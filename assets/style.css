@@ -72,7 +72,6 @@ p { margin: 0; }
 @media (max-width: 1240px) { .nav-inner { gap: 28px; } .nav-links { gap: 20px; font-size: 14.5px; } }
 @media (max-width: 1100px) { .nav-links a[href="#projects"] { display: none; } }
 @media (max-width: 960px) { .nav-links { display: none; } .nav-inner { padding-inline: 16px; } }
-@media (max-width: 480px) { .nav-cta .btn-outline { display: none; } }
 
 /* ---------- frame: two vertical hairlines running down the page ---------- */
 .frame {

@@ -44,6 +44,21 @@ Cột "Bằng chứng" ghi đường dẫn file trong repo CRM để Tech Lead m
 | 35 | Giá gói dịch vụ | ⚠️ Chưa duyệt bảng giá | — | Không đăng giá "từ X đồng". Nêu 4 thành phần chi phí: khởi tạo, tài khoản sử dụng, hỗ trợ, tính năng mở rộng | ☐ | ☐ |
 | 36 | Nút "Trải nghiệm 90 ngày" ở đầu trang | ⚠️ Chưa có chính sách kèm theo | — | Nút đưa vào theo yêu cầu 2026-09-30, trỏ tới form đặt lịch demo. **Cần chốt và công bố điều kiện**: gói nào được dùng thử, bao nhiêu tài khoản, có tính phí khởi tạo không, hết 90 ngày thì dữ liệu xử lý ra sao | ☐ | ☐ |
 
+## Quyết định của Product Owner ngày 2026-09-30
+
+PO yêu cầu **bỏ toàn bộ nhãn trạng thái** ("Đã có", "Demo giao diện", "Đang phát triển",
+"Đang cung cấp", "Theo hợp đồng") và trình bày mọi tính năng như đã phát triển. Homepage đã
+sửa theo: mục AI đổi tên thành "Trợ lý AI", bỏ mọi câu ghi chú kiểu "chưa mở cho doanh nghiệp
+dùng"/"chưa có lịch phát hành", bỏ chú thích dưới ảnh AI Matching, và đưa AI Matching trở lại
+gói Professional.
+
+⚠️ Các dòng ❌/⚠️ trong bảng trên **vẫn đúng về mặt kỹ thuật** — bảng giữ nguyên để nội bộ biết
+cái gì Sales chứng minh được trên bản demo và cái gì không.
+
+Riêng các claim **không thuộc nhóm AI** thì vẫn đang nói đúng hiện trạng và chưa đổi: kết nối
+tổng đài (dòng 8), phạm vi xuất Excel và nhật ký xuất (dòng 3, 4), chuyển dữ liệu từ phần mềm
+khác (dòng 32). Cần PO xác nhận có đổi nốt hay giữ.
+
 ## Vấn đề còn lại cần xử lý
 
 ### 1. Ảnh minh hoạ chụp từ nhánh dev, không phải bản khách hàng dùng

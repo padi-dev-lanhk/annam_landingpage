@@ -389,7 +389,6 @@ html, body { overflow-x: clip; }
 .fcol h3 { font-family: var(--body); font-size: 15px; font-weight: 500; color: #6d6d76; margin-bottom: 4px; }
 .fcol a { color: #d6d6db; }
 .fcol a:hover { color: #fff; }
-.footer-note { max-width: 1240px; margin: 56px auto 0; font-size: 13px; color: #6d6d76; }
 @media (max-width: 760px) { .footer-inner { grid-template-columns: 1fr 1fr; } }
 
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }

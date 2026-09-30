@@ -1169,12 +1169,12 @@ body.no-scroll { overflow: hidden; }
 /* Mục Chức năng: giảm khoảng trống quanh chữ và hạ chiều cao ảnh */
 .flows .flow-text { padding: 52px 58px 30px; }
 .flows .flow-ill { margin-bottom: 56px; padding: 22px; }
-.flows .flow-ill .shot-card { width: fit-content; max-width: 100%; margin-inline: auto; }
-.flows .flow-ill .shot-card img { max-height: 380px; width: auto; max-width: 100%; }
+.flows .flow-ill .shot-card { width: 100%; max-width: none; margin-inline: 0; }
+.flows .flow-ill .shot-card img { max-height: none; width: 100%; height: auto; }
 
-/* Ảnh lớn ở mục Dashboard và Định hướng AI: hạ chiều cao tương tự */
-.dash-shot .shot-card, .ai2-shot .shot-card { width: fit-content; max-width: 100%; margin-inline: auto; }
-.dash-shot .shot-card img, .ai2-shot .shot-card img { max-height: 420px; width: auto; max-width: 100%; }
+/* Ảnh ở mục Dashboard và Định hướng AI: tràn hết chiều ngang khung cho đỡ trống hai bên */
+.dash-shot .shot-card, .ai2-shot .shot-card { width: 100%; max-width: none; margin-inline: 0; }
+.dash-shot .shot-card img, .ai2-shot .shot-card img { max-height: none; width: 100%; height: auto; }
 
 @media (max-width: 900px) {
   .flows .flow-text { padding: 40px 16px 24px; }
@@ -1215,3 +1215,4 @@ body.no-scroll { overflow: hidden; }
   .dash-list b { font-size: 12.5px; }
   .ai2-item h3 { font-size: 15px; }
 }
+.ai2-shot { max-width: 900px; }

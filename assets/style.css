@@ -1338,3 +1338,8 @@ body.no-scroll { overflow: hidden; }
   .rollout-phone .shot-btn img { border-radius: 26px; width: 100%; height: auto; }
   .mig-dest { margin-top: 14px; font-size: 14px; }
 }
+
+/* Chừa khoảng thở giữa 2 thẻ bảo mật và đường kẻ cuối mục */
+.scale-shot { padding-bottom: 64px; }
+@media (max-width: 1000px) { .scale-shot { padding: 0 0 56px 24px; } }
+@media (max-width: 640px) { .scale-shot { padding-bottom: 48px; } }

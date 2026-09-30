@@ -1343,3 +1343,8 @@ body.no-scroll { overflow: hidden; }
 .scale-shot { padding-bottom: 64px; }
 @media (max-width: 1000px) { .scale-shot { padding: 0 0 56px 24px; } }
 @media (max-width: 640px) { .scale-shot { padding-bottom: 48px; } }
+
+/* Footer còn 3 cột sau khi bỏ cột Liên hệ */
+.footer-inner { grid-template-columns: minmax(0, 1fr) auto auto; gap: 64px; }
+@media (max-width: 1000px) { .footer-inner { grid-template-columns: minmax(0, 1fr) auto auto; gap: 40px; } }
+@media (max-width: 760px) { .footer-inner { grid-template-columns: 1fr 1fr; gap: 32px 24px; } }

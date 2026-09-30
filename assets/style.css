@@ -1314,3 +1314,16 @@ body.no-scroll { overflow: hidden; }
   .ai2-shot .aim-tabs { flex-direction: column; border-radius: 14px; gap: 2px; }
   .ai2-shot .aim-tab { border-radius: 10px; font-size: 13px; padding: 9px 12px; }
 }
+
+/* Tiêu đề "AI Matching" đặt cạnh tab, trong mục Trợ lý AI nền tối */
+.ai2-shot { margin-top: 48px; }
+.ai2-shot .aim-head { text-align: left; align-items: flex-end; gap: 20px 32px; }
+.ai2-shot .aim-head .sec-head { max-width: 520px; }
+.ai2-shot .aim-head h3 { margin-top: 14px; font-size: clamp(19px, 1.9vw, 25px); line-height: 1.22;
+  font-weight: 500; letter-spacing: -0.028em; color: #fff; }
+.ai2-shot .aim-head h3 span { display: block; color: var(--dark-ink-2); }
+.ai2-shot .aim-tabs { margin: 0; flex: none; }
+@media (max-width: 760px) {
+  .ai2-shot .aim-head { align-items: stretch; }
+  .ai2-shot .aim-head .sec-head { max-width: none; }
+}

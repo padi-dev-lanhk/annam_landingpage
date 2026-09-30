@@ -1,4 +1,3 @@
-const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 
 // ---------- Tracking: đẩy sự kiện vào dataLayer (GTM/GA4 đọc nếu có). KHÔNG đẩy PII ----------
@@ -44,54 +43,6 @@ document.addEventListener("click", (e) => {
   document.querySelectorAll(".flow").forEach((el) => io.observe(el));
 })();
 
-// ---------- "Một ngày làm việc": tab 5 bước, hỗ trợ phím mũi tên ----------
-(function () {
-  const tabs = [...document.querySelectorAll(".day-step")];
-  if (!tabs.length) return;
-  function select(tab, focus) {
-    tabs.forEach((t) => {
-      const on = t === tab;
-      t.setAttribute("aria-selected", on);
-      t.tabIndex = on ? 0 : -1;
-      document.getElementById(t.getAttribute("aria-controls")).hidden = !on;
-    });
-    if (focus) tab.focus();
-  }
-  tabs.forEach((t, i) => {
-    t.addEventListener("click", () => { select(t); track("ai_step_view", { step: i + 1 }); });
-    t.addEventListener("keydown", (e) => {
-      const d = e.key === "ArrowRight" || e.key === "ArrowDown" ? 1 : e.key === "ArrowLeft" || e.key === "ArrowUp" ? -1 : 0;
-      if (!d) return;
-      e.preventDefault();
-      select(tabs[(i + d + tabs.length) % tabs.length], true);
-    });
-  });
-})();
-
-// ---------- AI Matching: tab 2 chiều (tìm khách cho SP / tìm SP cho khách) ----------
-(function () {
-  const tabs = [...document.querySelectorAll(".aim-tab")];
-  if (!tabs.length) return;
-  function select(tab, focus) {
-    tabs.forEach((t) => {
-      const on = t === tab;
-      t.setAttribute("aria-selected", on);
-      t.tabIndex = on ? 0 : -1;
-      document.getElementById(t.getAttribute("aria-controls")).hidden = !on;
-    });
-    if (focus) tab.focus();
-  }
-  tabs.forEach((t, i) => {
-    t.addEventListener("click", () => { select(t); track("matching_tab", { tab: i + 1 }); });
-    t.addEventListener("keydown", (e) => {
-      const d = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
-      if (!d) return;
-      e.preventDefault();
-      select(tabs[(i + d + tabs.length) % tabs.length], true);
-    });
-  });
-})();
-
 // ---------- Phóng to ảnh chụp màn hình ----------
 (function () {
   const dlg = document.getElementById("zoom"), img = document.getElementById("zoomImg");
@@ -105,48 +56,6 @@ document.addEventListener("click", (e) => {
     track("screenshot_zoom", { image: b.dataset.zoom.split("/").pop() });
   });
   dlg.addEventListener("click", (e) => { if (e.target === dlg) dlg.close(); });
-})();
-
-// ---------- Trợ lý tính toán: tự lần lượt trả lời 3 câu hỏi mẫu ----------
-(function () {
-  const qEl = document.getElementById("xcQ"), aEl = document.getElementById("xcA");
-  if (!qEl) return;
-  const lbl = document.getElementById("xcLbl"), big = document.getElementById("xcBig");
-  const bar = document.getElementById("xcBar"), leg = document.getElementById("xcLeg"), src = document.getElementById("xcSrc");
-  const dots = [...document.querySelectorAll("#xcDots i")];
-  // Số minh hoạ. Mỗi cảnh ghi rõ công thức và giả định (yêu cầu: kết quả do công thức nghiệp vụ tính, không do AI đoán)
-  const SCENES = [
-    { q: "Căn 5,8 tỷ sang tên hết bao nhiêu?", label: "Tổng phí sang tên", big: "148,5 triệu",
-      parts: [["Thuế thu nhập cá nhân", "116 triệu", 116, "#6366f1"], ["Lệ phí trước bạ", "29 triệu", 29, "#a855f7"], ["Phí công chứng", "3,5 triệu", 3.5, "#ec4899"]],
-      src: "Công thức: thuế TNCN 2% và lệ phí trước bạ 0,5% trên giá chuyển nhượng; công chứng theo biểu phí. Giả định: giá trên hợp đồng 5,8 tỷ." },
-    { q: "Căn 5,8 tỷ, vay 70% trong 25 năm, lãi 8,5%/năm thì tháng đầu trả bao nhiêu?", label: "Tháng đầu tiên, giảm dần về sau", big: "42,3 triệu",
-      parts: [["Tiền gốc", "13,5 triệu", 13.5, "#0ea5e9"], ["Tiền lãi", "28,8 triệu", 28.8, "#6366f1"]],
-      src: "Công thức: gốc chia đều, lãi tính trên dư nợ giảm dần. Giả định: lãi suất cố định 8,5%/năm; lãi thực tế theo ngân hàng." },
-    { q: "Bán căn 4,5 tỷ thì em nhận hoa hồng bao nhiêu?", label: "Hoa hồng thực nhận", big: "48,6 triệu",
-      parts: [["Thực nhận", "48,6 triệu", 48.6, "#10b981"], ["Thuế thu nhập cá nhân 10%", "5,4 triệu", 5.4, "#f59e0b"]],
-      src: "Công thức: tỷ lệ hoa hồng × giá bán, trừ thuế TNCN 10%. Giả định: tỷ lệ 1,2% theo chính sách của sàn." },
-  ];
-  function show(s) {
-    lbl.textContent = s.label; big.textContent = s.big; src.textContent = s.src;
-    bar.innerHTML = s.parts.map((p) => `<i style="--f:${p[2]};--c:${p[3]}"></i>`).join("");
-    leg.innerHTML = s.parts.map((p) => `<div><i style="--c:${p[3]}"></i><span>${p[0]}</span><b>${p[1]}</b></div>`).join("");
-  }
-  const mark = (i) => dots.forEach((d, j) => d.classList.toggle("on", i === j));
-  if (reduceMotion) { qEl.textContent = SCENES[0].q; show(SCENES[0]); mark(0); return; }
-  let visible = false;
-  new IntersectionObserver(([e]) => { visible = e.isIntersecting; }).observe(qEl);
-  (async function loop() {
-    for (let i = 0; ; i = (i + 1) % SCENES.length) {
-      while (!visible) await wait(300);
-      const s = SCENES[i];
-      mark(i); aEl.classList.add("busy"); qEl.textContent = "";
-      await wait(300);
-      for (let k = 1; k <= s.q.length; k++) { qEl.textContent = s.q.slice(0, k); await wait(28); }
-      await wait(450);
-      show(s); aEl.classList.remove("busy");
-      await wait(5200);
-    }
-  })();
 })();
 
 // ---------- Form đặt lịch demo: validate, chống spam, gửi lead ----------
@@ -165,7 +74,6 @@ document.addEventListener("click", (e) => {
   const RULES = {
     name: (v) => (v.trim().length < 2 ? "Vui lòng nhập họ và tên." : ""),
     company: (v) => (v.trim().length < 2 ? "Vui lòng nhập tên công ty." : ""),
-    role: (v) => (!v ? "Vui lòng chọn vai trò." : ""),
     size: (v) => (!v ? "Vui lòng chọn quy mô." : ""),
     phone: (v) => (!/^(\+?84|0)(3|5|7|8|9)\d{8}$/.test(v.replace(/[\s.-]/g, "")) ? "Số điện thoại chưa đúng (ví dụ 0912 345 678)." : ""),
     email: (v) => (v && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()) ? "Email chưa đúng định dạng." : ""),
@@ -200,7 +108,7 @@ document.addEventListener("click", (e) => {
   function toFormSubmit(p) {
     return {
       _subject: "[VinaLand] Yêu cầu demo mới: " + p.company, _template: "table", _captcha: "false",
-      "Họ và tên": p.name, "Công ty": p.company, "Vai trò": p.role, "Số nhân viên kinh doanh": p.size,
+      "Họ và tên": p.name, "Công ty": p.company, "Vai trò": p.role || "(không chọn)", "Số nhân viên kinh doanh": p.size,
       "Điện thoại": p.phone, "Email": p.email || "(không có)", "Gói quan tâm": p.plan || "Chưa rõ", "Nhu cầu": p.need || "(trống)",
       "Đồng ý liên hệ": "Có", "Nguồn": p.source, "Trang": p.page,
       "UTM": ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"].filter((k) => p[k]).map((k) => k + "=" + p[k]).join(", ") || "(không có)",
@@ -212,7 +120,7 @@ document.addEventListener("click", (e) => {
     e.preventDefault();
     msg.textContent = "";
     const bad = validate();
-    if (bad) { bad.focus(); track("form_error", { field: bad.name }); return; }
+    if (bad) { bad.closest("details")?.setAttribute("open", ""); bad.focus(); track("form_error", { field: bad.name }); return; }
 
     // Honeypot + gửi quá nhanh (< 3 giây) → coi là bot, giả vờ thành công
     const isBot = form.elements.website.value !== "" || Date.now() - openedAt < 3000;

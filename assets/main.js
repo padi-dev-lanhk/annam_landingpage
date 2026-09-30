@@ -43,6 +43,30 @@ document.addEventListener("click", (e) => {
   document.querySelectorAll(".flow").forEach((el) => io.observe(el));
 })();
 
+// ---------- AI Matching: tab 2 chiều (tìm khách cho SP / tìm SP cho khách) ----------
+(function () {
+  const tabs = [...document.querySelectorAll(".aim-tab")];
+  if (!tabs.length) return;
+  function select(tab, focus) {
+    tabs.forEach((t) => {
+      const on = t === tab;
+      t.setAttribute("aria-selected", on);
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute("aria-controls")).hidden = !on;
+    });
+    if (focus) tab.focus();
+  }
+  tabs.forEach((t, i) => {
+    t.addEventListener("click", () => { select(t); track("matching_tab", { tab: i + 1 }); });
+    t.addEventListener("keydown", (e) => {
+      const d = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+      if (!d) return;
+      e.preventDefault();
+      select(tabs[(i + d + tabs.length) % tabs.length], true);
+    });
+  });
+})();
+
 // ---------- Phóng to ảnh chụp màn hình ----------
 (function () {
   const dlg = document.getElementById("zoom"), img = document.getElementById("zoomImg");

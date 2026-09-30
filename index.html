@@ -378,9 +378,22 @@
       </div>
 
       <div class="ai2-shot">
-        <button class="shot-btn shot-card" type="button" data-zoom="assets/screenshots/21-ai-matching-kh.webp" aria-label="Phóng to ảnh màn hình AI Matching">
-          <img src="assets/screenshots/21-ai-matching-kh.webp" width="1440" height="900" loading="lazy" alt="Màn hình AI Matching: nhu cầu khách và danh sách căn kèm điểm phù hợp">
-        </button>
+        <div class="aim-tabs" role="tablist" aria-label="Chiều ghép">
+          <button class="aim-tab" role="tab" id="am-t1" aria-controls="am-p1" aria-selected="true">Tìm khách cho sản phẩm</button>
+          <button class="aim-tab" role="tab" id="am-t2" aria-controls="am-p2" aria-selected="false" tabindex="-1">Tìm sản phẩm cho khách</button>
+        </div>
+        <div class="aim-stage g-dusk">
+          <div class="aim-panel" role="tabpanel" id="am-p1" aria-labelledby="am-t1">
+            <button class="shot-btn shot-card" type="button" data-zoom="assets/screenshots/20-ai-matching-sp.webp" aria-label="Phóng to ảnh AI Matching: tìm khách cho sản phẩm">
+              <img src="assets/screenshots/20-ai-matching-sp.webp" width="1440" height="900" loading="lazy" alt="AI Matching tìm khách phù hợp cho một căn: điểm phù hợp, lý do khớp và điểm cần lưu ý">
+            </button>
+          </div>
+          <div class="aim-panel" role="tabpanel" id="am-p2" aria-labelledby="am-t2" hidden>
+            <button class="shot-btn shot-card" type="button" data-zoom="assets/screenshots/21-ai-matching-kh.webp" aria-label="Phóng to ảnh AI Matching: tìm sản phẩm cho khách">
+              <img src="assets/screenshots/21-ai-matching-kh.webp" width="1440" height="900" loading="lazy" alt="AI Matching tìm căn phù hợp cho một khách: nhu cầu khai báo và danh sách căn kèm điểm">
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </section>

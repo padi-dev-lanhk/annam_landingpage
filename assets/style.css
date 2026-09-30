@@ -1296,3 +1296,21 @@ body.no-scroll { overflow: hidden; }
 /* Mobile: bỏ min-height ở các khung ảnh, để khung cao đúng bằng ảnh */
 @media (max-width: 900px) { .flow-ill { min-height: 0; } }
 @media (max-width: 1000px) { .scale { min-height: 0; } }
+
+/* Tab AI Matching đặt trong mục Trợ lý AI (nền tối) */
+.ai2-shot .aim-tabs { margin: 0 auto; display: inline-flex; background: rgba(255,255,255,.07); border-color: var(--dark-line); }
+.ai2-shot .aim-tab { color: var(--dark-ink-2); }
+.ai2-shot .aim-tab:hover { color: #fff; }
+.ai2-shot .aim-tab[aria-selected="true"] { background: #fff; color: var(--ink); box-shadow: 0 2px 8px -2px rgba(0,0,0,.5); }
+.ai2-shot .aim-stage { margin-top: 24px; padding: 22px; }
+.ai2-shot .aim-panel .shot-card { max-width: none; width: 100%; margin: 0; }
+@media (max-width: 560px) {
+  .ai2-shot .aim-tabs { display: flex; width: 100%; }
+  .ai2-shot .aim-tab { flex: 1; padding: 8px 6px; font-size: 12px; }
+  .ai2-shot .aim-stage { padding: 14px; }
+}
+/* Màn rất hẹp: 2 tab xếp dọc cho đủ chỗ một dòng, đỡ phải hạ cỡ chữ quá nhỏ */
+@media (max-width: 380px) {
+  .ai2-shot .aim-tabs { flex-direction: column; border-radius: 14px; gap: 2px; }
+  .ai2-shot .aim-tab { border-radius: 10px; font-size: 13px; padding: 9px 12px; }
+}

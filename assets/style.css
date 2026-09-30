@@ -1295,3 +1295,6 @@ body.no-scroll { overflow: hidden; }
   .mig-arrow { grid-row: 2; width: 54px; height: 52px; transform: rotate(90deg); margin: 8px auto; }
   .mig-steps { grid-row: 3; width: 100%; margin-top: 8px; }
 }
+
+/* Các trường trong khối "Thêm thông tin": details không phải flex nên không ăn gap của form */
+.f-more > .f-row, .f-more > .f { margin-top: 16px; }

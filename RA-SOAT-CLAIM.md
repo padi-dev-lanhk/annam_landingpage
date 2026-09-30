@@ -70,19 +70,21 @@ toán) mà bản production **không có**. Ảnh dashboard còn có khối "AI 
 Hiện đã xử lý bằng cách chú thích rõ dưới ảnh hero và ảnh mục Định hướng AI. Cách xử lý triệt để là
 **chụp lại toàn bộ ảnh trên nhánh `main`** — việc này cần chỉnh trong repo CRM nên chưa làm.
 
-### 2. Nội dung chưa điền (đang để nhãn vàng "cần điền" trên trang)
+### 2. Nội dung chưa điền
 
-Phải xoá hết nhãn vàng này trước khi gửi website rộng rãi:
+Trang hiện **không còn nhãn vàng "cần điền"** nào. Tổng hợp các quyết định:
 
 | Vị trí | Cần |
 |---|---|
 | Footer | ✅ Xong — PO quyết định 2026-09-30 bỏ MST và email, chỉ để đơn vị cung cấp, 2 địa chỉ văn phòng và hotline |
 | Footer | PO quyết định 2026-09-30 bỏ link chính sách quyền riêng tư khỏi footer — cần xem lại vì form demo có thu thập tên, SĐT, email |
-| Mục Đơn vị phát triển | ✅ PO xác nhận 2026-09-30: đơn vị cung cấp là PadiTech Company |
-| Mục Khách hàng đang sử dụng | Văn bản đồng ý dùng tên/logo + nhận xét ngắn |
 | Cạnh form demo | ✅ Đã điền hotline 024 6685 8488 (2026-09-30). PO quyết định không dùng Zalo |
 
-### 3. Chưa làm (P1, cần quyết định của PO)
+### 3. Đã gỡ khỏi trang
+
+- Mục **"Đơn vị phát triển & Khách hàng đang sử dụng"** (section #proof) gỡ ngày 2026-09-30 theo yêu cầu. Thông tin PadiTech Company vẫn còn ở footer. Muốn đăng lời chứng thực của khách sau này thì dựng lại section, nhớ xin văn bản đồng ý trước.
+
+### 4. Chưa làm (P1, cần quyết định của PO)
 
 - Video demo 2–3 phút.
 - Bảng so sánh với cách làm bằng Excel/Zalo.

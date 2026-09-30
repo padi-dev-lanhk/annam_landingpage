@@ -1074,23 +1074,6 @@ body.no-scroll { overflow: hidden; }
 
 /* ============ Bản chỉnh sửa theo yêu cầu homepage (thứ tự mới, nhãn trạng thái) ============ */
 
-/* Nhãn "cần điền" — chỉ dùng cho nội dung chưa được duyệt, phải xoá trước khi gửi rộng */
-.todo { display: inline-block; font-size: 13px; font-weight: 600; color: #b45309; background: #fef3c7;
-  border: 1px dashed #f59e0b; border-radius: 6px; padding: 1px 7px; }
-.footer .todo, .cta .todo { color: #fcd34d; background: rgba(245,158,11,.14); border-color: rgba(245,158,11,.45); }
-
-/* 02 Đơn vị phát triển & bằng chứng khách hàng */
-.proof { padding: 56px 58px; background: var(--bg-soft); }
-.proof-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.proof-card { border: 1px solid var(--line); border-radius: 14px; padding: 24px; background: var(--bg); }
-.proof-card h3 { font-size: 18px; font-weight: 600; letter-spacing: -0.015em; }
-.proof-card p { margin-top: 10px; font-size: 15px; color: var(--ink-2); line-height: 1.55; }
-.proof-card p b { color: var(--ink); font-weight: 600; }
-.proof-todo { border: 1.5px dashed #f59e0b; background: #fffbeb; }
-.proof-todo h3 { color: #b45309; }
-@media (max-width: 800px) { .proof-grid { grid-template-columns: 1fr; } }
-@media (max-width: 640px) { .proof { padding: 40px 16px; } }
-
 /* 04 Dashboard quản lý */
 .dash { padding: 112px 58px; }
 .dash-grid { margin-top: 48px; display: grid; grid-template-columns: 360px 1fr; gap: 48px; align-items: start; }

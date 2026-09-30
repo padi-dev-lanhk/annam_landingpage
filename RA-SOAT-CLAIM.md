@@ -76,11 +76,11 @@ Phải xoá hết nhãn vàng này trước khi gửi website rộng rãi:
 
 | Vị trí | Cần |
 |---|---|
-| Footer | Tên pháp nhân, MST, địa chỉ, email, hotline |
+| Footer | Tên pháp nhân, MST, địa chỉ, email (hotline đã điền) |
 | Footer | Trang chính sách quyền riêng tư (chưa soạn) |
 | Mục Đơn vị phát triển | PO xác nhận cách mô tả vai trò của Paditech |
 | Mục Khách hàng đang sử dụng | Văn bản đồng ý dùng tên/logo + nhận xét ngắn |
-| Cạnh form demo | Số hotline và Zalo của người trực tiếp nhận cuộc gọi |
+| Cạnh form demo | ✅ Đã điền hotline 024 6685 8488 (2026-09-30). PO quyết định không dùng Zalo |
 
 ### 3. Chưa làm (P1, cần quyết định của PO)
 

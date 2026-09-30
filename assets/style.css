@@ -1216,3 +1216,7 @@ body.no-scroll { overflow: hidden; }
   .ai2-item h3 { font-size: 15px; }
 }
 .ai2-shot { max-width: 900px; }
+
+/* Ảnh ma trận phân quyền: bỏ khoảng đệm lớn để ảnh tràn hết khung nền gradient */
+.perm-ill { min-height: 0; padding: 22px; }
+@media (max-width: 1000px) { .perm-ill { padding: 18px; } }

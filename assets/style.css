@@ -1369,3 +1369,8 @@ body.no-scroll { overflow: hidden; }
   .footer-inner { grid-template-columns: auto auto auto; column-gap: 56px; }
   .footer-inner > :last-child { justify-self: start; }
 }
+/* Ba khối cách đều nhau theo bề ngang footer */
+@media (min-width: 761px) {
+  .footer-inner { grid-template-columns: auto auto auto; justify-content: space-between; column-gap: 40px; }
+  .footer-inner > :last-child { justify-self: start; }
+}

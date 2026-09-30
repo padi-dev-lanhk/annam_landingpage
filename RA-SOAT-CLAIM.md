@@ -76,7 +76,7 @@ Phải xoá hết nhãn vàng này trước khi gửi website rộng rãi:
 
 | Vị trí | Cần |
 |---|---|
-| Footer | Tên pháp nhân, MST, địa chỉ, email (hotline đã điền) |
+| Footer | Tên pháp nhân, MST, email (hotline và 2 địa chỉ văn phòng đã điền) |
 | Footer | Trang chính sách quyền riêng tư (chưa soạn) |
 | Mục Đơn vị phát triển | PO xác nhận cách mô tả vai trò của Paditech |
 | Mục Khách hàng đang sử dụng | Văn bản đồng ý dùng tên/logo + nhận xét ngắn |

@@ -1359,3 +1359,13 @@ body.no-scroll { overflow: hidden; }
 @media (min-width: 761px) {
   .footer-inner { grid-template-columns: auto auto auto; justify-content: start; column-gap: 72px; }
 }
+/* Chỉ "Chức năng" bám sát khối công ty; "Nền tảng" giữ nguyên ở lề phải */
+@media (min-width: 761px) {
+  .footer-inner { grid-template-columns: auto auto minmax(0, 1fr); }
+  .footer-inner > :last-child { justify-self: end; }
+}
+/* Chỉ đẩy "Nền tảng" sang phải khi đủ chỗ; màn hẹp hơn thì xếp sát nhau cho khỏi bóp chữ */
+@media (min-width: 761px) and (max-width: 1199px) {
+  .footer-inner { grid-template-columns: auto auto auto; column-gap: 56px; }
+  .footer-inner > :last-child { justify-self: start; }
+}

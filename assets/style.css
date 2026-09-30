@@ -1171,7 +1171,6 @@ body.no-scroll { overflow: hidden; }
 .flows .flow-ill { margin-bottom: 56px; padding: 22px; }
 .flows .flow-ill .shot-card { width: fit-content; max-width: 100%; margin-inline: auto; }
 .flows .flow-ill .shot-card img { max-height: 380px; width: auto; max-width: 100%; }
-.flow-hint { margin-top: 18px; font-size: 13.5px; color: var(--ink-3); line-height: 1.5; }
 
 /* Ảnh lớn ở mục Dashboard và Định hướng AI: hạ chiều cao tương tự */
 .dash-shot .shot-card, .ai2-shot .shot-card { width: fit-content; max-width: 100%; margin-inline: auto; }

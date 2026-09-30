@@ -3,8 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<!-- Mỗi lần sửa file trong assets/ phải đổi số ?v=... ở TẤT CẢ đường dẫn bên dưới (tìm thay cả file).
-     index.html không bị Cloudflare cache nên đổi số là trình duyệt tải lại file mới, khỏi phải purge cache. -->
+<!-- CHỐNG CACHE: index.html không bị Cloudflare cache nên luôn mới; mọi file trong assets/ thì bị cache 30 ngày.
+     Khi sửa CSS hoặc JS: đổi luôn TÊN FILE (style-<ngày><chữ>.css, main-<ngày><chữ>.js) rồi sửa 2 thẻ bên dưới.
+     Khi thay ảnh: đổi số ?v=... ở tất cả đường dẫn ảnh (tìm thay cả file).
+     Làm vậy thì sau mỗi lần deploy không cần purge cache Cloudflare nữa. -->
 <title>VinaLand — Phần mềm quản lý sàn bất động sản</title>
 <meta name="description" content="VinaLand: quản lý giỏ hàng, khách hàng và đội Sales trên một hệ thống. Theo dõi căn còn bán, lead cần chăm sóc và tiến độ cơ hội theo từng nhóm.">
 <meta property="og:title" content="VinaLand — Phần mềm quản lý sàn bất động sản">
@@ -16,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@500;600&family=JetBrains+Mono:wght@500&display=swap">
-<link rel="stylesheet" href="assets/style.css?v=20260930a">
+<link rel="stylesheet" href="assets/style-20260930a.css">
 </head>
 <body>
 
@@ -496,6 +498,6 @@
   <img alt="" id="zoomImg">
 </dialog>
 
-<script src="assets/main.js?v=20260930a"></script>
+<script src="assets/main-20260930a.js"></script>
 </body>
 </html>

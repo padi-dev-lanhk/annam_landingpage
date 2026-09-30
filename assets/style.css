@@ -1220,3 +1220,15 @@ body.no-scroll { overflow: hidden; }
 /* Ảnh ma trận phân quyền: bỏ khoảng đệm lớn để ảnh tràn hết khung nền gradient */
 .perm-ill { min-height: 0; padding: 22px; }
 @media (max-width: 1000px) { .perm-ill { padding: 18px; } }
+
+/* Hai thẻ bảo mật đặt dưới ảnh ma trận phân quyền, căn giữa theo bề ngang ảnh */
+.scale-shot { flex-direction: column; }
+.sec-badges { width: 100%; align-self: stretch; margin-top: 32px; display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.sec-badge { flex: 0 1 262px; display: flex; flex-direction: column; align-items: center; text-align: center;
+  border: 1px solid var(--line); border-radius: 14px; padding: 22px 20px; background: var(--bg); }
+.sec-badge .ent-ic { margin-bottom: 12px; }
+.sec-badge:hover .ent-ic { transform: translateY(-2px); }
+.sec-badge b { font-size: 16px; font-weight: 600; letter-spacing: -0.015em; }
+.sec-badge p { margin-top: 7px; font-size: 14px; color: var(--ink-2); line-height: 1.5; }
+@media (max-width: 1000px) { .sec-badges { margin-top: 24px; padding-right: 24px; } }
+@media (max-width: 640px) { .sec-badges { padding: 0 16px 0 0; } .sec-badge { flex: 1 1 100%; } }

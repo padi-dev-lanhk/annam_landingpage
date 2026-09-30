@@ -1327,3 +1327,14 @@ body.no-scroll { overflow: hidden; }
   .ai2-shot .aim-head { align-items: stretch; }
   .ai2-shot .aim-head .sec-head { max-width: none; }
 }
+
+/* Màn di động: ảnh điện thoại ở mục Triển khai chiếm hết bề ngang */
+@media (max-width: 1000px) and (min-width: 641px) {
+  .rollout-phone { width: 300px; max-width: 300px; margin-inline: auto; }
+}
+@media (max-width: 640px) {
+  .rollout-phone { width: 100%; max-width: none; }
+  .rollout-phone .shot-btn { border-width: 8px; border-radius: 34px; }
+  .rollout-phone .shot-btn img { border-radius: 26px; width: 100%; height: auto; }
+  .mig-dest { margin-top: 14px; font-size: 14px; }
+}

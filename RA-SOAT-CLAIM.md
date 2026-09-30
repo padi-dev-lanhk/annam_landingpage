@@ -76,9 +76,9 @@ Phải xoá hết nhãn vàng này trước khi gửi website rộng rãi:
 
 | Vị trí | Cần |
 |---|---|
-| Footer | Tên pháp nhân, MST, email (hotline và 2 địa chỉ văn phòng đã điền) |
+| Footer | MST, email (đơn vị cung cấp PadiTech Company, hotline và 2 địa chỉ văn phòng đã điền) |
 | Footer | Trang chính sách quyền riêng tư (chưa soạn) |
-| Mục Đơn vị phát triển | PO xác nhận cách mô tả vai trò của Paditech |
+| Mục Đơn vị phát triển | ✅ PO xác nhận 2026-09-30: đơn vị cung cấp là PadiTech Company |
 | Mục Khách hàng đang sử dụng | Văn bản đồng ý dùng tên/logo + nhận xét ngắn |
 | Cạnh form demo | ✅ Đã điền hotline 024 6685 8488 (2026-09-30). PO quyết định không dùng Zalo |
 

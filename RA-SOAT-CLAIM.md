@@ -42,7 +42,7 @@ Cột "Bằng chứng" ghi đường dẫn file trong repo CRM để Tech Lead m
 | 33 | Thời gian triển khai | ⚠️ Chưa có dữ liệu dự án thật | — | Đã sửa: không đăng mốc thời gian; "mốc cụ thể gửi sau buổi khảo sát, kèm điều kiện áp dụng" | ☐ | ☐ |
 | 34 | Chỉ số pilot | ⚠️ Chưa thống nhất cách đo | — | Đã sửa: đổi thành "chỉ số hai bên cùng theo dõi"; bỏ mọi cam kết kết quả | ☐ | ☐ |
 | 35 | Giá gói dịch vụ | ⚠️ Chưa duyệt bảng giá | — | Không đăng giá "từ X đồng". Nêu 4 thành phần chi phí: khởi tạo, tài khoản sử dụng, hỗ trợ, tính năng mở rộng | ☐ | ☐ |
-| 36 | Nút "Trải nghiệm 90 ngày" ở đầu trang | ⚠️ Chưa có chính sách kèm theo | — | Nút đưa vào theo yêu cầu 2026-09-30, trỏ tới form đặt lịch demo. **Cần chốt và công bố điều kiện**: gói nào được dùng thử, bao nhiêu tài khoản, có tính phí khởi tạo không, hết 90 ngày thì dữ liệu xử lý ra sao | ☐ | ☐ |
+| 36 | Nút "Trải nghiệm Free 90 ngày" ở đầu trang | ⚠️ Chưa có chính sách kèm theo | — | Nút đưa vào theo yêu cầu 2026-09-30, trỏ tới form đặt lịch demo. Chữ "Free" nói thẳng là miễn phí nên càng cần điều kiện rõ. **Cần chốt và công bố điều kiện**: gói nào được dùng thử, bao nhiêu tài khoản, có tính phí khởi tạo không, hết 90 ngày thì dữ liệu xử lý ra sao | ☐ | ☐ |
 
 ## Quyết định của Product Owner ngày 2026-09-30
 

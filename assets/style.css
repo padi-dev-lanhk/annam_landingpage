@@ -1181,3 +1181,11 @@ body.no-scroll { overflow: hidden; }
   .flows .flow-text { padding: 40px 16px 24px; }
   .flows .flow-ill .shot-card img, .dash-shot .shot-card img, .ai2-shot .shot-card img { max-height: none; width: 100%; }
 }
+
+/* Đầu mục trong Dashboard quản lý: thêm icon tròn cho dễ quét mắt (cùng style icon mục Doanh nghiệp) */
+.ent-ic-xs { width: 44px; height: 44px; margin-bottom: 0; flex: none; }
+.ent-ic-xs svg { width: 26px; height: 26px; stroke-width: 1.4; }
+.dash-list li { display: grid; grid-template-columns: 44px 1fr; column-gap: 16px; align-items: start; }
+.dash-list li:hover .ent-ic-xs { transform: translateY(-2px); }
+@media (max-width: 640px) { .dash-list li { column-gap: 13px; } }
+@media (min-width: 1001px) { .dash-grid { grid-template-columns: 430px 1fr; } }

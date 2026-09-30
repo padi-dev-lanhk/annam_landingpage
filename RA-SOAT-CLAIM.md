@@ -76,8 +76,8 @@ Phải xoá hết nhãn vàng này trước khi gửi website rộng rãi:
 
 | Vị trí | Cần |
 |---|---|
-| Footer | MST, email (đơn vị cung cấp PadiTech Company, hotline và 2 địa chỉ văn phòng đã điền) |
-| Footer | Trang chính sách quyền riêng tư (chưa soạn) |
+| Footer | ✅ Xong — PO quyết định 2026-09-30 bỏ MST và email, chỉ để đơn vị cung cấp, 2 địa chỉ văn phòng và hotline |
+| Footer | PO quyết định 2026-09-30 bỏ link chính sách quyền riêng tư khỏi footer — cần xem lại vì form demo có thu thập tên, SĐT, email |
 | Mục Đơn vị phát triển | ✅ PO xác nhận 2026-09-30: đơn vị cung cấp là PadiTech Company |
 | Mục Khách hàng đang sử dụng | Văn bản đồng ý dùng tên/logo + nhận xét ngắn |
 | Cạnh form demo | ✅ Đã điền hotline 024 6685 8488 (2026-09-30). PO quyết định không dùng Zalo |

@@ -1297,3 +1297,8 @@ body.no-scroll { overflow: hidden; }
 
 /* Các trường trong khối "Thêm thông tin": details không phải flex nên không ăn gap của form */
 .f-more > .f-row, .f-more > .f { margin-top: 16px; }
+
+/* Khối thông tin pháp nhân: đưa lên cột đầu của footer, cỡ chữ nhỏ lại */
+.foot-legal { max-width: none; margin: 22px 0 0; padding-top: 0; border-top: 0;
+  font-size: 13px; line-height: 1.8; }
+@media (max-width: 760px) { .footer-inner > div:first-child { grid-column: 1 / -1; } }

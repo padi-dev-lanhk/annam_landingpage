@@ -1354,3 +1354,8 @@ body.no-scroll { overflow: hidden; }
 .footer-inner { max-width: var(--frame); margin-inline: auto; padding-inline: 58px; }
 @media (max-width: 1440px) { .footer-inner { max-width: none; margin-inline: 24px; } }
 @media (max-width: 640px) { .footer-inner { margin-inline: 0; padding-inline: 16px; } }
+
+/* Hai cột link kéo về sát khối thông tin công ty, không dạt sang lề phải */
+@media (min-width: 761px) {
+  .footer-inner { grid-template-columns: auto auto auto; justify-content: start; column-gap: 72px; }
+}

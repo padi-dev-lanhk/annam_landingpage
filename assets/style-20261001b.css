@@ -1412,3 +1412,11 @@ body.no-scroll { overflow: hidden; }
   .flows.has-tabs .flow-nav a.active::before { display: none; }
   .flows.has-tabs .flow-text { padding-top: 32px; }
 }
+
+/* ---- 2026-10-01: logo thật của thương hiệu thay cho ô 4 chấm + chữ ----
+   Bản màu dùng trên nền sáng (header), bản trắng dùng trên nền tối
+   (menu trượt, footer). Nền trắng của file gốc đã được tách trong suốt. */
+.logo-img { height: 46px; width: auto; display: block; }
+.logo-img-foot { height: 54px; }
+@media (max-width: 900px) { .logo-img { height: 40px; } }
+@media (max-width: 640px) { .logo-img { height: 36px; } .logo-img-foot { height: 46px; } }

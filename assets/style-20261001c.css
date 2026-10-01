@@ -1420,3 +1420,8 @@ body.no-scroll { overflow: hidden; }
 .logo-img-foot { height: 54px; }
 @media (max-width: 900px) { .logo-img { height: 40px; } }
 @media (max-width: 640px) { .logo-img { height: 36px; } .logo-img-foot { height: 46px; } }
+
+/* ---- 2026-10-01: dùng y nguyên file assets/vinaland.png cho cả ba chỗ.
+   Logo màu navy nên ở menu trượt và footer (nền gần đen) phải đổi màu
+   hiển thị sang trắng; file ảnh giữ nguyên, chỉ lọc lúc vẽ. ---- */
+.logo-light .logo-img { filter: brightness(0) invert(1); }

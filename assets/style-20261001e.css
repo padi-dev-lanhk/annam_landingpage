@@ -1426,7 +1426,9 @@ body.no-scroll { overflow: hidden; }
    hiển thị sang trắng; file ảnh giữ nguyên, chỉ lọc lúc vẽ. ---- */
 .logo-light .logo-img { filter: brightness(0) invert(1); }
 
-/* ---- 2026-10-01: header trải hết bề ngang. Trước bị khoá max-width 1240px
-   rồi canh giữa, trên màn rộng thừa hơn 300px trống mỗi bên. ---- */
-.nav-inner { max-width: none; padding-inline: 20px; }
-@media (max-width: 960px) { .nav-inner { padding-inline: 16px; } }
+/* ---- 2026-10-01: header canh đúng mép khung .frame như các mục bên dưới.
+   Trước khoá max-width 1240px (thụt vào trong khung 100px), sau đó thử trải
+   hết bề ngang (tràn ra ngoài khung 184px) — cả hai đều lệch. ---- */
+.nav-inner { max-width: var(--frame); margin-inline: auto; padding-inline: 20px; }
+@media (max-width: 1440px) { .nav-inner { margin-inline: 24px; } }
+@media (max-width: 640px) { .nav-inner { margin-inline: 0; padding-inline: 16px; } }

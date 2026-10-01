@@ -1381,3 +1381,34 @@ body.no-scroll { overflow: hidden; }
   color: var(--ink-2); line-height: 1.4; letter-spacing: -0.01em; }
 .flow-keys li::before { content: "✓"; position: absolute; left: 0; top: -1px; color: var(--blue); font-weight: 700; }
 @media (max-width: 900px) { .flow-keys { gap: 9px; } .flow-keys li { font-size: 15.5px; padding-left: 24px; } }
+
+/* ---- 2026-10-01: gọn nội dung. Bỏ khối chữ "dữ liệu cũ" (trùng FAQ),
+   bỏ 2 thẻ nhắc lại ở mục Bảo mật, nén khối chỉ số pilot thành một dòng ---- */
+.rollout-data { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 40px; }
+.rollout-data > .mig { flex: 0 1 auto; }
+.pilot-line { margin-top: 44px; border-top: 1px solid var(--line); padding-top: 24px;
+  font-size: 15.5px; color: var(--ink-2); line-height: 1.7; }
+.pilot-line b { color: var(--ink); font-weight: 600; }
+@media (max-width: 640px) { .pilot-line { font-size: 15px; } }
+
+/* ---- 2026-10-01: mục Chức năng chuyển sang tab. Bốn nội dung dùng chung một khung ảnh,
+   trang ngắn đi khoảng 2.700px trên desktop ---- */
+.flows.has-tabs { align-items: start; }
+.flows.has-tabs .flow-nav { position: static; height: auto; align-self: stretch;
+  justify-content: flex-start; padding-top: 85px; }
+.flows.has-tabs .flow-nav a { cursor: pointer; }
+.flows.has-tabs .flow { display: none; border-bottom: 0; }
+.flows.has-tabs .flow.is-on { display: block; }
+.flows.has-tabs .flow-text { padding-top: 78px; }
+
+@media (max-width: 900px) {
+  .flows.has-tabs .flow-nav { display: flex; flex-direction: row; gap: 8px; padding: 28px 20px 0;
+    border-right: 0; overflow-x: auto; scrollbar-width: none; }
+  .flows.has-tabs .flow-nav::-webkit-scrollbar { display: none; }
+  .flows.has-tabs .flow-nav a { flex: 0 0 auto; font-size: 14.5px; color: var(--ink-2);
+    border: 1px solid var(--line); border-radius: 999px; padding: 9px 15px;
+    background: var(--bg); white-space: nowrap; }
+  .flows.has-tabs .flow-nav a.active { background: var(--blue); border-color: var(--blue); color: #fff; }
+  .flows.has-tabs .flow-nav a.active::before { display: none; }
+  .flows.has-tabs .flow-text { padding-top: 32px; }
+}

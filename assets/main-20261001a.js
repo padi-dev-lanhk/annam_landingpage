@@ -26,21 +26,40 @@ document.addEventListener("click", (e) => {
   }
 });
 
-// ---------- Menu cạnh phần Giải pháp: highlight mục đang ở giữa màn hình ----------
+// ---------- Mục Chức năng: 4 nội dung chuyển bằng tab, mỗi lần chỉ hiện một ảnh ----------
 (function () {
+  const wrap = document.querySelector(".flows");
+  const nav = document.querySelector(".flow-nav");
   const links = [...document.querySelectorAll(".flow-nav a")];
-  const byId = new Map(links.map((a) => [a.getAttribute("href").slice(1), a]));
-  const io = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((e) => {
-        if (!e.isIntersecting) return;
-        links.forEach((a) => a.classList.remove("active"));
-        byId.get(e.target.id)?.classList.add("active");
-      });
-    },
-    { rootMargin: "-45% 0px -50% 0px" }
-  );
-  document.querySelectorAll(".flow").forEach((el) => io.observe(el));
+  const panels = [...document.querySelectorAll(".flow")];
+  if (!wrap || !nav || !links.length || links.length !== panels.length) return;
+  wrap.classList.add("has-tabs");
+  const ids = new Set(panels.map((el) => el.id));
+
+  function show(id) {
+    links.forEach((a) => a.classList.toggle("active", a.getAttribute("href").slice(1) === id));
+    panels.forEach((el) => el.classList.toggle("is-on", el.id === id));
+  }
+
+  nav.setAttribute("role", "tablist");
+  links.forEach((a) => {
+    a.setAttribute("role", "tab");
+    a.addEventListener("click", (e) => {
+      e.preventDefault();
+      show(a.getAttribute("href").slice(1));
+    });
+  });
+
+  // Link từ footer (#f-leads…) vẫn mở đúng tab rồi cuộn tới mục
+  window.addEventListener("hashchange", () => {
+    const id = location.hash.slice(1);
+    if (!ids.has(id)) return;
+    show(id);
+    wrap.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+
+  const start = location.hash.slice(1);
+  show(ids.has(start) ? start : panels[0].id);
 })();
 
 // ---------- AI Matching: tab 2 chiều (tìm khách cho SP / tìm SP cho khách) ----------

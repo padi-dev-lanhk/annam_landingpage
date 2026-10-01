@@ -1425,3 +1425,8 @@ body.no-scroll { overflow: hidden; }
    Logo màu navy nên ở menu trượt và footer (nền gần đen) phải đổi màu
    hiển thị sang trắng; file ảnh giữ nguyên, chỉ lọc lúc vẽ. ---- */
 .logo-light .logo-img { filter: brightness(0) invert(1); }
+
+/* ---- 2026-10-01: header trải hết bề ngang. Trước bị khoá max-width 1240px
+   rồi canh giữa, trên màn rộng thừa hơn 300px trống mỗi bên. ---- */
+.nav-inner { max-width: none; padding-inline: 20px; }
+@media (max-width: 960px) { .nav-inner { padding-inline: 16px; } }

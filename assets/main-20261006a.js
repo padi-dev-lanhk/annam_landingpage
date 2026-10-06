@@ -15,6 +15,108 @@ function track(event, data = {}) {
   window.dataLayer.push({ event, ...UTM, ...data });
 }
 
+// ---------- Đa ngôn ngữ VI / EN / JA ----------
+// Tiếng Việt là bản gốc trong HTML (mặc định). Đổi ngôn ngữ = duyệt mọi đoạn chữ + alt/aria-label/placeholder,
+// tra từ điển VINALAND_DICT (assets/i18n-*.js) theo câu tiếng Việt gốc. Câu nào chưa có trong từ điển thì giữ tiếng Việt.
+// Chữ do JS tự đặt (lỗi form, nút "Đang gửi…") dùng setText() để khi đổi ngôn ngữ vẫn dịch lại được.
+const LANGS = ["vi", "en", "ja"];
+const LANG_NAMES = { vi: "Tiếng Việt", en: "English", ja: "日本語" };
+const DICT = window.VINALAND_DICT || {};
+let LANG = "vi";
+const norm = (s) => s.replace(/\s+/g, " ").trim();
+function t(vi) {
+  if (LANG === "vi" || !vi) return vi;
+  const e = DICT[norm(vi)];
+  return e ? e[LANGS.indexOf(LANG) - 1] : vi;
+}
+function setText(el, vi) {
+  el.dataset.vi = vi;
+  el.textContent = t(vi);
+}
+
+const applyLang = (() => {
+  const ATTRS = ["alt", "aria-label", "placeholder"];
+  const origText = new WeakMap(), origAttr = new WeakMap();
+  const metaDesc = document.querySelector('meta[name="description"]');
+  const orig = { title: document.title, desc: metaDesc?.content };
+  const skip = (el) => el.tagName === "SCRIPT" || el.tagName === "STYLE" || el.hasAttribute("data-i18n-skip") || el.hasAttribute("data-vi");
+
+  return function (lang) {
+    LANG = lang;
+    document.documentElement.lang = lang;
+    document.title = t(orig.title);
+    if (metaDesc) metaDesc.content = t(orig.desc);
+
+    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT, {
+      acceptNode: (n) => (n.nodeType === 1 && skip(n) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT),
+    });
+    for (let n = walker.nextNode(); n; n = walker.nextNode()) {
+      if (n.nodeType === 3) {
+        if (!n.data.trim()) continue;
+        if (!origText.has(n)) origText.set(n, n.data);
+        const o = origText.get(n), tr = t(o);
+        // Giữ khoảng trắng đầu/cuối để chữ không dính vào thẻ <b>, <i> bên cạnh
+        const next = tr === o ? o : o.match(/^\s*/)[0] + tr + o.match(/\s*$/)[0];
+        if (n.data !== next) n.data = next;
+        continue;
+      }
+      let saved = origAttr.get(n);
+      for (const a of ATTRS) {
+        if (!n.hasAttribute(a)) continue;
+        if (!saved) origAttr.set(n, (saved = {}));
+        if (!(a in saved)) saved[a] = n.getAttribute(a);
+        n.setAttribute(a, t(saved[a]));
+      }
+    }
+    document.querySelectorAll("[data-vi]").forEach((el) => { el.textContent = t(el.dataset.vi); });
+
+    // Ảnh chụp app: bản EN/JA nằm ở assets/screenshots/<lang>/ cùng tên file với bản tiếng Việt
+    document.querySelectorAll('img[src*="assets/screenshots/"], [data-zoom*="assets/screenshots/"]').forEach((el) => {
+      const attr = el.tagName === "IMG" ? "src" : "data-zoom";
+      let saved = origAttr.get(el);
+      if (!saved) origAttr.set(el, (saved = {}));
+      if (!(attr in saved)) saved[attr] = el.getAttribute(attr);
+      el.setAttribute(attr, lang === "vi" ? saved[attr] : saved[attr].replace("assets/screenshots/", `assets/screenshots/${lang}/`));
+    });
+  };
+})();
+
+// Nút chọn ngôn ngữ trên header. Ưu tiên ?lang=en|ja trên URL, sau đó lựa chọn lần trước; mặc định tiếng Việt.
+(function () {
+  const box = document.getElementById("lang");
+  const btn = box?.querySelector(".lang-btn"), menu = box?.querySelector(".lang-menu");
+  const items = box ? [...box.querySelectorAll("[data-lang]")] : [];
+
+  function setLang(lang) {
+    applyLang(lang);
+    if (!box) return;
+    box.querySelector(".lang-code").textContent = lang.toUpperCase();
+    items.forEach((b) => (b.dataset.lang === lang ? b.setAttribute("aria-current", "true") : b.removeAttribute("aria-current")));
+  }
+
+  let start = new URLSearchParams(location.search).get("lang");
+  if (!LANGS.includes(start)) try { start = localStorage.getItem("vinaland_lang"); } catch {}
+  if (LANGS.includes(start) && start !== "vi") setLang(start);
+
+  if (!box) return;
+  function toggle(open) {
+    menu.hidden = !open;
+    btn.setAttribute("aria-expanded", open);
+  }
+  btn.addEventListener("click", () => toggle(menu.hidden));
+  items.forEach((b) => b.addEventListener("click", () => {
+    const lang = b.dataset.lang;
+    toggle(false);
+    btn.focus();
+    if (lang === LANG) return;
+    setLang(lang);
+    try { localStorage.setItem("vinaland_lang", lang); } catch {}
+    track("lang_change", { lang });
+  }));
+  document.addEventListener("click", (e) => { if (!menu.hidden && !box.contains(e.target)) toggle(false); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !menu.hidden) { toggle(false); btn.focus(); } });
+})();
+
 // ---------- CTA click + chọn sẵn gói khi bấm "Yêu cầu tư vấn" ----------
 document.addEventListener("click", (e) => {
   const a = e.target.closest("[data-cta]");
@@ -118,13 +220,17 @@ document.addEventListener("click", (e) => {
     name: (v) => (v.trim().length < 2 ? "Vui lòng nhập họ và tên." : ""),
     company: (v) => (v.trim().length < 2 ? "Vui lòng nhập tên công ty." : ""),
     size: (v) => (!v ? "Vui lòng chọn quy mô." : ""),
-    phone: (v) => (!/^(\+?84|0)(3|5|7|8|9)\d{8}$/.test(v.replace(/[\s.-]/g, "")) ? "Số điện thoại chưa đúng (ví dụ 0912 345 678)." : ""),
+    // Số Việt Nam, hoặc số quốc tế có mã nước (+81…, +1…) cho khách xem bản EN/JA
+    phone: (v) => {
+      const p = v.replace(/[\s.()-]/g, "");
+      return /^(\+?84|0)(3|5|7|8|9)\d{8}$/.test(p) || /^\+(?!84)\d{7,14}$/.test(p) ? "" : "Số điện thoại chưa đúng (ví dụ 0912 345 678).";
+    },
     email: (v) => (v && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()) ? "Email chưa đúng định dạng." : ""),
   };
   function setErr(name, text) {
     const el = form.elements[name];
     const err = name === "consent" ? form.querySelector(".f-err-consent") : el.closest(".f").querySelector(".f-err");
-    err.textContent = text;
+    setText(err, text);
     el.setAttribute("aria-invalid", text ? "true" : "false");
   }
   function validate() {
@@ -153,7 +259,7 @@ document.addEventListener("click", (e) => {
       _subject: "[VinaLand] Yêu cầu demo mới: " + p.company, _template: "table", _captcha: "false",
       "Họ và tên": p.name, "Công ty": p.company, "Vai trò": p.role || "(không chọn)", "Số nhân viên kinh doanh": p.size,
       "Điện thoại": p.phone, "Email": p.email || "(không có)", "Gói quan tâm": p.plan || "Chưa rõ", "Nhu cầu": p.need || "(trống)",
-      "Đồng ý liên hệ": "Có", "Nguồn": p.source, "Trang": p.page,
+      "Đồng ý liên hệ": "Có", "Nguồn": p.source, "Trang": p.page, "Ngôn ngữ trang": LANG_NAMES[p.lang] || p.lang,
       "UTM": ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"].filter((k) => p[k]).map((k) => k + "=" + p[k]).join(", ") || "(không có)",
       _replyto: p.email || undefined,
     };
@@ -161,7 +267,7 @@ document.addEventListener("click", (e) => {
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
-    msg.textContent = "";
+    setText(msg, "");
     const bad = validate();
     if (bad) { bad.closest("details")?.setAttribute("open", ""); bad.focus(); track("form_error", { field: bad.name }); return; }
 
@@ -170,11 +276,11 @@ document.addEventListener("click", (e) => {
     const f = form.elements;
     const payload = {
       name: f.name.value.trim(), company: f.company.value.trim(), role: f.role.value, size: f.size.value,
-      phone: f.phone.value.replace(/[\s.-]/g, ""), email: f.email.value.trim(), plan: f.plan.value, need: f.need.value.trim(),
-      consent: true, source: "Website Landing", page: location.href.split("?")[0], ...UTM,
+      phone: f.phone.value.replace(/[\s.()-]/g, ""), email: f.email.value.trim(), plan: f.plan.value, need: f.need.value.trim(),
+      consent: true, source: "Website Landing", page: location.href.split("?")[0], lang: LANG, ...UTM,
     };
 
-    btn.disabled = true; btn.classList.add("loading"); btn.textContent = "Đang gửi…";
+    btn.disabled = true; btn.classList.add("loading"); setText(btn, "Đang gửi…");
     const endpoint = form.dataset.endpoint;
     let preview = false;
     try {
@@ -190,14 +296,14 @@ document.addEventListener("click", (e) => {
       }
       track("form_submit", { role: payload.role, size: payload.size, plan: payload.plan || "none" });
       form.hidden = true; done.hidden = false;
-      if (preview) document.getElementById("doneText").textContent =
-        "Đây là bản xem trước: form chưa kết nối CRM nên thông tin chưa được gửi đi. Vui lòng liên hệ trực tiếp đội ngũ VinaLand để đặt lịch demo.";
+      if (preview) setText(document.getElementById("doneText"),
+        "Đây là bản xem trước: form chưa kết nối CRM nên thông tin chưa được gửi đi. Vui lòng liên hệ trực tiếp đội ngũ VinaLand để đặt lịch demo.");
       done.focus();
     } catch (err) {
       console.error("Gửi form demo thất bại:", err);
       track("form_submit_error");
-      msg.textContent = "Chưa gửi được yêu cầu. Vui lòng thử lại sau ít phút.";
-      btn.disabled = false; btn.classList.remove("loading"); btn.textContent = "Gửi yêu cầu demo";
+      setText(msg, "Chưa gửi được yêu cầu. Vui lòng thử lại sau ít phút.");
+      btn.disabled = false; btn.classList.remove("loading"); setText(btn, "Gửi yêu cầu demo");
     }
   });
 })();

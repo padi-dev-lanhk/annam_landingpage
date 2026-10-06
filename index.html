@@ -11,7 +11,7 @@
 <meta name="description" content="VinaLand: quản lý giỏ hàng, khách hàng và đội Sales trên một hệ thống. Theo dõi căn còn bán, lead cần chăm sóc và tiến độ cơ hội theo từng nhóm.">
 <meta property="og:title" content="VinaLand — Phần mềm quản lý sàn bất động sản">
 <meta property="og:description" content="Quản lý giỏ hàng, khách hàng và đội Sales trên một hệ thống.">
-<meta property="og:image" content="assets/screenshots/01-dashboard.webp?v=20261001c">
+<meta property="og:image" content="assets/screenshots/01-dashboard.webp?v=20261006a">
 <meta property="og:type" content="website">
 <link rel="icon" href="favicon.ico?v=20261001b" sizes="32x32">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32-20261001b.png">
@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@500;600&family=JetBrains+Mono:wght@500&display=swap">
-<link rel="stylesheet" href="assets/style-20261001e.css">
+<link rel="stylesheet" href="assets/style-20261006a.css">
 </head>
 <body>
 
@@ -39,6 +39,19 @@
       <a href="#faq">Hỏi đáp</a>
     </nav>
     <div class="nav-cta">
+      <!-- Chọn ngôn ngữ: tên ngôn ngữ luôn viết bằng chính ngôn ngữ đó nên không dịch (data-i18n-skip) -->
+      <div class="lang" id="lang" data-i18n-skip>
+        <button class="lang-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="langMenu" aria-label="Ngôn ngữ · Language · 言語">
+          <svg class="lang-globe" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg>
+          <span class="lang-code">VI</span>
+          <svg class="lang-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <ul class="lang-menu" id="langMenu" hidden>
+          <li><button type="button" data-lang="vi" lang="vi" aria-current="true">Tiếng Việt</button></li>
+          <li><button type="button" data-lang="en" lang="en">English</button></li>
+          <li><button type="button" data-lang="ja" lang="ja">日本語</button></li>
+        </ul>
+      </div>
       <a class="btn btn-blue" href="#demo" data-cta="nav">Đặt lịch demo</a>
     </div>
   </div>
@@ -85,12 +98,12 @@
     <figure class="hero2-shot">
       <div class="window">
         <div class="window-bar"><i></i><i></i><i></i><span>Bảng điều hành VinaLand</span></div>
-        <button class="shot-btn" type="button" data-zoom="assets/screenshots/01-dashboard.webp?v=20261001c" aria-label="Phóng to ảnh bảng điều hành">
-          <img src="assets/screenshots/01-dashboard.webp?v=20261001c" width="1440" height="900" alt="Bảng điều hành VinaLand: tổng sản phẩm, lead và khách hàng, cơ hội đang xử lý, pipeline theo giai đoạn">
+        <button class="shot-btn" type="button" data-zoom="assets/screenshots/01-dashboard.webp?v=20261006a" aria-label="Phóng to ảnh bảng điều hành">
+          <img src="assets/screenshots/01-dashboard.webp?v=20261006a" width="1440" height="900" alt="Bảng điều hành VinaLand: tổng sản phẩm, lead và khách hàng, cơ hội đang xử lý, pipeline theo giai đoạn">
         </button>
       </div>
-      <button class="hero2-phone" type="button" data-zoom="assets/screenshots/m02-products.webp?v=20261001c" aria-label="Phóng to ảnh giỏ hàng trên điện thoại">
-        <img src="assets/screenshots/m02-products.webp?v=20261001c" width="390" height="844" alt="Giỏ hàng VinaLand trên điện thoại">
+      <button class="hero2-phone" type="button" data-zoom="assets/screenshots/m02-products.webp?v=20261006a" aria-label="Phóng to ảnh giỏ hàng trên điện thoại">
+        <img src="assets/screenshots/m02-products.webp?v=20261006a" width="390" height="844" alt="Giỏ hàng VinaLand trên điện thoại">
       </button>
     </figure>
   </section>
@@ -165,8 +178,8 @@
         </li>
       </ul>
       <div class="dash-shot">
-        <button class="shot-btn shot-card" type="button" data-zoom="assets/screenshots/14-reports.webp?v=20261001c" aria-label="Phóng to ảnh báo cáo">
-          <img src="assets/screenshots/14-reports.webp?v=20261001c" width="1440" height="900" loading="lazy" alt="Màn hình báo cáo VinaLand theo nguồn hàng, tuần và tháng">
+        <button class="shot-btn shot-card" type="button" data-zoom="assets/screenshots/14-reports.webp?v=20261006a" aria-label="Phóng to ảnh báo cáo">
+          <img src="assets/screenshots/14-reports.webp?v=20261006a" width="1440" height="900" loading="lazy" alt="Màn hình báo cáo VinaLand theo nguồn hàng, tuần và tháng">
         </button>
       </div>
     </div>
@@ -187,8 +200,8 @@
           <ul class="flow-keys"><li>Theo dự án &middot; phân khu &middot; toà</li><li>Lọc giá, loại căn, hướng, nguồn hàng</li><li>Nhập &amp; xuất Excel theo file mẫu</li><li>Link chia sẻ rổ hàng gửi khách</li></ul>
         </div>
         <div class="flow-ill g-violet">
-          <button class="shot-btn shot-card" type="button" data-zoom="assets/screenshots/02-products.webp?v=20261001c" aria-label="Phóng to ảnh giỏ hàng">
-            <img src="assets/screenshots/02-products.webp?v=20261001c" width="1440" height="900" loading="lazy" alt="Màn hình giỏ hàng VinaLand: danh sách căn theo dự án, trạng thái và giá">
+          <button class="shot-btn shot-card" type="button" data-zoom="assets/screenshots/02-products.webp?v=20261006a" aria-label="Phóng to ảnh giỏ hàng">
+            <img src="assets/screenshots/02-products.webp?v=20261006a" width="1440" height="900" loading="lazy" alt="Màn hình giỏ hàng VinaLand: danh sách căn theo dự án, trạng thái và giá">
           </button>
         </div>
       </article>
@@ -198,8 +211,8 @@
           <ul class="flow-keys"><li>Ghi nguồn: Facebook, Zalo, hotline</li><li>Chống trùng số điện thoại</li><li>Phân bổ lead cho từng Sales</li><li>Lưu nhu cầu &amp; lịch sử chăm sóc</li></ul>
         </div>
         <div class="flow-ill g-sunset">
-          <button class="shot-btn shot-card" type="button" data-zoom="assets/screenshots/07-leads.webp?v=20261001c" aria-label="Phóng to ảnh danh sách lead">
-            <img src="assets/screenshots/07-leads.webp?v=20261001c" width="1440" height="900" loading="lazy" alt="Màn hình danh sách lead VinaLand, thông tin cá nhân đã làm mờ">
+          <button class="shot-btn shot-card" type="button" data-zoom="assets/screenshots/07-leads.webp?v=20261006a" aria-label="Phóng to ảnh danh sách lead">
+            <img src="assets/screenshots/07-leads.webp?v=20261006a" width="1440" height="900" loading="lazy" alt="Màn hình danh sách lead VinaLand, thông tin cá nhân đã làm mờ">
           </button>
         </div>
       </article>
@@ -209,8 +222,8 @@
           <ul class="flow-keys"><li>Kanban hoặc danh sách theo giai đoạn</li><li>Đặt cọc là khoá căn, hết chào trùng</li><li>Ghi lý do khi mất deal</li><li>Thống kê theo dự án và theo Sales</li></ul>
         </div>
         <div class="flow-ill g-peach">
-          <button class="shot-btn shot-card" type="button" data-zoom="assets/screenshots/11-opportunities.webp?v=20261001c" aria-label="Phóng to ảnh pipeline cơ hội">
-            <img src="assets/screenshots/11-opportunities.webp?v=20261001c" width="1440" height="900" loading="lazy" alt="Màn hình pipeline cơ hội VinaLand dạng Kanban">
+          <button class="shot-btn shot-card" type="button" data-zoom="assets/screenshots/11-opportunities.webp?v=20261006a" aria-label="Phóng to ảnh pipeline cơ hội">
+            <img src="assets/screenshots/11-opportunities.webp?v=20261006a" width="1440" height="900" loading="lazy" alt="Màn hình pipeline cơ hội VinaLand dạng Kanban">
           </button>
         </div>
       </article>
@@ -220,8 +233,8 @@
           <ul class="flow-keys"><li>Lịch gọi lại, xem nhà, ký cọc</li><li>Đánh dấu việc quá hạn</li><li>Báo khi được giao lead mới</li><li>Nhắc tên trong trao đổi nội bộ</li></ul>
         </div>
         <div class="flow-ill g-mint">
-          <button class="shot-btn shot-card" type="button" data-zoom="assets/screenshots/13-tasks.webp?v=20261001c" aria-label="Phóng to ảnh lịch và công việc">
-            <img src="assets/screenshots/13-tasks.webp?v=20261001c" width="1440" height="900" loading="lazy" alt="Màn hình lịch và công việc VinaLand">
+          <button class="shot-btn shot-card" type="button" data-zoom="assets/screenshots/13-tasks.webp?v=20261006a" aria-label="Phóng to ảnh lịch và công việc">
+            <img src="assets/screenshots/13-tasks.webp?v=20261006a" width="1440" height="900" loading="lazy" alt="Màn hình lịch và công việc VinaLand">
           </button>
         </div>
       </article>
@@ -268,14 +281,14 @@
         </ol>
       </div>
       <div class="rollout-phone">
-        <button class="shot-btn" type="button" data-zoom="assets/screenshots/m04-leads.webp?v=20261001c" aria-label="Phóng to ảnh danh sách lead trên điện thoại">
-          <img src="assets/screenshots/m04-leads.webp?v=20261001c" width="390" height="844" loading="lazy" alt="Danh sách lead VinaLand trên trình duyệt điện thoại">
+        <button class="shot-btn" type="button" data-zoom="assets/screenshots/m04-leads.webp?v=20261006a" aria-label="Phóng to ảnh danh sách lead trên điện thoại">
+          <img src="assets/screenshots/m04-leads.webp?v=20261006a" width="390" height="844" loading="lazy" alt="Danh sách lead VinaLand trên trình duyệt điện thoại">
         </button>
         <p class="mig-dest">Dữ liệu vào VinaLand</p>
       </div>
     </div>
 
-    <p class="pilot-line">Trong giai đoạn pilot, hai bên cùng theo dõi bốn chỉ số: <b>thời gian phản hồi lead</b> &middot; <b>tỷ lệ lead được chăm sóc</b> &middot; <b>tỷ lệ chuyển đổi</b> &middot; <b>bàn giao không mất lịch sử</b>.</p>
+    <p class="pilot-line">Trong giai đoạn pilot, hai bên cùng theo dõi bốn chỉ số: <b>thời gian phản hồi lead</b> &middot; <b>tỷ lệ lead được chăm sóc</b> &middot; <b>tỷ lệ chuyển đổi</b> &middot; <b>bàn giao không mất lịch sử</b></p>
   </section>
 
   <!-- 07 PHÂN QUYỀN & BẢO MẬT -->
@@ -292,8 +305,8 @@
     </div>
     <div class="scale-shot">
       <div class="perm-ill g-violet">
-        <button class="shot-btn shot-card" type="button" data-zoom="assets/screenshots/17-permissions.webp?v=20261001c" aria-label="Phóng to ảnh ma trận phân quyền">
-          <img src="assets/screenshots/17-permissions.webp?v=20261001c" width="1440" height="900" loading="lazy" alt="Màn hình ma trận phân quyền theo vai trò và phạm vi trong VinaLand">
+        <button class="shot-btn shot-card" type="button" data-zoom="assets/screenshots/17-permissions.webp?v=20261006a" aria-label="Phóng to ảnh ma trận phân quyền">
+          <img src="assets/screenshots/17-permissions.webp?v=20261006a" width="1440" height="900" loading="lazy" alt="Màn hình ma trận phân quyền theo vai trò và phạm vi trong VinaLand">
         </button>
       </div>
     </div>
@@ -369,13 +382,13 @@
         </div>
         <div class="aim-stage g-dusk">
           <div class="aim-panel" role="tabpanel" id="am-p1" aria-labelledby="am-t1">
-            <button class="shot-btn shot-card" type="button" data-zoom="assets/screenshots/20-ai-matching-sp.webp?v=20261001c" aria-label="Phóng to ảnh AI Matching: tìm khách cho sản phẩm">
-              <img src="assets/screenshots/20-ai-matching-sp.webp?v=20261001c" width="1440" height="900" loading="lazy" alt="AI Matching tìm khách phù hợp cho một căn: điểm phù hợp, lý do khớp và điểm cần lưu ý">
+            <button class="shot-btn shot-card" type="button" data-zoom="assets/screenshots/20-ai-matching-sp.webp?v=20261006a" aria-label="Phóng to ảnh AI Matching: tìm khách cho sản phẩm">
+              <img src="assets/screenshots/20-ai-matching-sp.webp?v=20261006a" width="1440" height="900" loading="lazy" alt="AI Matching tìm khách phù hợp cho một căn: điểm phù hợp, lý do khớp và điểm cần lưu ý">
             </button>
           </div>
           <div class="aim-panel" role="tabpanel" id="am-p2" aria-labelledby="am-t2" hidden>
-            <button class="shot-btn shot-card" type="button" data-zoom="assets/screenshots/21-ai-matching-kh.webp?v=20261001c" aria-label="Phóng to ảnh AI Matching: tìm sản phẩm cho khách">
-              <img src="assets/screenshots/21-ai-matching-kh.webp?v=20261001c" width="1440" height="900" loading="lazy" alt="AI Matching tìm căn phù hợp cho một khách: nhu cầu khai báo và danh sách căn kèm điểm">
+            <button class="shot-btn shot-card" type="button" data-zoom="assets/screenshots/21-ai-matching-kh.webp?v=20261006a" aria-label="Phóng to ảnh AI Matching: tìm sản phẩm cho khách">
+              <img src="assets/screenshots/21-ai-matching-kh.webp?v=20261006a" width="1440" height="900" loading="lazy" alt="AI Matching tìm căn phù hợp cho một khách: nhu cầu khai báo và danh sách căn kèm điểm">
             </button>
           </div>
         </div>
@@ -421,14 +434,14 @@
         <div class="f-row">
           <label class="f"><span>Số điện thoại <i>*</i></span><input name="phone" type="tel" inputmode="tel" autocomplete="tel" required maxlength="15"><em class="f-err"></em></label>
           <label class="f"><span>Số nhân viên kinh doanh <i>*</i></span>
-            <select name="size" required><option value="">Chọn quy mô</option><option>Dưới 20</option><option>20 – 50</option><option>51 – 200</option><option>Trên 200</option></select><em class="f-err"></em></label>
+            <select name="size" required><option value="">Chọn quy mô</option><option value="Dưới 20">Dưới 20</option><option value="20 – 50">20 – 50</option><option value="51 – 200">51 – 200</option><option value="Trên 200">Trên 200</option></select><em class="f-err"></em></label>
         </div>
         <details class="f-more">
           <summary>Thêm thông tin (không bắt buộc)</summary>
           <div class="f-row">
             <label class="f"><span>Email</span><input name="email" type="email" autocomplete="email" maxlength="120"><em class="f-err"></em></label>
             <label class="f"><span>Vai trò</span>
-              <select name="role"><option value="">Chưa chọn</option><option>CEO / Chủ sàn</option><option>Giám đốc kinh doanh</option><option>Trưởng nhóm / Trưởng phòng</option><option>Sales</option><option>Khác</option></select></label>
+              <select name="role"><option value="">Chưa chọn</option><option value="CEO / Chủ sàn">CEO / Chủ sàn</option><option value="Giám đốc kinh doanh">Giám đốc kinh doanh</option><option value="Trưởng nhóm / Trưởng phòng">Trưởng nhóm / Trưởng phòng</option><option value="Sales">Sales</option><option value="Khác">Khác</option></select></label>
           </div>
           <label class="f"><span>Gói quan tâm</span>
             <select name="plan"><option value="">Chưa rõ, cần tư vấn</option><option>Starter</option><option>Professional</option><option>Enterprise</option></select></label>
@@ -473,6 +486,7 @@
   <img alt="" id="zoomImg">
 </dialog>
 
-<script src="assets/main-20261001a.js"></script>
+<script src="assets/i18n-20261006a.js"></script>
+<script src="assets/main-20261006a.js"></script>
 </body>
 </html>

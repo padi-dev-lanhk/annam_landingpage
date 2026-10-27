@@ -71,9 +71,6 @@ a{color:inherit}
 .ann-tin.mo{opacity:0}
 .ann-tin i{font-style:normal;font-weight:600;white-space:nowrap;border-bottom:1px solid rgba(255,255,255,.4)}
 .ann-tin:hover i{border-bottom-color:#fff}
-.ann-cham{display:flex;gap:5px;flex:none}
-.ann-cham i{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.28);transition:background .22s}
-.ann-cham i.dang{background:#fff}
 @media (prefers-reduced-motion:reduce){.ann-tin{transition:none}}
 .ann button{position:absolute;right:28px;top:50%;transform:translateY(-50%);background:none;border:0;
   color:rgba(255,255,255,.6);font-size:18px;cursor:pointer;line-height:1}
@@ -745,7 +742,6 @@ h1,h2,h3{text-wrap:balance}
       <span>Trợ lý AI ghép khách với căn, có giải trình từng tiêu chí</span>
       <i>Xem thử →</i>
     </a>
-    <span class="ann-cham" id="ann-cham" aria-hidden="true"><i class="dang"></i><i></i><i></i></span>
     <button type="button" aria-label="Đóng thông báo">×</button>
   </div>
 </div>
@@ -1306,14 +1302,12 @@ const apDungNgonNgu = (() => {
   document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !bang.hidden) { mo(false); nut.focus(); } });
 })();
 
-/* Thanh thông báo — ba tin, mỗi tin 3 giây, chạy đúng MỘT vòng rồi dừng ở tin cuối.
-   Quay vòng mãi thì dải chữ nhấp nháy suốt buổi, kéo mắt khỏi nội dung chính.
+/* Thanh thông báo — ba tin luân phiên, mỗi tin 3 giây, chạy vòng không dừng.
    Rê chuột hoặc đặt tiêu điểm vào thì hoãn đổi tin — đang đọc dở không bị cướp chữ. */
 (function () {
   const bang = document.getElementById("ann");
   if (!bang) return;
   const tin = document.getElementById("ann-tin");
-  const cham = [...document.getElementById("ann-cham").children];
   const oNhan = tin.querySelector("b"), oChu = tin.querySelector("span"), oThem = tin.querySelector("i");
 
   const DS = [
@@ -1333,14 +1327,13 @@ const apDungNgonNgu = (() => {
     datChu(oChu, t.chu);
     datChu(oThem, t.them);
     tin.setAttribute("href", t.neo);
-    cham.forEach((c, n) => c.classList.toggle("dang", n === k));
   }
   function doi() {
     if (dangDoc) { hen = setTimeout(doi, 800); return; }
-    i++;
+    i = (i + 1) % DS.length;
     tin.classList.add("mo");
     setTimeout(() => { ve(i); tin.classList.remove("mo"); }, 220);
-    if (i < DS.length - 1) hen = setTimeout(doi, 3000);
+    hen = setTimeout(doi, 3000);
   }
   ve(0);
   hen = setTimeout(doi, 3000);

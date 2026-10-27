@@ -184,6 +184,7 @@ Object.assign(window.VINALAND_DICT || (window.VINALAND_DICT = {}), {
     "© 2026 VinaLand — 不動産仲介会社向け管理ソフトウェア。",
   ],
   "Phim giới thiệu VinaLand": ["VinaLand intro film", "VinaLand紹介動画"],
+  "Phóng to ảnh giao diện": ["Enlarge the interface screenshot", "画面のスクリーンショットを拡大"],
   "Gọi điện": ["Call", "電話する"],
 
   // --- chữ do JS đặt ---

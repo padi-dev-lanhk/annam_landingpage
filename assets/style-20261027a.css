@@ -1,0 +1,736 @@
+/* VinaLand — giao diện trang chủ, bản bố cục 27/10/2026.
+   Tách ra từ demo-layout.html khi bản mẫu được đưa lên làm trang thật.
+   Đổi file này thì đổi luôn TÊN FILE theo quy ước chống cache (xem đầu index.html). */
+:root{
+  /* Xanh dương VinaLand, tổ chức theo cùng cách trang mẫu tổ chức màu xanh lá của họ:
+     một màu đậm làm thương hiệu, một màu sáng làm nhấn, hai mặt nền nhuộm rất nhạt. */
+  --brand:#14407F;
+  --brand-2:#0F3366;
+  --brand-mid:#2C6FD1;
+  --brand-light:#7FB0F2;
+  --tint:#EDF3FC;
+  --tint-2:#DEEAFA;
+
+  --ink:#121A22;
+  --ink-2:#44525E;
+  --ink-3:#7A8894;
+  --line:#E3E8EE;
+  --paper:#fff;
+  --bg:#F7F9FB;
+
+  --r-sm:12px; --r-md:17px; --r-lg:22px; --r-pill:999px;
+  --sh-card:0 1px 2px rgba(18,26,34,.05), 0 8px 24px rgba(18,26,34,.06);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+section[id]{scroll-margin-top:92px}
+@media (max-width:860px){section[id]{scroll-margin-top:78px}}
+body{margin:0;font-family:Manrope,system-ui,sans-serif;color:var(--ink);background:var(--paper);
+  font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.frame{max-width:1328px;margin:0 auto;padding:0 32px}
+h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.04em;line-height:1.08}
+a{color:inherit}
+
+/* ---------- 1. thanh thông báo ---------- */
+.ann{background:var(--ink);color:#fff;font-size:13.5px;position:relative}
+.ann .frame{display:flex;align-items:center;justify-content:center;gap:10px;min-height:44px;padding-right:56px}
+.ann b{background:var(--brand-mid);color:#fff;font-size:11.5px;font-weight:700;
+  padding:3px 9px;border-radius:var(--r-pill);letter-spacing:.02em}
+/* Tin chạy: cả dòng là một đường dẫn, riêng phần "Xem thử →" mới gạch chân. */
+.ann-tin{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;transition:opacity .22s}
+.ann-tin.mo{opacity:0}
+.ann-tin i{font-style:normal;font-weight:600;white-space:nowrap;border-bottom:1px solid rgba(255,255,255,.4)}
+.ann-tin:hover i{border-bottom-color:#fff}
+@media (prefers-reduced-motion:reduce){.ann-tin{transition:none}}
+.ann button{position:absolute;right:28px;top:50%;transform:translateY(-50%);background:none;border:0;
+  color:rgba(255,255,255,.6);font-size:18px;cursor:pointer;line-height:1}
+.ann button:hover{color:#fff}
+
+/* ---------- thanh đầu ---------- */
+.top{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line)}
+.top .frame{display:flex;align-items:center;gap:30px;height:74px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:21px;letter-spacing:-.03em;text-decoration:none}
+.brand img{height:40px;width:auto}
+.nav{display:flex;gap:26px;margin-left:16px}
+.nav a{font-size:15px;color:var(--ink-2);text-decoration:none;font-weight:500}
+.nav a:hover{color:var(--ink)}
+.top .right{margin-left:auto;display:flex;align-items:center;gap:14px}
+/* Nút chọn ngôn ngữ — giữ đúng kiểu bản thật: địa cầu + mã ngôn ngữ + mũi tên,
+   bảng chọn ghi tên bằng CHÍNH ngôn ngữ đó, mục đang dùng có dấu tích. */
+.lang{position:relative}
+.lang-btn{display:inline-flex;align-items:center;gap:6px;height:38px;padding:0 11px;background:#fff;
+  border:1px solid var(--line);border-radius:var(--r-sm);font-family:inherit;font-size:13.5px;
+  font-weight:700;color:var(--brand);cursor:pointer;transition:.15s}
+.lang-btn:hover{background:var(--tint)}
+.lang-btn svg{flex:none;width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.6;
+  stroke-linecap:round;stroke-linejoin:round}
+.lang-btn .lang-chev{width:12px;height:12px;color:var(--ink-3);stroke-width:2.2;transition:transform .15s}
+.lang-btn[aria-expanded="true"] .lang-chev{transform:rotate(180deg)}
+.lang-code{min-width:2ch}
+.lang-menu{position:absolute;right:0;top:calc(100% + 7px);z-index:60;min-width:172px;margin:0;padding:5px;
+  list-style:none;background:#fff;border:1px solid var(--line);border-radius:var(--r-sm);
+  box-shadow:0 12px 34px rgba(18,26,34,.14)}
+.lang-menu button{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;
+  padding:9px 11px;border:0;border-radius:9px;background:none;font-family:inherit;font-size:14.5px;
+  color:var(--ink);text-align:left;cursor:pointer}
+.lang-menu button:hover{background:var(--tint)}
+.lang-menu button[aria-current="true"]{color:var(--brand);font-weight:700}
+/* Dấu tích vẽ bằng hai cạnh của khung, xoay 45° — khỏi phải nhúng thêm một SVG. */
+.lang-menu button[aria-current="true"]::after{content:"";width:13px;height:7px;margin-top:-3px;
+  border:solid currentColor;border-width:0 0 2px 2px;transform:rotate(-45deg) scale(.8)}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;height:46px;padding:0 22px;
+  border-radius:var(--r-pill);font-size:15px;font-weight:700;text-decoration:none;border:1px solid transparent;
+  cursor:pointer;transition:.18s;white-space:nowrap}
+.btn-solid{background:var(--brand);color:#fff;border-color:var(--brand)}
+.btn-solid:hover{background:var(--brand-2);border-color:var(--brand-2)}
+.btn-line{background:#fff;color:var(--ink);border-color:var(--line)}
+.btn-line:hover{border-color:var(--ink-3)}
+.btn svg{flex:none}
+
+/* ---------- hero ---------- */
+.hero{background:var(--bg);padding:56px 0 80px;position:relative;overflow:hidden}
+/* Lưới bản vẽ rất mờ — dấu hiệu duy nhất của ngành bất động sản trong hệ này. */
+.hero::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(rgba(18,26,34,.028) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(18,26,34,.028) 1px,transparent 1px);
+  background-size:72px 72px;
+  mask-image:radial-gradient(ellipse 80% 70% at 20% 30%,#000 30%,transparent 75%)}
+.hero .frame{position:relative;display:grid;grid-template-columns:minmax(0,50fr) minmax(0,50fr);gap:78px;align-items:start}
+
+/* Nhãn hai dòng: dòng trên màu thương hiệu, dòng dưới chữ hoa xám. */
+.eyebrow{font-size:15px;font-weight:700;color:var(--brand);margin:0 0 4px}
+.eyebrow-sub{font-size:12.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin:0 0 22px}
+
+.hero h1{font-size:clamp(32px,4vw,58px);max-width:600px}
+/* Dòng giữa đổi màu — cấu trúc ba dòng này là thứ làm tiêu đề dễ nhớ. */
+.hero h1 span{color:var(--brand);display:block}
+.hero .lead{margin:20px 0 30px;font-size:17.5px;color:var(--ink-2);max-width:44ch}
+.hero .acts{display:flex;gap:12px;flex-wrap:wrap}
+
+/* 3. dòng bằng chứng có chấm */
+.proof{display:flex;gap:10px;align-items:flex-start;margin-top:26px;font-size:14.5px;color:var(--ink-2);max-width:48ch}
+.proof i{position:relative;width:8px;height:8px;border-radius:50%;background:var(--brand-mid);
+  margin-top:8px;flex:none;box-shadow:0 0 0 4px rgba(44,111,209,.16);
+  animation:cham-nhip 2.4s ease-in-out infinite}
+.proof i::after{content:"";position:absolute;inset:-9px;border-radius:50%;
+  background:radial-gradient(circle,rgba(44,111,209,.26),rgba(44,111,209,0) 70%);
+  animation:cham-quang 2.4s ease-in-out infinite}
+@keyframes cham-nhip{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+@keyframes cham-quang{0%,100%{opacity:1}50%{opacity:.62}}
+@media (prefers-reduced-motion:reduce){.proof i,.proof i::after{animation:none}}
+
+/* ---------- 2. tab chuyển ảnh ---------- */
+.tabs{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:16px}
+.tab{border:1px solid var(--line);background:#fff;color:var(--ink-2);border-radius:var(--r-pill);
+  padding:9px 17px;font-size:14px;font-weight:600;cursor:pointer;transition:.16s;font-family:inherit}
+.tab:hover{border-color:var(--ink-3)}
+.tab[aria-selected="true"]{background:var(--brand);color:#fff;border-color:var(--brand)}
+
+/* Ảnh app đặt trong khung máy tối, bo góc rộng — cho ảnh chụp màn hình trông như
+   thiết bị thật chứ không như ảnh dán vào trang. */
+.device{background:var(--ink);border-radius:var(--r-lg);padding:9px;box-shadow:0 20px 50px rgba(18,26,34,.18)}
+.device img{width:100%;height:auto;display:block;border-radius:11px}
+/* Bỏ nhãn đậm đứng trước, chỉ còn một câu mô tả nên canh giữa dưới ảnh cho cân.
+   Khoá bề ngang để câu không kéo dài hết khổ ảnh, đọc mỏi mắt. */
+.cap{margin:18px auto 0;font-size:14.5px;color:var(--ink-2);text-align:center;max-width:52ch}
+.cap b{color:var(--ink);font-weight:700;flex:none}
+
+/* ---------- 4. khối "thay cho" ---------- */
+.swap{padding:80px 0}
+.sec-head{text-align:center;max-width:46ch;margin:0 auto 52px}
+.sec-head h2{font-size:clamp(26px,3vw,40px)}
+.sec-head h2 span{color:var(--brand)}
+.sec-head p{margin:16px 0 0;color:var(--ink-2);font-size:17px;text-wrap:balance}
+/* Tiếng Nhật không có dấu cách giữa các từ, mà `ch` là bề ngang chữ "0" (nửa thân)
+   nên 20ch chỉ còn khoảng 10 chữ Nhật một dòng — tiêu đề gãy ngang giữa từ
+   ("営業チー / ムの規模"). Đặt trần theo `em` để dòng dài bằng bản tiếng Việt. */
+html[lang="ja"] .sec-head{max-width:30em}
+html[lang="ja"] .sec-head h2{max-width:20em}
+
+/* Ba cột: thẻ phân hệ · dải nối · ảnh app. Dải nối KHÔNG có gap hai bên — nét đứt
+   phải bắt đầu đúng ở mép thẻ thì mới ra ý "mọi thứ chảy về một mối". */
+.swap-grid{display:grid;grid-template-columns:minmax(0,50fr) 140px minmax(0,50fr);gap:0;align-items:stretch}
+.swap-grid .mods{padding-right:4px}
+.swap-grid .swap-shot{padding-left:4px}
+.mods{display:flex;flex-direction:column;gap:9px;justify-content:center}
+.mod{display:flex;gap:14px;align-items:flex-start;background:var(--tint);border:1px solid transparent;
+  border-radius:var(--r-md);padding:13px 17px;transition:.18s}
+.mod:hover{background:#fff;border-color:var(--line);box-shadow:var(--sh-card)}
+.mod .ic{width:36px;height:36px;flex:none;display:grid;place-items:center;background:#fff;
+  border-radius:11px;color:var(--brand);border:1px solid var(--tint-2)}
+.mod h3{font-size:15px;font-weight:700;letter-spacing:-.01em;line-height:1.35}
+/* "Thay cho: …" là chỗ đắt nhất của mẫu này — nói thẳng nó thế chỗ công cụ nào,
+   người trong nghề đọc là nhận ra mình ngay. */
+.mod p{margin:3px 0 0;font-size:13px;color:var(--ink-2)}
+.mod p b{color:var(--ink-2);font-weight:700}
+
+.swap-shot{position:relative;display:flex;flex-direction:column;justify-content:center}
+.swap-shot .ve{width:100%;height:auto;display:block}
+.swap-note{display:flex;gap:9px;align-items:center;justify-content:center;margin-top:18px;
+  font-size:14.5px;color:var(--ink-2)}
+.swap-note i{width:8px;height:8px;border-radius:50%;background:var(--brand-mid);flex:none}
+
+/* ---------- dải nối giữa hai cột ----------------------------------------------
+   Sáu nét đứt chạy từ mép phải từng thẻ, cong về một điểm giữa.
+   Mỗi đường có HAI path chồng nhau:
+     .n   — nét đứt mảnh, bò chậm và liên tục, cho cảm giác dữ liệu luôn chảy;
+     .tia — một vạch sáng duy nhất (dash 30px, khoảng trống 4000px nên chỉ thấy một
+            vạch) phóng hết đường rồi tắt, lặp lại theo chu kỳ.
+   Toạ độ do JS tính từ vị trí thật của thẻ, nên viewBox khớp 1:1 với pixel —
+   nét đứt và vạch sáng không bị kéo méo khi khối đổi kích thước. */
+.noi{position:relative;align-self:stretch}
+.noi svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.noi path{fill:none;stroke:var(--brand-mid)}
+.noi .n{stroke-width:1.4;stroke-dasharray:4 5;opacity:.66;animation:noi-bo 1.6s linear infinite}
+.noi .tia{stroke-width:3;stroke-linecap:round;stroke-dasharray:30 4000;opacity:0;
+  animation:noi-tia 4s linear infinite;animation-delay:var(--tre)}
+
+/* 18px = 2 × (4+5): hết một vòng dash lại trùng khít vị trí đầu, không thấy mối nối. */
+@keyframes noi-bo{to{stroke-dashoffset:-18px}}
+
+/* Vạch sáng chỉ chiếm 22% chu kỳ; 78% còn lại nghỉ để hiệu ứng không thành nhấp nháy. */
+@keyframes noi-tia{
+  0%{stroke-dashoffset:30px;opacity:0}
+  3%{opacity:1}
+  22%{stroke-dashoffset:var(--cuoi);opacity:1}
+  26%,100%{stroke-dashoffset:var(--cuoi);opacity:0}
+}
+
+.noi .hub{position:absolute;left:62%;top:50%;transform:translate(-50%,-50%);
+  width:62px;height:62px;border-radius:50%;background:#fff;display:grid;place-items:center;
+  border:1px solid var(--tint-2);box-shadow:0 14px 34px rgba(18,26,34,.10);
+  animation:noi-hub 4s ease-in-out infinite}
+.noi .hub img{width:34px;height:auto;display:block}
+
+/* Nhịp phình nhẹ + quầng lan ra, đặt trùng chu kỳ 4s với vạch sáng để hub "nhận" được
+   đúng lúc các tia chạm tới. */
+@keyframes noi-hub{
+  0%,22%{transform:translate(-50%,-50%) scale(1);box-shadow:0 14px 34px rgba(18,26,34,.10)}
+  40%{transform:translate(-50%,-50%) scale(1.07);
+      box-shadow:0 0 0 13px rgba(44,111,209,.07),0 18px 42px rgba(18,26,34,.14)}
+  100%{transform:translate(-50%,-50%) scale(1);box-shadow:0 14px 34px rgba(18,26,34,.10)}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .noi .n,.noi .tia,.noi .hub{animation:none}
+  .noi .tia{display:none}
+}
+
+@media (max-width:980px){
+  .hero .frame,.swap-grid{grid-template-columns:1fr;gap:38px}
+  /* Một cột thì không còn hai bờ để nối — giữ lại chỉ thành vệt lạc lõng. */
+  .noi{display:none}
+  .nav,.ann .frame span.full{display:none}
+  .hero{padding:44px 0 62px}
+}
+
+/* ============================================================================
+   CÁC KHỐI CÒN LẠI — dựng theo đúng ngôn ngữ đã chốt ở hero:
+   đệm dọc 80px · tiêu đề khối canh giữa, khoá 46ch · thẻ nền nhuộm nhạt bo 17px
+   · nút viên thuốc · ảnh app trong khung máy tối.
+   ============================================================================ */
+
+.sec{padding:80px 0}
+.sec-alt{background:var(--bg)}
+.sec-brand{background:linear-gradient(165deg,var(--brand-mid) 0%,var(--brand) 48%,var(--brand-2) 100%);color:#fff}
+.sec-brand h2,.sec-brand h3{color:#fff}
+.sec-brand .sec-head p{color:rgba(255,255,255,.80)}
+.sec-brand .sec-head h2 span{color:var(--brand-light)}
+
+/* lưới thẻ dùng chung */
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.g2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.card{background:var(--tint);border:1px solid transparent;border-radius:var(--r-md);padding:24px 22px;transition:.18s}
+.card:hover{background:#fff;border-color:var(--line);box-shadow:var(--sh-card)}
+.card h3{font-size:16.5px;font-weight:700;letter-spacing:-.015em;line-height:1.35}
+.card p{margin:8px 0 0;font-size:14px;color:var(--ink-2)}
+.card .ic{width:40px;height:40px;display:grid;place-items:center;background:#fff;border:1px solid var(--tint-2);
+  border-radius:11px;color:var(--brand);margin-bottom:16px}
+.sec-brand .card{background:rgba(255,255,255,.10);border-color:rgba(255,255,255,.14)}
+.sec-brand .card:hover{background:rgba(255,255,255,.16);box-shadow:none}
+.sec-brand .card p{color:rgba(255,255,255,.78)}
+.sec-brand .card .ic{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.18);color:#fff}
+
+/* số thứ tự cho khối vấn đề và khối triển khai */
+/* ---------- thẻ vấn đề ---------------------------------------------------
+   Nhịp mượn từ mẫu: đầu thẻ (icon + nhãn khu vực) → tên vấn đề → hình minh hoạ
+   → gạch ngang chạy hết bề ngang → đoạn mô tả.
+   Khác mẫu ở chỗ giữa: mẫu đặt một con số lớn, mình đặt hình vẽ chính cái đang
+   hỏng. Khối này nói về VẤN ĐỀ của sàn, bịa một con số vào đây là thành số liệu
+   khách hàng giả. */
+.vds{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.vd{display:flex;flex-direction:column;background:linear-gradient(180deg,#fff,#FAFCFE);
+  border:1px solid var(--line);border-radius:var(--r-lg);padding:20px 20px 0;
+  box-shadow:0 1px 2px rgba(18,26,34,.04);transition:.2s}
+.vd:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(18,26,34,.09);border-color:var(--tint-2)}
+.vd-dau{display:flex;align-items:center;gap:10px}
+.vd-dau .ic{width:34px;height:34px;flex:none;display:grid;place-items:center;border-radius:10px;
+  background:var(--tint);color:var(--brand);border:1px solid var(--tint-2)}
+.vd-dau .nhan{font-size:12.5px;font-weight:600;color:var(--ink-2)}
+.vd-dau .stt{margin-left:auto;font-size:11.5px;font-weight:800;color:var(--brand-light);letter-spacing:.04em}
+.vd h3{margin:15px 0 0;font-size:18.5px;font-weight:600;letter-spacing:-.025em}
+/* Gạch ngang chạy sát hai mép thẻ như mẫu — lùi ra đúng bằng padding. */
+.vd p{margin:0 -20px;padding:15px 20px 20px;border-top:1px solid var(--line);
+  font-size:13.5px;line-height:1.6;color:var(--ink-2)}
+
+/* Khung hình minh hoạ: chiều cao cố định để bốn thẻ thẳng hàng dù chữ dài ngắn khác nhau. */
+.vd-hinh{position:relative;height:62px;margin:14px 0 2px;margin-top:auto;padding-top:14px}
+
+/* 01 — bốn kênh rời rạc: thẻ viền đứt, mỗi cái nghiêng một kiểu, không có chỗ gom. */
+.h-kenh{display:flex;flex-wrap:wrap;gap:6px;align-content:center}
+.h-kenh span{font-size:11px;color:var(--ink-2);background:#fff;border:1px dashed var(--line);
+  border-radius:var(--r-pill);padding:3px 9px;line-height:1.4}
+.h-kenh span:nth-child(1){transform:rotate(-1.6deg)}
+.h-kenh span:nth-child(2){transform:rotate(1.2deg)}
+.h-kenh span:nth-child(3){transform:rotate(-.8deg)}
+.h-kenh span:nth-child(4){transform:rotate(1.8deg);opacity:.45}
+
+/* 02 — nhiều bản bảng giá chồng nhau, không rõ bản nào mới nhất. */
+.h-file i{position:absolute;bottom:4px;width:52px;height:40px;border-radius:6px;background:#fff;
+  border:1px solid var(--line);box-shadow:0 2px 6px rgba(18,26,34,.05);
+  font-size:10px;font-style:normal;color:var(--ink-2);display:grid;place-items:center}
+.h-file i:nth-child(1){left:0;transform:rotate(-5deg)}
+.h-file i:nth-child(2){left:34px;transform:rotate(2deg)}
+.h-file i:nth-child(3){left:68px;transform:rotate(-1deg);border-style:dashed;color:var(--brand-light)}
+
+/* 03 — pipeline: ba bước đầu còn thấy, ba bước sau mờ vì tới cuối tháng mới biết. */
+.h-cot{display:flex;align-items:flex-end;gap:6px;height:62px}
+.h-cot i{width:13px;border-radius:3px 3px 1px 1px;background:var(--brand-light)}
+.h-cot i:nth-child(1){height:16px}.h-cot i:nth-child(2){height:24px}.h-cot i:nth-child(3){height:31px}
+.h-cot i:nth-child(n+4){background:transparent;border:1px dashed var(--line)}
+.h-cot i:nth-child(4){height:26px}.h-cot i:nth-child(5){height:20px}
+.h-cot i:nth-child(6){height:22px}.h-cot i:nth-child(7){height:17px}
+.h-cot b{margin-left:4px;align-self:center;font-size:10.5px;font-weight:600;color:var(--brand-light)}
+
+/* 04 — mắt xích bàn giao bị đứt ở giữa. */
+.h-giao{display:flex;align-items:center;gap:8px}
+.h-giao i{width:34px;height:34px;flex:none;border-radius:50%;background:var(--tint);border:1px solid var(--tint-2);
+  display:grid;place-items:center;font-style:normal;font-size:12px;font-weight:700;color:var(--brand)}
+.h-giao i:last-child{background:#fff;border-style:dashed;color:var(--brand-light)}
+.h-giao u{flex:1;height:0;border-top:1.5px dashed var(--line);position:relative;text-decoration:none}
+.h-giao u::before{content:"";position:absolute;left:50%;top:50%;width:20px;height:20px;
+  transform:translate(-50%,-50%);background:#fff;border-radius:6px}
+.h-giao u::after{content:"";position:absolute;left:50%;top:50%;width:11px;height:11px;
+  transform:translate(-50%,-50%);
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' stroke='%237FB0F2' stroke-width='1.8' stroke-linecap='round'%3E%3Cpath d='M2 2l8 8M10 2l-8 8'/%3E%3C/svg%3E") center/11px 11px no-repeat}
+
+@media (max-width:900px){.vds{grid-template-columns:repeat(2,1fr);gap:12px}}
+@media (max-width:560px){.vds{grid-template-columns:1fr}}
+
+/* Sáu bước triển khai — dải mốc ngang.
+   Nét nối vẽ trên TỪNG mốc (từ mốc này sang mốc kế) chứ không phải một đường chung,
+   nhờ vậy cùng đoạn CSS chạy được cả hàng 6 cột lẫn 3 cột; mốc cuối mỗi hàng tắt nét.
+   Ô biểu tượng đậm dần từ bước 01 đến 06 — nhìn lướt đã thấy đang tiến về đích,
+   chưa cần đọc chữ. */
+.buocs{--moc:46px;--khe:24px;display:grid;grid-template-columns:repeat(6,1fr);gap:var(--khe)}
+.buoc{position:relative}
+.buoc::after{content:"";position:absolute;top:calc(var(--moc)/2 - 1px);left:calc(var(--moc) + 12px);
+  width:calc(100% + var(--khe) - var(--moc) - 24px);height:2px;background:var(--tint-2)}
+.buoc:last-child::after{display:none}
+.buoc-ic{width:var(--moc);height:var(--moc);border-radius:14px;display:grid;place-items:center;
+  background:var(--tint);color:var(--brand-mid);transition:transform .18s ease}
+.buoc-ic svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.6;
+  stroke-linecap:round;stroke-linejoin:round}
+.buoc:nth-child(2) .buoc-ic{background:var(--tint-2)}
+.buoc:nth-child(3) .buoc-ic{background:#CDDFF8;color:var(--brand)}
+.buoc:nth-child(4) .buoc-ic{background:#A8C8F0;color:var(--brand-2)}
+.buoc:nth-child(5) .buoc-ic{background:var(--brand-mid);color:#fff}
+.buoc:nth-child(6) .buoc-ic{background:var(--brand);color:#fff}
+.buoc:hover .buoc-ic{transform:translateY(-3px)}
+.buoc-so{display:block;margin:16px 0 0;font-size:11.5px;font-weight:800;letter-spacing:.09em;
+  color:var(--ink-2);font-variant-numeric:tabular-nums}
+.buoc h3{margin:5px 0 0;font-size:16px;font-weight:700;letter-spacing:-.02em;line-height:1.3}
+.buoc p{margin:7px 0 0;font-size:13.5px;line-height:1.6;color:var(--ink-2)}
+@media (prefers-reduced-motion:reduce){.buoc-ic{transition:none}}
+
+@media (max-width:1080px){
+  .buocs{grid-template-columns:repeat(3,1fr);row-gap:38px}
+  .buoc:nth-child(3n)::after{display:none}
+}
+@media (max-width:640px){
+  .buocs{grid-template-columns:1fr;gap:0}
+  .buoc{display:grid;grid-template-columns:var(--moc) 1fr;column-gap:16px;padding-bottom:26px}
+  .buoc>:not(.buoc-ic){grid-column:2}
+  /* Chia hàng tường minh: biểu tượng trải cả ba hàng và neo lên đỉnh, nhờ vậy số thứ tự
+     nằm ngay sát tiêu đề thay vì bị đẩy xuống giữa một hàng cao bằng ô biểu tượng. */
+  .buoc-ic{grid-row:1/span 3;align-self:start}
+  .buoc-so{grid-row:1;margin-top:0}
+  .buoc h3{grid-row:2;margin:3px 0 0}
+  .buoc p{grid-row:3}
+  .buoc:nth-child(3n)::after{display:block}
+  .buoc::after{top:calc(var(--moc) + 10px);left:calc(var(--moc)/2 - 1px);
+    width:2px;height:calc(100% - var(--moc) - 20px)}
+  .buoc:last-child{padding-bottom:0}
+  .buoc:last-child::after{display:none}
+}
+
+/* Đưa dữ liệu cũ vào hệ thống — hai nguồn rời rạc gộp về một nơi.
+   Cột trái: hai thẻ nguồn + mũi tên nét đứt, bên dưới là ba việc làm khi nhập.
+   Cột phải: ảnh điện thoại cho thấy dữ liệu đã nằm trong VinaLand. */
+/* Cột trái để auto (vừa nội dung) rồi canh giữa cả cụm: nếu cho 1fr, ở màn rộng
+   cột trái giãn ra và mũi tên bị đẩy xa khỏi màn hình điện thoại nó đang trỏ tới. */
+.nhap{margin-top:60px;padding-top:44px;border-top:1px solid var(--line);
+  display:grid;grid-template-columns:auto 248px;gap:72px;align-items:center;justify-content:center}
+.nhap-so-do{display:grid;grid-template-columns:auto 132px;column-gap:16px;align-items:center;justify-content:start}
+.nhap-nguon{display:flex;flex-direction:column;gap:12px}
+.nhap-the{display:grid;grid-template-columns:40px 1fr;gap:13px;align-items:center;width:258px;
+  padding:14px 16px;border:1px solid var(--line);border-radius:var(--r-md);
+  background:var(--paper);box-shadow:var(--sh-card)}
+.nhap-the b{display:block;font-size:14.5px;font-weight:700;letter-spacing:-.01em}
+.nhap-the p{margin:3px 0 0;font-size:12.5px;line-height:1.45;color:var(--ink-3)}
+.nhap-ic{width:40px;height:40px;border-radius:11px;display:grid;place-items:center}
+.nhap-ic svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.5;
+  stroke-linecap:round;stroke-linejoin:round}
+/* Xanh lá cho Excel, xanh thương hiệu cho Zalo — màu người dùng vốn đã quen nhận ra. */
+.nhap-ic-x{color:#0F7B42;background:#E6F6EC}
+.nhap-ic-x .fl{fill:#C7ECD6;stroke:none}
+.nhap-ic-z{color:var(--brand-mid);background:var(--tint)}
+.nhap-ic-z .fl{fill:var(--tint-2);stroke:none}
+.nhap-ten{width:132px;height:152px;display:block}
+.nhap-ten path{stroke:var(--brand-mid);stroke-width:1.6;stroke-linecap:round;
+  stroke-dasharray:5 5;opacity:.7}
+.nhap-ten .dau{stroke-dasharray:none;stroke-width:1.8;opacity:1}
+.nhap-viec{grid-column:1/-1;list-style:none;margin:20px 0 0;padding:18px 0 0;
+  border-top:1px solid var(--line);display:flex;flex-direction:column;gap:9px}
+.nhap-viec li{display:grid;grid-template-columns:18px 1fr;gap:11px;align-items:center;
+  font-size:13.5px;line-height:1.5;color:var(--ink-2)}
+.nhap-viec span{width:18px;height:18px;border-radius:50%;display:grid;place-items:center;
+  background:var(--tint);color:var(--brand);font-size:10.5px;font-weight:800}
+.nhap-may .device{border-radius:30px;padding:7px}
+.nhap-may .device img{border-radius:24px}
+.nhap-dich{margin:13px 0 0;text-align:center;font-size:12.5px;font-weight:700;color:var(--brand-mid)}
+
+@media (max-width:860px){
+  .nhap{grid-template-columns:1fr;gap:34px;justify-items:center}
+  .nhap-may{width:248px}
+}
+@media (max-width:560px){
+  .nhap{padding-top:34px}
+  .nhap-so-do{grid-template-columns:1fr;justify-items:center;width:100%}
+  /* Cho cả cột nguồn rộng bằng ô lưới, nếu không thẻ co về max-content và
+     lệch mép so với danh sách việc bên dưới. */
+  .nhap-nguon{width:100%}
+  .nhap-the{width:100%;max-width:330px}
+  /* Xếp dọc thì mũi tên quay xuống, trỏ sang phần việc và màn hình bên dưới. */
+  .nhap-ten{width:54px;height:52px;transform:rotate(90deg);margin:10px auto}
+  .nhap-viec{width:100%;max-width:330px;margin-top:10px;padding-top:16px}
+  .nhap-may{width:100%;max-width:300px}
+}
+/* hai cột ảnh + chữ */
+.split{display:grid;grid-template-columns:minmax(0,50fr) minmax(0,50fr);gap:62px;align-items:center}
+.split.rev>.split-shot{order:-1}
+/* Minh hoạ vẽ để trần, không khung máy: khung máy tối bo góc là ngôn ngữ của ảnh
+   chụp, lồng hình vẽ phẳng vào trong thành "ảnh trong ảnh". */
+/* Minh hoạ nền trắng đặt trên khối nền xám: multiply hoà nền trắng vào nền trang,
+   phần còn lại chỉ tối đi ~3% vì --bg rất nhạt. */
+.split-ve img,.swap-shot .ve{mix-blend-mode:multiply}
+.split-ve img{width:100%;height:auto;display:block}
+.list-rows{display:flex;flex-direction:column}
+.row{display:flex;gap:15px;padding:18px 0;border-bottom:1px solid var(--line)}
+.row:last-child{border-bottom:0}
+.row .ic{width:38px;height:38px;flex:none;display:grid;place-items:center;background:var(--tint);
+  border-radius:10px;color:var(--brand)}
+.row h3{font-size:15.5px;font-weight:700;line-height:1.4}
+.row p{margin:4px 0 0;font-size:14px;color:var(--ink-2)}
+.sec-brand .row{border-color:rgba(255,255,255,.16)}
+.sec-brand .row p{color:rgba(255,255,255,.78)}
+.sec-brand .row .ic{background:rgba(255,255,255,.14);color:#fff}
+
+/* Bảng giá — ba thẻ gói, thẻ giữa nổi lên bằng viền thương hiệu và bóng đổ đậm hơn.
+   Nhãn "Phổ biến" nằm TRONG đầu thẻ chứ không treo lên viền: treo lên viền thì nhãn
+   cắt ngang nét viền và ở màn hẹp còn đè sang thẻ bên cạnh. */
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px;align-items:stretch}
+.plan{display:flex;flex-direction:column;padding:30px 26px;background:var(--paper);
+  border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--sh-card)}
+.plan.hot{border:1.5px solid var(--brand);box-shadow:0 14px 42px rgba(20,64,127,.14)}
+.plan-dau{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.plan h3{margin:0;font-size:21px;font-weight:700;letter-spacing:-.02em}
+.plan-nhan{padding:4px 11px;border-radius:var(--r-pill);background:var(--brand);color:#fff;
+  font-size:11.5px;font-weight:800;letter-spacing:.03em}
+.plan .sub{margin:8px 0 0;font-size:14px;color:var(--ink-2)}
+.plan ul{list-style:none;flex:1;margin:22px 0 26px;padding:22px 0 0;border-top:1px solid var(--line);
+  display:flex;flex-direction:column;gap:13px}
+/* Dấu tích vẽ bằng hai pseudo: ::before là vòng tròn nền, ::after là nét tích bên trong. */
+.plan li{position:relative;padding-left:31px;font-size:14.5px;line-height:1.5}
+.plan li::before{content:"";position:absolute;left:0;top:1px;width:20px;height:20px;
+  border-radius:50%;background:var(--tint)}
+.plan li::after{content:"";position:absolute;left:5.5px;top:7.5px;width:9px;height:5px;
+  border-left:2px solid var(--brand);border-bottom:2px solid var(--brand);transform:rotate(-45deg)}
+.plan.hot li::before{background:var(--brand)}
+.plan.hot li::after{border-color:#fff}
+.plan .btn{width:100%}
+
+/* Báo giá gồm những khoản nào — một tấm thẻ trắng chia bốn.
+   Vạch ngăn đặt bên TRÁI mỗi cột để hai bên vạch có đệm bằng nhau; bản cũ chỉ đệm
+   bên phải nên chữ cột sau dính sát vào vạch. */
+.costs-nhan{margin:60px 0 16px;text-align:center}
+.costs{display:grid;grid-template-columns:repeat(4,1fr);background:var(--paper);
+  border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--sh-card);overflow:hidden}
+.cost{padding:26px 24px;border-left:1px solid var(--line)}
+.cost:first-child{border-left:0}
+.cost-ic{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;
+  background:var(--tint);color:var(--brand-mid)}
+.cost-ic svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.6;
+  stroke-linecap:round;stroke-linejoin:round}
+.cost b{display:block;margin-top:14px;font-size:15px;font-weight:700;letter-spacing:-.01em}
+.cost span{display:block;margin-top:6px;font-size:13.5px;line-height:1.55;color:var(--ink-2)}
+
+@media (max-width:1080px){
+  .costs{grid-template-columns:repeat(2,1fr)}
+  .cost:nth-child(odd){border-left:0}
+  .cost:nth-child(n+3){border-top:1px solid var(--line)}
+}
+@media (max-width:640px){
+  .costs{grid-template-columns:1fr}
+  .cost{border-left:0}
+  .cost+.cost{border-top:1px solid var(--line)}
+}
+
+/* hỏi đáp */
+.faq{max-width:860px;margin:0 auto}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{cursor:pointer;list-style:none;padding:20px 0;font-size:16.5px;font-weight:700;
+  display:flex;justify-content:space-between;gap:20px;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--brand);font-weight:700;font-size:21px;flex:none}
+.faq details[open] summary::after{content:"–"}
+.faq p{margin:0 0 20px;color:var(--ink-2);font-size:15px;max-width:72ch}
+
+/* lời mời cuối */
+.cta-box{background:linear-gradient(165deg,var(--brand-mid) 0%,var(--brand) 48%,var(--brand-2) 100%);
+  border-radius:var(--r-lg);padding:56px 48px;color:#fff;display:grid;
+  grid-template-columns:minmax(0,52fr) minmax(0,48fr);gap:52px;align-items:center}
+.cta-box h2{color:#fff;font-size:clamp(25px,2.8vw,37px)}
+.cta-box p{color:rgba(255,255,255,.82);margin:16px 0 0}
+.cta-box ul{list-style:none;padding:0;margin:22px 0 0}
+.cta-box li{padding:7px 0 7px 26px;position:relative;font-size:15px;color:rgba(255,255,255,.92)}
+.cta-box li::before{content:"";position:absolute;left:4px;top:14px;width:11px;height:6px;
+  border-left:2px solid var(--brand-light);border-bottom:2px solid var(--brand-light);transform:rotate(-45deg)}
+.form{background:#fff;border-radius:var(--r-md);padding:26px}
+.form .fr{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-bottom:13px}
+.form label{display:block;font-size:13px;font-weight:600;color:var(--ink-2);margin-bottom:5px}
+.form label i{font-style:normal;color:#C2321F}
+.form input,.form select{width:100%;height:44px;border:1px solid var(--line);border-radius:10px;padding:0 13px;
+  font-family:inherit;font-size:14.5px;color:var(--ink);background:#fff}
+.form input:focus,.form select:focus{outline:0;border-color:var(--brand);box-shadow:0 0 0 3px rgba(20,64,127,.12)}
+.form .btn{width:100%;margin-top:6px}
+
+/* Phần mở thêm, ô đồng ý và chỗ báo lỗi — chép chức năng từ form thật ở index.html.
+   Bốn ô bắt buộc để ngoài, phần không bắt buộc gấp vào <details> cho form ngắn lại. */
+.form{position:relative}
+.form .f-more{margin:0 0 13px;border-top:1px solid var(--line);padding-top:14px}
+.form .f-more summary{cursor:pointer;list-style:none;display:flex;align-items:flex-start;gap:8px;
+  font-size:13.5px;font-weight:700;color:var(--brand)}
+.form .f-more summary::-webkit-details-marker{display:none}
+/* Neo lên đầu dòng: ở khổ hẹp nhãn xuống hai dòng, canh giữa thì dấu +/− trôi ra giữa. */
+.form .f-more summary::before{content:"+";width:14px;flex:none;text-align:center;font-size:17px;line-height:1.45}
+.form .f-more[open] summary::before{content:"–"}
+.form .f-more .fr{margin:14px 0 0}
+.form .f-more>div{margin-top:14px}
+.form textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px 13px;
+  font-family:inherit;font-size:14.5px;color:var(--ink);background:#fff;resize:vertical}
+.form textarea:focus{outline:0;border-color:var(--brand);box-shadow:0 0 0 3px rgba(20,64,127,.12)}
+.form .f-err{display:block;margin-top:5px;font-size:12.5px;font-style:normal;color:#C2321F}
+.form .f-err:empty{display:none}
+.form [aria-invalid="true"]{border-color:#C2321F}
+/* Ô bẫy bot: giấu khỏi mắt người nhưng vẫn nằm trong form để bot tự điền vào. */
+.form .f-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.form .f-check{display:grid;grid-template-columns:18px 1fr;gap:11px;align-items:start;margin:14px 0 0;
+  font-size:13px;font-weight:500;color:var(--ink-2);line-height:1.5}
+.form .f-check input{width:18px;height:18px;margin:1px 0 0;accent-color:var(--brand)}
+.form .f-check i{font-style:normal;color:#C2321F}
+.form .f-check~.btn{margin-top:17px}
+.form .f-msg{margin:12px 0 0;font-size:13.5px;color:#C2321F;text-align:center}
+.form .f-msg:empty{display:none}
+/* Bảng cảm ơn thay chỗ form sau khi gửi — không chuyển trang, giữ nguyên chỗ đang cuộn. */
+.form-xong{background:#fff;border-radius:var(--r-md);padding:46px 30px;text-align:center}
+.form-xong .ic{width:52px;height:52px;margin:0 auto 17px;border-radius:50%;display:grid;place-items:center;
+  background:var(--tint);color:var(--brand);font-size:24px;font-weight:700}
+.form-xong h3{margin:0;font-size:19px;font-weight:700;letter-spacing:-.02em;color:var(--ink)}
+.form-xong p{margin:9px 0 0;font-size:14.5px;line-height:1.6;color:var(--ink-2)}
+
+/* chân trang */
+.ft{background:var(--bg);border-top:1px solid var(--line);padding:56px 0 40px;font-size:14px;color:var(--ink-2)}
+.ft-grid{display:grid;grid-template-columns:minmax(0,2fr) 1fr 1fr 1fr;gap:38px}
+.ft h4{font-size:13px;font-weight:700;color:var(--ink);margin:0 0 14px;letter-spacing:.02em}
+.ft a{display:block;padding:5px 0;color:var(--ink-2);text-decoration:none}
+.ft a:hover{color:var(--ink)}
+.ft .legal{margin-top:34px;padding-top:22px;border-top:1px solid var(--line);font-size:13px;color:var(--ink-3)}
+
+@media (max-width:980px){
+  .g3,.g4,.g2,.plans,.ft-grid{grid-template-columns:1fr}
+  .split,.cta-box{grid-template-columns:1fr;gap:34px}
+  .split.rev>.split-shot{order:0}
+  .cta-box{padding:36px 26px}
+}
+
+
+/* ============================================================================
+   VÁ SAU ĐỢT SOÁT (27/10) — sáu lỗi máy soát và mắt cùng bắt được
+   ============================================================================ */
+
+/* 1. TIÊU ĐỀ RỚT DÒNG CUỐI CHỈ CÒN MỘT CHỮ.
+   Ba chỗ bị: "…sàn đang&nbsp;dùng" → "dùng", "…chạy thế nào" → "nào",
+   "…theo sáu&nbsp;bước" → "bước". Một chữ đứng lẻ một dòng làm tiêu đề trông gãy.
+   `text-wrap:balance` để trình duyệt tự chia đều các dòng; khoá thêm bề ngang
+   cho chắc, vì balance chỉ áp dụng khi tiêu đề ngắn hơn một ngưỡng nhất định. */
+h1,h2,h3{text-wrap:balance}
+.sec-head h2{max-width:20ch;margin-left:auto;margin-right:auto}
+.split h2{max-width:14ch}
+
+/* 2. VÙNG BẤM NHỎ HƠN 32px.
+   Các mục trên thanh điều hướng, liên kết trong thanh thông báo và nút đóng đều
+   dưới ngưỡng bấm thoải mái bằng ngón tay. Nới vùng bấm mà không đổi chỗ chữ. */
+.nav a{padding:10px 0;display:inline-block}
+.ann-tin{padding:9px 0}
+.ann button{width:40px;height:40px;display:grid;place-items:center}
+
+@media (max-width:860px){
+  /* 3. TRÀN NGANG Ở KHỔ ĐIỆN THOẠI — lỗi nặng nhất.
+     Trang rộng 437px trên màn 390px: cụm bên phải thanh đầu (ô ngôn ngữ + nút
+     "Đặt lịch demo") không đủ chỗ nên đẩy cả trang rộng ra, kéo theo thanh cuộn
+     ngang. Giấu ô ngôn ngữ và thu nút lại. */
+  /* Thu nút ngôn ngữ còn địa cầu + mũi tên; giấu hẳn thì khách xem bản EN/JA
+     trên điện thoại không có đường nào đổi lại. */
+  .lang-btn{padding:0 7px;gap:4px}
+  .lang-code{display:none}
+  .top .frame{height:64px;gap:12px}
+  .top .right .btn{height:40px;padding:0 15px;font-size:13.5px}
+  .top .right .btn svg{display:none}
+  .brand{font-size:18px}
+  .brand img{height:34px}
+
+  /* 4. THANH THÔNG BÁO: giấu hẳn trên điện thoại. Câu tin dài hai dòng chiếm mất
+     một phần tư màn hình đầu tiên, đẩy tiêu đề chính xuống dưới nếp gấp — mà ba
+     khối nó trỏ tới đều đã có trong trang. */
+  .ann{display:none}
+
+  /* 6. TRANG DÀI 13.236px trên điện thoại vì mọi lưới đều rơi xuống một cột.
+     Để lưới bốn và ba cột thành HAI cột — thẻ vẫn đọc tốt mà trang ngắn đi đáng kể.
+     Đồng thời giảm đệm dọc, vì khoảng trống thiết kế cho màn rộng thì trên điện
+     thoại thành lãng phí. */
+  .g4,.g3{grid-template-columns:repeat(2,1fr);gap:12px}
+  .card{padding:18px 16px}
+  .card h3{font-size:15px}
+  .card p{font-size:13px}
+  .sec{padding:52px 0}
+  .hero{padding:36px 0 52px}
+  .sec-head{margin-bottom:30px}
+  .sec-head h2{max-width:none}
+  .split h2{max-width:none}
+  .costs{grid-template-columns:repeat(2,1fr)}
+  .cost{padding:18px 16px 18px 0}
+  .cost:nth-child(2){border-right:0}
+  .form .fr{grid-template-columns:1fr}
+}
+
+@media (max-width:520px){
+  /* Dưới 520px thì hai cột cũng chật, trả về một cột. */
+  .g4,.g3,.costs{grid-template-columns:1fr}
+  .cost{border-right:0}
+}
+
+
+/* ============================================================================
+   NỀN HERO CÓ SẮC ĐỘ + ĐƯỜNG CONG MÉP DƯỚI (27/10)
+   ============================================================================
+   Trước đây hero chỉ là một ô xám phẳng, cắt ngang trang bằng cạnh thẳng. Hai thứ
+   dưới đây làm nó thành một KHỐI riêng có điểm nhấn:
+
+   1. Nền chuyển sắc rất nhẹ, cộng một quầng xanh mờ ở góc trên phải — đặt ngay sau
+      ảnh app nên ảnh như được đèn hắt vào, nổi khỏi nền.
+   2. Đường cong ở mép dưới thay cho cạnh thẳng. Cong rất thoải, không phải vòng
+      cung rõ — cong gắt thì thành mô-típ web những năm 2015.
+   ============================================================================ */
+
+.hero{
+  background:
+    radial-gradient(900px 420px at 88% 6%, rgba(44,111,209,.10), transparent 62%),
+    radial-gradient(700px 380px at 6% 92%, rgba(20,64,127,.05), transparent 64%),
+    linear-gradient(180deg, #FBFCFE 0%, #EFF3F8 100%) !important;
+  padding-bottom:132px !important;   /* chừa chỗ cho đường cong, nội dung không bị che */
+}
+
+/* Đường cong dựng bằng SVG nhúng thẳng vào CSS — không thêm thẻ HTML, không thêm
+   một lượt tải ảnh. Màu trắng vì khối ngay dưới hero là nền trắng. */
+.hero::after{
+  content:"";
+  position:absolute; left:0; right:0; bottom:-1px;   /* -1px để không hở kẽ khi thu phóng */
+  height:84px; width:100%; pointer-events:none; z-index:1;
+  background:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 84' preserveAspectRatio='none'%3E%3Cpath fill='%23ffffff' d='M0 84V46c240-34 520-46 820-30 220 12 420 30 620 22v46z'/%3E%3C/svg%3E")
+    bottom center / 100% 84px no-repeat;
+}
+.hero .frame{z-index:2}
+
+@media (max-width:860px){
+  .hero{padding-bottom:84px !important}
+  .hero::after{height:48px;background-size:100% 48px}
+}
+
+
+/* ============================================================================
+   HỘP THOẠI XEM PHIM GIỚI THIỆU (27/10)
+   ============================================================================ */
+.modal{position:fixed;inset:0;z-index:90;display:none;align-items:center;justify-content:center;padding:24px}
+.modal[open],.modal.mo{display:flex}
+.modal-nen{position:absolute;inset:0;background:rgba(8,16,28,.78);backdrop-filter:blur(3px)}
+.modal-khung{position:relative;width:min(1040px,100%)}
+.modal-hop{background:#000;border-radius:var(--r-md);overflow:hidden;
+  box-shadow:0 30px 80px rgba(8,16,28,.5)}
+.modal-hop video{width:100%;height:auto;display:block;aspect-ratio:16/9;background:#000}
+/* Nút đóng.
+   Bản đầu để nền trắng mờ 16% trên nền tối — nó CÓ tồn tại và bấm được, nhưng nhìn
+   như không có, nên người xem không biết đường đóng. Đổi sang trắng đặc, chữ navy,
+   to hơn và có bóng: không thể không thấy. */
+.modal-dong{position:absolute;top:-54px;right:0;z-index:2;width:42px;height:42px;border-radius:50%;
+  border:0;background:rgba(255,255,255,.14);color:#fff;cursor:pointer;
+  display:grid;place-items:center;backdrop-filter:blur(6px);transition:.16s;padding:0}
+.modal-dong:hover{background:rgba(255,255,255,.3)}
+/* Dưới 860px không đủ chỗ phía trên khung phim — đưa nút vào trong, góc trên phải. */
+@media (max-width:860px){
+  .modal-dong{top:10px;right:10px;width:38px;height:38px;
+    background:rgba(0,0,0,.55);color:#fff;backdrop-filter:blur(4px)}
+  .modal-dong:hover{background:rgba(0,0,0,.75)}
+}
+@media (max-width:860px){ .modal{padding:16px} .modal-dong{top:-42px} }
+
+
+/* ---------- menu kéo trên điện thoại ---------- */
+/* Bấm logo mở ra. Trên màn rộng khối này không bao giờ hiện nên không cần ẩn riêng. */
+.keo{position:fixed;inset:0;z-index:80;visibility:hidden}
+.keo.mo{visibility:visible}
+.keo-nen{position:absolute;inset:0;background:rgba(18,26,34,.45);opacity:0;transition:opacity .22s}
+.keo.mo .keo-nen{opacity:1}
+.keo-bang{position:absolute;left:0;top:0;bottom:0;width:min(84vw,320px);padding:20px;background:#fff;
+  display:flex;flex-direction:column;gap:6px;box-shadow:0 0 40px rgba(18,26,34,.18);
+  transform:translateX(-100%);transition:transform .24s ease}
+.keo.mo .keo-bang{transform:none}
+.keo-dau{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.keo-dau img{height:36px;width:auto}
+.keo-x{width:40px;height:40px;display:grid;place-items:center;border:0;background:none;
+  color:var(--ink-2);cursor:pointer}
+.keo-x svg{width:20px;height:20px}
+.keo-muc{list-style:none;margin:0 0 18px;padding:0;flex:1}
+.keo-muc a{display:block;padding:13px 0;font-size:16px;font-weight:600;color:var(--ink);
+  text-decoration:none;border-bottom:1px solid var(--line)}
+.keo-muc a:hover{color:var(--brand)}
+.keo-hotline{margin:14px 0 0;text-align:center;font-size:14px;font-weight:700}
+.keo-hotline a{color:var(--brand);text-decoration:none}
+body.khoa-cuon{overflow:hidden}
+@media (prefers-reduced-motion:reduce){.keo-nen,.keo-bang{transition:none}}
+
+/* ---------- phóng to ảnh chụp màn hình ---------- */
+/* Nút bọc ảnh phải trong suốt hoàn toàn, nếu không khung máy tối bị viền nút cắt ngang. */
+.shot-btn{display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in}
+.shot-btn img{display:block;width:100%;height:auto;border-radius:11px}
+.zoom{max-width:min(1200px,94vw);max-height:92vh;padding:0;border:0;border-radius:var(--r-md);
+  background:#000;overflow:visible}
+.zoom::backdrop{background:rgba(18,26,34,.78)}
+.zoom img{display:block;width:100%;height:auto;border-radius:var(--r-md)}
+.zoom-x{position:absolute;top:-14px;right:-14px;width:36px;height:36px;border-radius:50%;border:0;
+  background:#fff;color:var(--ink);font-size:20px;line-height:1;cursor:pointer;
+  box-shadow:0 6px 18px rgba(18,26,34,.3)}
+@media (max-width:640px){.zoom-x{top:-12px;right:-6px}}

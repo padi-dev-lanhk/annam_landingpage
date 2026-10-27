@@ -337,3 +337,49 @@ document.addEventListener("click", (e) => {
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") close(true); });
   mobile.addEventListener("change", () => close(false));
 })();
+
+// ---------- Hiện dần khi cuộn (làm mới 2026-10-20) ----------
+// Không gắn thuộc tính vào HTML: chọn ngay trong JS để không phải sửa markup và để
+// trang vẫn đọc được nguyên vẹn khi tắt JS (CSS chỉ ẩn khi <html> có .js-reveal).
+(() => {
+  const diu = window.matchMedia("(prefers-reduced-motion: reduce)");
+  if (diu.matches || !("IntersectionObserver" in window)) return;
+
+  const CHON = [
+    ".sec-head",
+    ".pain",
+    ".plan",
+    ".fee > div",
+    ".ai2-item",
+    ".steps li",
+    ".dash-list > li",
+    ".faq-list details",
+    ".shot-card",
+    ".hero2-shot",
+  ].join(",");
+
+  // Bỏ qua phần tử đang nằm trong khối ẩn (tab AI Matching dùng thuộc tính `hidden`).
+  // Khối ẩn thì không bao giờ giao cắt khung nhìn, nên nếu vẫn gắn .reveal thì lúc người
+  // dùng bấm sang tab đó nội dung hiện ra với opacity 0 — mất hẳn chữ.
+  const hien = (el) => el.offsetParent !== null || getComputedStyle(el).position === "fixed";
+  const els = Array.from(document.querySelectorAll(CHON)).filter(hien);
+  if (!els.length) return;
+
+  document.documentElement.classList.add("js-reveal");
+  els.forEach((el) => el.classList.add("reveal"));
+
+  const io = new IntersectionObserver(
+    (muc) => {
+      for (const m of muc) {
+        if (!m.isIntersecting) continue;
+        // Các thẻ cùng một hàng hiện lệch nhau một nhịp ngắn cho đỡ khô.
+        const anh = m.target.parentElement ? Array.from(m.target.parentElement.children).indexOf(m.target) : 0;
+        m.target.style.transitionDelay = `${Math.min(anh, 5) * 60}ms`;
+        m.target.classList.add("hien");
+        io.unobserve(m.target);
+      }
+    },
+    { rootMargin: "0px 0px -12% 0px", threshold: 0.08 },
+  );
+  els.forEach((el) => io.observe(el));
+})();

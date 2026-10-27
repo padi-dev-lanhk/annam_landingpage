@@ -15,6 +15,31 @@
   --dark-ink: #f4f4f5;
   --dark-ink-2: #9a9aa3;
   --radius: 12px;
+
+  /* Làm mới 2026-10-20 — thang bo góc.
+     Trước đây gần như mọi thứ dùng chung 12–14px nên thẻ nhỏ và khối lớn trông cùng một
+     độ cứng. Tách thang ra thì mắt mới thấy phân cấp. */
+  --r-xs: 8px;
+  --r-sm: 12px;
+  --r-md: 18px;
+  --r-lg: 24px;
+  --r-xl: 32px;
+
+  /* Thang đổ bóng: mỗi mức hai lớp — một lớp sát viền cho nét, một lớp toả rộng cho
+     chiều sâu. Bóng một lớp (hoặc không bóng, chỉ viền 1px) là thứ làm trang trông phẳng. */
+  --sh-1: 0 1px 2px rgba(17, 20, 45, .04), 0 1px 1px rgba(17, 20, 45, .03);
+  --sh-2: 0 1px 2px rgba(17, 20, 45, .05), 0 8px 20px -8px rgba(17, 20, 45, .10);
+  --sh-3: 0 1px 3px rgba(17, 20, 45, .06), 0 18px 40px -16px rgba(17, 20, 45, .18);
+  --sh-4: 0 2px 6px rgba(17, 20, 45, .08), 0 36px 72px -28px rgba(17, 20, 45, .28);
+  --sh-blue: 0 10px 30px -12px rgba(47, 107, 240, .45);
+
+  /* Hai màu lân cận để pha gradient. --blue vẫn là màu thương hiệu, không đổi. */
+  --iris: #6366f1;
+  --sky: #38bdf8;
+  --grad-brand: linear-gradient(135deg, var(--blue) 0%, var(--iris) 100%);
+
+  --ease: cubic-bezier(.22, .61, .36, 1);
+
   --frame: 1392px;
   --display: "Inter Tight", "Inter", system-ui, sans-serif;
   --body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -261,9 +286,17 @@ html, body { overflow-x: clip; }
   .mod:nth-last-child(-n+2) { border-bottom: 0; }
 }
 
-/* ---------- two-tone headings ---------- */
-.two-tone { color: var(--ink); }
-.two-tone span { color: var(--ink-2); }
+/* ---------- two-tone headings ----------
+   Làm mới 2026-10-20: dòng hai trước đây chỉ đổi sang màu xám, cùng cỡ cùng độ đậm với
+   dòng một, nên hai dòng "đánh nhau" và tám section mở đầu y hệt nhau. Giờ dòng một là
+   tiêu đề thật (đậm, chữ to), dòng hai lùi xuống thành câu dẫn — nhẹ hơn, nhỏ hơn, cách
+   ra một nhịp. Chữ giữ nguyên, chỉ đổi cách trình bày. */
+.two-tone { color: var(--ink); font-weight: 600; letter-spacing: -0.035em; }
+.two-tone span {
+  display: block; margin-top: 14px;
+  color: var(--ink-2); font-size: .66em; font-weight: 450; line-height: 1.45; letter-spacing: -0.015em;
+  max-width: 34em;
+}
 .statement { padding: 160px 58px 120px; background: var(--bg-soft); text-align: center; }
 .statement .tag { margin-bottom: 24px; }
 /* Tag có chấm "đang hoạt động" nhấp nháy */
@@ -299,11 +332,20 @@ html, body { overflow-x: clip; }
 
 /* ---------- centered sections ---------- */
 .centered { padding: 112px 24px 0; text-align: center; overflow: hidden; }
+/* Nhãn section. Làm mới 2026-10-20: bỏ viên thuốc nền xanh đặc (mô-típ của SaaS 2020,
+   lặp 8 lần thành ra nhàm) — thay bằng nhãn chữ hoa nhỏ có vạch gradient dẫn trước. */
 .tag {
-  display: inline-block; font-size: 14px; font-weight: 500; color: var(--blue);
-  background: var(--blue-soft); padding: 2px 7px; border-radius: 6px;
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 12px; font-weight: 650; color: var(--blue);
+  text-transform: uppercase; letter-spacing: .09em;
+  background: none; padding: 0; border-radius: 0;
 }
-.tag-dark { color: #9dbbff; background: #1c2336; }
+.tag::before {
+  content: ""; width: 24px; height: 2px; border-radius: 2px; flex: none;
+  background: var(--grad-brand);
+}
+.tag-dark { color: #a7c0ff; background: none; }
+.tag-dark::before { background: linear-gradient(135deg, #7aa2ff, #a78bfa); }
 .centered h2.big { margin: 20px auto 0; max-width: 720px; font-size: clamp(23px, 2.7vw, 35px); line-height: 1.15; font-weight: 500; letter-spacing: -0.03em; }
 .striped {
   height: 110px; margin: 48px -24px 0;
@@ -792,8 +834,22 @@ html, body { overflow-x: clip; }
 .dark .st-contract { color: #c4b5fd; background: rgba(139,92,246,.18); }
 
 /* Hero */
-.hero2 { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 56px; align-items: center; padding: 88px 58px 96px; border-top: 0; overflow: hidden;
-  background: radial-gradient(70% 80% at 85% 40%, var(--blue-soft) 0%, rgba(234,241,254,0) 70%); }
+/* Làm mới 2026-10-20: nền hero trước là một vệt xanh nhạt duy nhất. Chồng ba vệt lệch
+   tâm (xanh dương / tím / xanh da trời) cho ra nền có chiều, vẫn rất nhạt nên không
+   nuốt chữ. Thêm lưới chấm mờ ở lớp ::before để nền không bị "trống". */
+.hero2 { position: relative; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 56px; align-items: center; padding: 88px 58px 96px; border-top: 0; overflow: hidden;
+  background:
+    radial-gradient(58% 70% at 88% 28%, rgba(99,102,241,.16) 0%, rgba(99,102,241,0) 72%),
+    radial-gradient(52% 64% at 62% 82%, rgba(56,189,248,.13) 0%, rgba(56,189,248,0) 70%),
+    radial-gradient(70% 80% at 85% 40%, var(--blue-soft) 0%, rgba(234,241,254,0) 70%); }
+.hero2::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image: radial-gradient(rgba(17,20,45,.07) 1px, transparent 1px);
+  background-size: 22px 22px;
+  mask-image: radial-gradient(60% 60% at 20% 30%, #000 0%, transparent 72%);
+  -webkit-mask-image: radial-gradient(60% 60% at 20% 30%, #000 0%, transparent 72%);
+}
+.hero2 > * { position: relative; z-index: 1; }
 .eyebrow { font-size: 14px; font-weight: 600; color: var(--blue); letter-spacing: 0; }
 .hero2 h1 { margin-top: 16px; font-size: clamp(32px, 3.5vw, 48px); line-height: 1.1; font-weight: 600; letter-spacing: -0.035em; }
 .hero2-sub { margin-top: 22px; font-size: 18px; line-height: 1.5; color: var(--ink-2); max-width: 520px; }
@@ -802,9 +858,17 @@ html, body { overflow-x: clip; }
 .hero2-shot { margin: 0; }
 .hero2-shot .window { padding: 0 8px 8px; }
 .hero2-shot figcaption { margin-top: 12px; font-size: 13px; color: var(--ink-3); text-align: right; }
-.shot-btn { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; border-radius: 8px; overflow: hidden; }
-.shot-btn img { width: 100%; height: auto; }
-.hero2-shot .shot-btn { border: 1px solid #e6e7eb; }
+/* Làm mới 2026-10-20: ảnh app trước đây là hình chữ nhật bo 8px viền xám — trông như
+   ảnh dán vào trang. Bo lớn + bóng kép làm nó "nổi" lên trên nền. */
+.shot-btn {
+  display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in;
+  border-radius: var(--r-md); overflow: hidden;
+  box-shadow: var(--sh-3);
+  transition: transform .35s var(--ease), box-shadow .35s var(--ease);
+}
+.shot-btn:hover { transform: translateY(-3px); box-shadow: var(--sh-4); }
+.shot-btn img { width: 100%; height: auto; display: block; }
+.hero2-shot .shot-btn { border: 1px solid rgba(17, 20, 45, .07); border-radius: var(--r-lg); box-shadow: var(--sh-4); }
 .shot-card { max-width: 860px; border-radius: 12px; box-shadow: 0 1px 0 rgba(255,255,255,.6) inset, 0 24px 60px -20px rgba(20,20,60,.45); background: #fff; }
 @media (max-width: 1000px) {
   .hero2 { grid-template-columns: 1fr; padding: 56px 24px 64px; gap: 40px; }
@@ -819,9 +883,30 @@ html, body { overflow-x: clip; }
 
 /* 02 Nỗi đau */
 .pains { padding: 112px 58px; background: var(--bg-soft); }
-.pain-grid { margin-top: 56px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-.pain { background: var(--bg); border: 1px solid var(--line); border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 12px; }
-.pain-n { font-family: var(--mono); font-size: 13px; color: var(--ink-3); }
+.pain-grid { margin-top: 56px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+/* Làm mới 2026-10-20: thẻ có chiều sâu và phản hồi khi rê chuột. Viền sáng ở mép trên
+   (inset trắng) là cách tạo cảm giác bề mặt vật lý mà không cần thêm ảnh nền. */
+.pain {
+  position: relative; overflow: hidden;
+  background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-lg);
+  padding: 28px 24px 24px; display: flex; flex-direction: column; gap: 12px;
+  box-shadow: var(--sh-1), inset 0 1px 0 #fff;
+  transition: transform .28s var(--ease), box-shadow .28s var(--ease), border-color .28s var(--ease);
+}
+/* Vệt gradient mảnh chạy dọc mép trên, chỉ hiện khi rê chuột */
+.pain::before {
+  content: ""; position: absolute; inset: 0 0 auto; height: 2px;
+  background: var(--grad-brand); opacity: 0; transition: opacity .28s var(--ease);
+}
+.pain:hover { transform: translateY(-4px); box-shadow: var(--sh-3), inset 0 1px 0 #fff; border-color: #dcdfe7; }
+.pain:hover::before { opacity: 1; }
+/* Số thứ tự thành con số lớn mờ ở góc — điểm nhấn thị giác thay cho dòng mono bé xíu */
+.pain-n {
+  font-family: var(--display); font-size: 40px; font-weight: 650; line-height: 1;
+  letter-spacing: -0.04em;
+  background: linear-gradient(180deg, #ccd3e4 0%, #eef0f5 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
 .pain h3 { font-size: 20px; font-weight: 600; letter-spacing: -0.02em; }
 .pain p { font-size: 15px; color: var(--ink-2); line-height: 1.5; }
 .pain .pain-fix { margin-top: auto; padding-top: 14px; border-top: 1px dashed var(--line); color: var(--ink); }
@@ -905,7 +990,16 @@ html, body { overflow-x: clip; }
 .steps b { display: block; margin-top: 14px; font-size: 17px; font-weight: 600; }
 .steps p { margin-top: 6px; font-size: 14.5px; color: var(--ink-2); line-height: 1.45; }
 .ent-grid { margin-top: 64px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-.ent-card { border: 1px solid var(--line); border-radius: 14px; padding: 22px; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; background: var(--bg); }
+/* Làm mới 2026-10-20: cùng ngôn ngữ bề mặt với .pain — nền chuyển sắc rất nhẹ, bo lớn,
+   nhấc lên khi rê chuột. */
+.ent-card {
+  border: 1px solid var(--line); border-radius: var(--r-lg); padding: 26px 24px;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 8px;
+  background: linear-gradient(180deg, #fff 0%, #fcfcfd 100%);
+  box-shadow: var(--sh-1), inset 0 1px 0 #fff;
+  transition: transform .28s var(--ease), box-shadow .28s var(--ease), border-color .28s var(--ease);
+}
+.ent-card:hover { transform: translateY(-4px); box-shadow: var(--sh-3), inset 0 1px 0 #fff; border-color: #dcdfe7; }
 .ent-card h3 { font-size: 18px; font-weight: 600; letter-spacing: -0.015em; }
 .ent-card p { font-size: 15px; color: var(--ink-2); line-height: 1.5; flex: 1; }
 .ent-card .st { margin-top: 6px; }
@@ -936,9 +1030,26 @@ html, body { overflow-x: clip; }
 .fee div:last-child { border-right: 0; }
 .fee b { font-size: 16px; font-weight: 600; }
 .fee p { margin-top: 6px; font-size: 14.5px; color: var(--ink-2); line-height: 1.45; }
-.plans { margin-top: 24px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-.plan { border: 1px solid var(--line); border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 6px; }
-.plan-hl { border: 1.5px solid var(--blue); box-shadow: 0 20px 50px -24px rgba(47,107,240,.45); }
+.plans { margin-top: 28px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; align-items: stretch; }
+.plan {
+  position: relative; border: 1px solid var(--line); border-radius: var(--r-lg); padding: 30px 28px;
+  display: flex; flex-direction: column; gap: 6px; background: var(--bg);
+  box-shadow: var(--sh-1), inset 0 1px 0 #fff;
+  transition: transform .28s var(--ease), box-shadow .28s var(--ease), border-color .28s var(--ease);
+}
+.plan:hover { transform: translateY(-4px); box-shadow: var(--sh-3), inset 0 1px 0 #fff; border-color: #dcdfe7; }
+/* Gói nổi bật: viền gradient thật (lớp nền gradient lộ ra qua khung đệm) thay cho viền
+   xanh 1.5px — viền đơn sắc làm thẻ trông như bị "chọn" chứ không phải được đề cao. */
+.plan-hl {
+  border: 0; padding: 31.5px 29.5px; background: var(--grad-brand);
+  box-shadow: var(--sh-blue), var(--sh-2); transform: translateY(-6px);
+}
+.plan-hl > * { position: relative; z-index: 1; }
+.plan-hl::before {
+  content: ""; position: absolute; inset: 1.5px; border-radius: calc(var(--r-lg) - 1px);
+  background: var(--bg);
+}
+.plan-hl:hover { transform: translateY(-10px); box-shadow: var(--sh-blue), var(--sh-3); }
 .plan h3 { font-size: 20px; font-weight: 600; letter-spacing: -0.01em; text-transform: uppercase; }
 .plan-hl h3 { color: var(--blue); }
 .plan-sub { font-size: 15px; color: var(--ink-2); }
@@ -1462,3 +1573,102 @@ html:lang(ja) {
 }
 html:lang(ja) body { word-break: auto-phrase; line-break: strict; }
 html:lang(ja) :is(h1, h2, h3, p, li, b, a, span, summary, button, label) { letter-spacing: 0; }
+
+/* ============================================================
+   Làm mới giao diện — 2026-10-20
+   Chỉ đổi cách trình bày. Không thêm/bớt/sửa một chữ nào trên trang, nên từ điển
+   i18n-20261006a.js (246 câu) và bảng RA-SOAT-CLAIM.md không bị ảnh hưởng.
+   ============================================================ */
+
+/* ---- Hiện dần khi cuộn ----
+   Chỉ ẩn khi JS đã chạy và đã gắn .js-reveal lên <html>. Tắt JS thì nội dung hiện
+   bình thường, không có chuyện trang trắng. */
+.js-reveal .reveal { opacity: 0; transform: translateY(14px); }
+.js-reveal .reveal.hien { opacity: 1; transform: none; }
+.js-reveal .reveal {
+  transition: opacity .55s var(--ease), transform .55s var(--ease);
+  will-change: opacity, transform;
+}
+@media (prefers-reduced-motion: reduce) {
+  .js-reveal .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* ---- Nút bấm ----
+   Trước đây nút chính là màu phẳng + bóng 1px. Thêm gradient rất nhẹ và bóng màu để
+   nút "bật" khỏi nền, kèm phản hồi khi nhấn. */
+.btn { transition: transform .18s var(--ease), box-shadow .22s var(--ease), background-color .22s var(--ease); }
+.btn:active { transform: translateY(1px); }
+.btn-primary, .btn.btn-blue {
+  background-image: var(--grad-brand); border-color: transparent;
+  box-shadow: var(--sh-blue), inset 0 1px 0 rgba(255,255,255,.22);
+}
+/* Phải khai lại background-image ở trạng thái hover: luật `.btn-blue:hover` phía trên
+   dùng `background` viết tắt nên nó xoá sạch gradient ngay khi rê chuột. */
+.btn-primary:hover, .btn.btn-blue:hover {
+  background-image: linear-gradient(135deg, #2458cf 0%, #4f52e0 100%);
+  box-shadow: 0 14px 34px -12px rgba(47,107,240,.58), inset 0 1px 0 rgba(255,255,255,.22);
+}
+.btn-dark { box-shadow: var(--sh-2), inset 0 1px 0 rgba(255,255,255,.10); }
+.btn-dark:hover { box-shadow: var(--sh-3), inset 0 1px 0 rgba(255,255,255,.12); }
+.btn-outline { box-shadow: var(--sh-1); }
+.btn-outline:hover { box-shadow: var(--sh-2); border-color: #d7dae2; }
+
+/* ---- Icon tròn của các đầu mục ----
+   Trước là một vòng tròn xanh nhạt phẳng. Thêm chuyển sắc + viền trong cho có khối. */
+.ent-ic {
+  background: linear-gradient(145deg, #eaf1fe 0%, #e8e9fe 100%);
+  box-shadow: inset 0 1px 0 #fff, 0 2px 6px -2px rgba(47,107,240,.25);
+  transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+}
+.ent-card:hover .ent-ic, .fee > div:hover .ent-ic { transform: scale(1.06) rotate(-3deg); }
+
+/* ---- Thẻ trong khối Gói dịch vụ (phí khởi tạo / tài khoản / hỗ trợ / mở rộng) ---- */
+.fee { border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--sh-1); }
+.fee > div { transition: background-color .25s var(--ease); }
+.fee > div:hover { background: linear-gradient(180deg, rgba(47,107,240,.045) 0%, rgba(47,107,240,0) 100%); }
+
+/* ---- Khối tối (Trợ lý AI) ----
+   Nền đen phẳng → thêm hai vệt sáng rất nhẹ cho đỡ "chết". */
+.dark {
+  position: relative;
+  background:
+    radial-gradient(48% 42% at 78% 8%, rgba(99,102,241,.20) 0%, rgba(99,102,241,0) 70%),
+    radial-gradient(42% 38% at 14% 92%, rgba(56,189,248,.14) 0%, rgba(56,189,248,0) 70%),
+    var(--dark);
+}
+.dark > * { position: relative; z-index: 1; }
+.ai2-item {
+  border-radius: var(--r-lg); padding: 24px 24px;
+  background: linear-gradient(180deg, rgba(255,255,255,.055) 0%, rgba(255,255,255,.018) 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.07);
+  transition: transform .28s var(--ease), border-color .28s var(--ease), box-shadow .28s var(--ease);
+}
+.ai2-item:hover { transform: translateY(-4px); border-color: #3e3e4a; box-shadow: 0 20px 44px -22px rgba(0,0,0,.9), inset 0 1px 0 rgba(255,255,255,.09); }
+
+/* ---- Sáu bước triển khai ----
+   Vòng tròn số trước đây là một chấm xanh đặc 32px. Cho nó gradient + quầng sáng để
+   thành mốc trên trục thời gian chứ không phải nút bấm. */
+.steps li > span {
+  width: 36px; height: 36px; font-size: 15px;
+  background: var(--grad-brand);
+  box-shadow: 0 0 0 4px rgba(47,107,240,.10), var(--sh-blue);
+}
+.steps li::after { top: 18px; left: 36px; }
+
+/* ---- Bộ tab (AI Matching) ---- */
+.aim-tabs { box-shadow: var(--sh-1), inset 0 1px 0 #fff; }
+.aim-stage { border-radius: var(--r-xl); box-shadow: var(--sh-2); }
+
+/* ---- Khung ảnh có nền (shot-card) ---- */
+.shot-card { border-radius: var(--r-lg); box-shadow: var(--sh-4); }
+
+/* ---- Hỏi đáp ----
+   Mỗi câu là một <details>. Thêm nền khi rê chuột và khi đang mở để thấy rõ câu nào
+   đang đọc; trước đây chỉ có đường kẻ ngang. */
+.faq-list details {
+  border-radius: var(--r-sm);
+  transition: background-color .25s var(--ease);
+}
+.faq-list details:hover { background: rgba(47,107,240,.035); }
+.faq-list details[open] { background: rgba(47,107,240,.045); }
+.faq-list summary { cursor: pointer; }

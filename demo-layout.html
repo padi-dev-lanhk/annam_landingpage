@@ -633,13 +633,10 @@ h1,h2,h3{text-wrap:balance}
   .brand{font-size:18px}
   .brand img{height:34px}
 
-  /* 4. THANH THÔNG BÁO ngắt chữ xấu trên khổ hẹp. Bỏ liên kết phụ, chỉ giữ ý chính.
-     Đệm phải phải chừa đủ chỗ cho nút đóng, nếu không ba chấm chỉ số tin nằm
-     đè lên dấu ×; đệm trái 16px cho viên "MỚI" khỏi dính mép màn hình. */
-  .ann{font-size:12.5px}
-  .ann .frame{padding:8px 56px 8px 16px;min-height:0}
-  .ann button{right:12px}
-  .ann-tin i{display:none}
+  /* 4. THANH THÔNG BÁO: giấu hẳn trên điện thoại. Câu tin dài hai dòng chiếm mất
+     một phần tư màn hình đầu tiên, đẩy tiêu đề chính xuống dưới nếp gấp — mà ba
+     khối nó trỏ tới đều đã có trong trang. */
+  .ann{display:none}
 
   /* 6. TRANG DÀI 13.236px trên điện thoại vì mọi lưới đều rơi xuống một cột.
      Để lưới bốn và ba cột thành HAI cột — thẻ vẫn đọc tốt mà trang ngắn đi đáng kể.

@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VinaLand — thử hướng giao diện mới</title>
+
+<!--
+  TRANG THỬ, KHÔNG PHẢI TRANG THẬT.
+
+  Dựng riêng để người dùng xem hướng giao diện mới trước khi đụng vào index.html. Nội
+  dung và ảnh lấy y nguyên từ trang thật, chỉ đổi phần nhìn.
+
+  BA THỨ ĐỔI SO VỚI TRANG HIỆN TẠI:
+
+  1. BẢNG MÀU. Trang cũ là trắng + xanh dương — khuôn SaaS dùng chung cho mọi ngành.
+     Bản này dùng bộ màu của ngành bất động sản cao cấp: navy đêm, giấy cát, và đồng
+     thau làm màu nhấn. Đây là bộ màu của brochure dự án và biển hiệu sảnh, không phải
+     của bảng điều khiển phần mềm.
+
+  2. CHỮ. Thêm một bộ chữ có chân cho mấy dòng tiêu đề lớn. Brochure bất động sản dùng
+     chữ có chân; phần mềm dùng chữ không chân. Ghép hai thứ lại thì ra đúng chỗ đứng
+     của sản phẩm: phần mềm cho ngành bất động sản.
+
+  3. MÔ-TÍP KIẾN TRÚC. Trang cũ không có một yếu tố nào gợi tới ngành. Bản này thêm:
+     lưới bản vẽ kỹ thuật ở nền hero, vạch đo như thước tỷ lệ, dấu góc kiểu bản vẽ ở
+     các thẻ, và dải bóng cao ốc ngăn giữa hai khối.
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- subset vietnamese là bắt buộc, thiếu nó thì chữ có dấu rơi về font dự phòng -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap&subset=vietnamese,latin" rel="stylesheet">
+
+<style>
+:root{
+  /* Navy đêm — nền hero và các khối tối. Lấy tông xanh lạnh hơi ngả tím cho sâu. */
+  --navy:#0C1A2E;
+  --navy-2:#13263F;
+  --navy-3:#1B3251;
+
+  /* Giấy cát — nền các khối sáng. Trắng tinh làm trang trông như bản nháp Figma;
+     giấy cát cho cảm giác ấn phẩm in. */
+  --sand:#F5F0E8;
+  --sand-2:#EDE6DA;
+
+  /* Đồng thau — màu nhấn. Đây là màu của tay nắm cửa, biển số căn, khung tranh sảnh. */
+  --brass:#C08A2E;
+  --brass-2:#E0B55C;
+
+  --ink:#0E1A2B;
+  --ink-2:#5A6676;
+  --paper:#FFFFFF;
+  --line:rgba(14,26,43,.12);
+  --line-dark:rgba(255,255,255,.14);
+
+  /* Trước đây đây là Playfair Display. Người dùng thấy chữ có chân ở tiêu đề
+     không hợp, nên gộp về một bộ chữ duy nhất. Cá tính giữ bằng độ đậm, giãn chữ
+     và chữ hoa, không bằng bộ chữ thứ hai. */
+  --serif:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --sans:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+
+*{box-sizing:border-box}
+body{margin:0;font-family:var(--sans);color:var(--ink);background:var(--sand);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.frame{max-width:1200px;margin:0 auto;padding:0 28px}
+h1,h2,h3{margin:0;font-family:var(--serif);font-weight:700;letter-spacing:-.035em;line-height:1.1}
+
+/* ---------- thanh trên ---------- */
+.top{position:sticky;top:0;z-index:40;background:rgba(12,26,46,.88);backdrop-filter:blur(14px);border-bottom:1px solid var(--line-dark)}
+.top .frame{display:flex;align-items:center;gap:28px;height:68px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--serif);font-size:22px;color:#fff;letter-spacing:-.02em;text-decoration:none}
+.brand img{height:30px;width:auto}
+.nav{display:flex;gap:22px;margin-left:12px}
+.nav a{color:rgba(255,255,255,.72);text-decoration:none;font-size:14.5px}
+.nav a:hover{color:#fff}
+.top .cta{margin-left:auto;display:flex;gap:10px;align-items:center}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;height:42px;padding:0 20px;border-radius:2px;font-size:14.5px;font-weight:500;text-decoration:none;border:1px solid transparent;transition:.18s}
+/* Bo góc 2px, gần như vuông — bo tròn nhiều là dấu hiệu của SaaS đại trà.
+   Góc vuông gợi bản vẽ kỹ thuật và ấn phẩm in. */
+/* Nút chính: nền trắng đặc, chữ navy. Trên nền tối thì trắng là mức tương phản cao
+   nhất — cao hơn cả đồng thau. Đồng thau vẫn giữ vai trò màu nhấn ở nhãn, vạch và
+   dấu góc bản vẽ, nhưng không dùng cho nút nữa. */
+.btn-white{background:#fff;color:var(--navy);border-color:#fff}
+.btn-white:hover{background:#ECE6DB;border-color:#ECE6DB}
+.btn-ghost{color:#fff;border-color:rgba(255,255,255,.3)}
+.btn-ghost:hover{border-color:#fff}
+.btn-ink{background:var(--navy);color:#fff;border-color:var(--navy)}
+.btn-ink:hover{background:var(--navy-3);border-color:var(--navy-3)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;background:var(--navy);color:#fff;overflow:hidden;padding:84px 0 96px}
+
+/* Lưới bản vẽ kỹ thuật. Đây là mô-típ rõ nhất của ngành — ai nhìn cũng nhận ra
+   bản vẽ mặt bằng. Để rất mờ, chỉ đủ cảm nhận chứ không đủ gây rối. */
+.hero::before{content:"";position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);
+  background-size:68px 68px;mask-image:radial-gradient(ellipse 85% 70% at 30% 35%,#000 35%,transparent 78%)}
+/* Quầng sáng ấm phía sau ảnh app, như đèn hắt trong sảnh. */
+.hero::after{content:"";position:absolute;right:-8%;top:-18%;width:780px;height:780px;border-radius:50%;
+  background:radial-gradient(circle,rgba(192,138,46,.16),transparent 62%);pointer-events:none}
+.hero .frame{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:56px;align-items:center}
+
+/* Vạch đo kiểu thước tỷ lệ trên bản vẽ. */
+.rule{display:flex;align-items:center;gap:10px;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--brass-2);margin-bottom:22px}
+.rule::before{content:"";width:46px;height:1px;background:var(--brass);position:relative}
+.rule i{font-style:normal;position:relative;padding-left:0}
+
+.hero h1{font-size:clamp(28px,3.1vw,44px);color:#fff;max-width:17ch}
+.hero h1 em{font-style:normal;color:var(--brass-2)}
+.hero p.lead{margin:22px 0 32px;font-size:17.5px;color:rgba(255,255,255,.72);max-width:46ch}
+.hero .acts{display:flex;gap:12px;flex-wrap:wrap}
+
+/* Ảnh app: khung mảnh màu đồng thau thay cho viền xám. Giống khung tranh treo sảnh
+   hơn là ảnh chụp màn hình dán vào trang. */
+.shot{position:relative;border:1px solid rgba(224,181,92,.35);background:rgba(255,255,255,.04);padding:10px;border-radius:3px}
+.shot img{width:100%;height:auto;display:block;border-radius:2px}
+/* Dấu góc kiểu bản vẽ kỹ thuật — bốn góc có hai vạch vuông. */
+.shot span{position:absolute;width:13px;height:13px;border:1px solid var(--brass)}
+.shot span:nth-child(1){top:-1px;left:-1px;border-right:0;border-bottom:0}
+.shot span:nth-child(2){top:-1px;right:-1px;border-left:0;border-bottom:0}
+.shot span:nth-child(3){bottom:-1px;left:-1px;border-right:0;border-top:0}
+.shot span:nth-child(4){bottom:-1px;right:-1px;border-left:0;border-top:0}
+
+/* ---------- dải bóng cao ốc ngăn khối ---------- */
+.skyline{display:block;width:100%;height:76px;background:var(--navy)}
+.skyline svg{display:block;width:100%;height:76px}
+
+/* ---------- khối số liệu kiểu bảng thông số căn hộ ---------- */
+.spec{background:var(--sand);padding:68px 0 10px}
+.spec-grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--ink);border-bottom:1px solid var(--line)}
+.spec-cell{padding:26px 22px 26px 0;border-right:1px solid var(--line)}
+.spec-cell:last-child{border-right:0}
+.spec-cell b{display:block;font-size:36px;font-weight:700;line-height:1;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.spec-cell small{display:block;margin-top:9px;font-size:13px;color:var(--ink-2);text-transform:uppercase;letter-spacing:.1em}
+
+/* ---------- khối tính năng ---------- */
+.feat{padding:78px 0 86px;background:var(--sand)}
+.head{max-width:62ch;margin-bottom:42px}
+.head h2{font-size:clamp(23px,2.4vw,31px)}
+.head p{margin:14px 0 0;color:var(--ink-2);font-size:17px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line)}
+/* Lưới liền mạch ngăn bằng chỉ 1px, như bảng chia lô trên mặt bằng tổng thể. */
+.card{background:var(--sand);padding:30px 26px 32px;position:relative;transition:.2s}
+.card:hover{background:var(--paper)}
+.card .ic{width:38px;height:38px;display:grid;place-items:center;border:1px solid var(--brass);color:var(--brass);margin-bottom:18px}
+.card h3{font-size:19px;font-family:var(--sans);font-weight:600;letter-spacing:-.01em}
+.card p{margin:9px 0 0;color:var(--ink-2);font-size:14.5px}
+
+/* ---------- khối tối giới thiệu AI ---------- */
+.ai{background:var(--navy-2);color:#fff;padding:82px 0}
+.ai .frame{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:52px;align-items:center}
+.ai h2{font-size:clamp(23px,2.4vw,31px);color:#fff}
+.ai h2 em{font-style:normal;color:var(--brass-2)}
+.ai p{color:rgba(255,255,255,.72);font-size:17px;margin:16px 0 0}
+.ai ul{list-style:none;padding:0;margin:26px 0 0}
+.ai li{padding:13px 0;border-top:1px solid var(--line-dark);font-size:15.5px;color:rgba(255,255,255,.86)}
+.ai li b{color:var(--brass-2);font-weight:600;font-variant-numeric:tabular-nums;margin-right:12px}
+
+@media (max-width:980px){
+  .hero .frame,.ai .frame{grid-template-columns:1fr;gap:38px}
+  .cards{grid-template-columns:1fr}
+  .spec-grid{grid-template-columns:repeat(2,1fr)}
+  .nav{display:none}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="frame">
+    <a class="brand" href="#"><img src="assets/vinaland-trang.png" alt="VinaLand">VinaLand</a>
+    <nav class="nav">
+      <a href="#">Chức năng</a><a href="#">Trợ lý AI</a><a href="#">Gói dịch vụ</a><a href="#">Hỏi đáp</a>
+    </nav>
+    <div class="cta"><a class="btn btn-white" href="#">Đặt lịch demo</a></div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="frame">
+    <div>
+      <div class="rule"><i>Phần mềm quản lý sàn bất động sản</i></div>
+      <h1>Quản lý giỏ hàng, khách hàng và đội Sales trên <em>một hệ thống</em></h1>
+      <p class="lead">Một nguồn dữ liệu cho cả sàn: quản lý nắm tình hình kinh doanh, Sales không còn mỗi người một file.</p>
+      <div class="acts">
+        <a class="btn btn-white" href="#">Đặt lịch demo</a>
+        <a class="btn btn-ghost" href="#">Trải nghiệm Free 90 ngày</a>
+      </div>
+    </div>
+    <div class="shot">
+      <span></span><span></span><span></span><span></span>
+      <img src="assets/screenshots/01-dashboard.webp" alt="Bảng điều hành VinaLand">
+    </div>
+  </div>
+</section>
+
+<div class="skyline">
+  <!-- Bóng cao ốc ngăn giữa khối tối và khối sáng. Đây là mô-típ trực tiếp nhất của
+       ngành, nhưng để dạng khối phẳng tối giản chứ không vẽ chi tiết — chi tiết nhiều
+       thì thành hình minh hoạ rẻ tiền. -->
+  <svg viewBox="0 0 1440 76" preserveAspectRatio="none" aria-hidden="true">
+    <path fill="#F5F0E8" d="M0 76V58h62V40h30V58h54V30h26V16h22v14h24v28h58V46h40V58h70V24h30V10h20v14h26v34h66V44h44v14h74V34h28V20h20v14h26v24h62V50h46v8h78V28h26V14h22v14h24v30h56V46h42v12h76V36h30V22h20v14h26v22h62V52h48v6h86v18z"/>
+  </svg>
+</div>
+
+<section class="spec">
+  <div class="frame">
+    <div class="spec-grid">
+      <div class="spec-cell"><b>350</b><small>sản phẩm</small></div>
+      <div class="spec-cell"><b>08</b><small>dự án · phân khu</small></div>
+      <div class="spec-cell"><b>90</b><small>ngày dùng thử</small></div>
+      <div class="spec-cell"><b>03</b><small>ngôn ngữ giao diện</small></div>
+    </div>
+  </div>
+</section>
+
+<section class="feat">
+  <div class="frame">
+    <div class="head">
+      <div class="rule"><i>Nền vững</i></div>
+      <h2>Dữ liệu của sàn về một mối</h2>
+      <p>Giỏ hàng, khách hàng và đội ngũ nằm chung một hệ thống, cập nhật theo thao tác thật của nhân viên.</p>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-5h6v5"/></svg></div>
+        <h3>Giỏ hàng theo dự án</h3>
+        <p>Quản lý theo dự án, phân khu và từng toà. Căn nào còn, căn nào đã cọc — cả sàn nhìn chung một màn hình.</p>
+      </div>
+      <div class="card">
+        <div class="ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5M17 11h4M19 9v4"/></svg></div>
+        <h3>Khách hàng thuộc công ty</h3>
+        <p>Nhân viên chuyển việc, khách hàng vẫn ở lại. Người tiếp nhận có đủ lịch sử chăm sóc.</p>
+      </div>
+      <div class="card">
+        <div class="ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div>
+        <h3>Báo cáo lên sẵn</h3>
+        <p>Ai liên hệ bao nhiêu lượt, tiếp cận được bao nhiêu khách, dự án nào đang ra hàng.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ai">
+  <div class="frame">
+    <div>
+      <div class="rule"><i>Vươn xa</i></div>
+      <h2>Trợ lý AI <em>riêng của sàn</em></h2>
+      <p>Học từ chính tài liệu nội bộ của doanh nghiệp, không phải kiến thức chung trên mạng.</p>
+      <ul>
+        <li><b>01</b> Trả lời theo đúng chính sách và bảng giá của công ty</li>
+        <li><b>02</b> Tự soạn kịch bản huấn luyện từ tài liệu đã nạp</li>
+        <li><b>03</b> Nhân viên luyện chốt deal, có chấm điểm từng câu</li>
+        <li><b>04</b> Gợi ý căn phù hợp với từng khách, kèm lý do</li>
+      </ul>
+    </div>
+    <div class="shot">
+      <span></span><span></span><span></span><span></span>
+      <img src="assets/screenshots/02-products.webp" alt="Giỏ hàng VinaLand">
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,275 @@
+/* ============================================================================
+   LỚP CHỦ ĐỀ "BẤT ĐỘNG SẢN" — nạp SAU style-20261020a.css để đè lên.
+   ============================================================================
+
+   VÌ SAO LÀ LỚP ĐÈ CHỨ KHÔNG VIẾT LẠI CSS:
+   Trang thật có 11 khối, hơn 490 dòng HTML và một bộ từ điển đa ngôn ngữ tra theo
+   chính câu tiếng Việt trong markup. Viết lại CSS từ đầu thì phải dựng lại toàn bộ
+   lớp cũ và dễ làm vỡ phần dịch. Đè lên thì giữ nguyên markup, nội dung và i18n —
+   duyệt xong chỉ việc đổi một dòng <link> trong index.html.
+
+   BA THỨ LỚP NÀY ĐỔI:
+
+   1. BẢNG MÀU. Trắng + xanh dương là khuôn SaaS dùng chung cho mọi ngành. Thay bằng
+      bộ màu của brochure dự án và biển hiệu sảnh: navy đêm, giấy cát, đồng thau.
+      Đồng thau là màu của tay nắm cửa, biển số căn, khung tranh sảnh.
+
+   2. HÌNH KHỐI. Góc bo từ 12–32px xuống còn 2–3px. Bo tròn nhiều là dấu hiệu của
+      SaaS đại trà; góc gần vuông gợi bản vẽ kỹ thuật và ấn phẩm in.
+
+   3. MÔ-TÍP KIẾN TRÚC. Trang cũ không có yếu tố nào gợi tới ngành. Thêm: lưới bản vẽ
+      ở nền hero, vạch thước trước nhãn khối, dấu góc bản vẽ quanh ảnh app, và dải
+      bóng cao ốc ngăn khối.
+
+   CHỮ: giữ nguyên Inter của trang cũ. Người dùng đã thử bản có chữ có chân ở tiêu đề
+   và thấy không hợp (27/10) — chỉ siết độ đậm và giãn chữ, không đổi bộ chữ.
+   ============================================================================ */
+
+:root{
+  --navy:#0C1A2E;
+  --navy-2:#13263F;
+  --sand:#F5F0E8;
+  --sand-2:#EDE6DA;
+  --brass:#C08A2E;
+  --brass-2:#E0B55C;
+
+  /* Đè thẳng lên biến của lớp cũ để mọi chỗ dùng chúng đổi theo, khỏi phải tìm từng nơi. */
+  --bg:#F5F0E8;
+  --bg-soft:#EDE6DA;
+  --ink:#0E1A2B;
+  --ink-2:#5A6676;
+  --ink-3:#8A94A2;
+  --line:rgba(14,26,43,.13);
+  --line-2:rgba(14,26,43,.08);
+  --blue:#C08A2E;            /* mọi chỗ "xanh nhấn" của lớp cũ thành đồng thau */
+  --blue-soft:rgba(192,138,46,.10);
+  --blue-band:rgba(192,138,46,.18);
+  --dark:#0C1A2E;
+  --dark-2:#13263F;
+  --dark-line:rgba(255,255,255,.14);
+  --dark-ink:#FFFFFF;
+  --dark-ink-2:rgba(255,255,255,.70);
+
+  /* Thang bo góc: gần vuông. */
+  --radius:3px; --r-xs:2px; --r-sm:2px; --r-md:3px; --r-lg:3px; --r-xl:4px;
+}
+
+body{background:var(--sand);color:var(--ink)}
+
+/* ---------- chữ: giữ Inter, chỉ siết lại ---------- */
+h1,h2,h3{font-weight:700;letter-spacing:-.035em;line-height:1.12}
+h1{font-size:clamp(28px,3.1vw,44px)}
+h2{font-size:clamp(23px,2.4vw,31px)}
+
+/* ---------- thanh trên ---------- */
+header,.top{background:rgba(12,26,46,.92)!important;backdrop-filter:blur(14px);border-bottom:1px solid var(--dark-line)!important}
+header a,.top a{color:rgba(255,255,255,.74)}
+header a:hover,.top a:hover{color:#fff}
+.logo,.logo *{color:#fff!important}
+
+/* ---------- nút ---------- */
+/* Người dùng chốt 27/10: nút chính nền trắng chữ navy. Trên nền tối thì trắng là mức
+   tương phản cao nhất — cao hơn cả đồng thau. Đồng thau lui về vai trò màu nhấn. */
+.btn{border-radius:2px!important;font-weight:500;letter-spacing:0}
+.btn-blue{background:#fff!important;color:var(--navy)!important;border:1px solid #fff!important}
+.btn-blue:hover{background:#ECE6DB!important;border-color:#ECE6DB!important}
+.btn-outline{border:1px solid rgba(255,255,255,.32)!important;color:#fff!important;background:transparent!important}
+.btn-outline:hover{border-color:#fff!important}
+
+/* Trên nền sáng thì nút trắng vô hình — đảo lại thành navy đặc. */
+.frame:not(.dark) .btn-blue,
+section:not(.dark) .btn-blue{background:var(--navy)!important;color:#fff!important;border-color:var(--navy)!important}
+section:not(.dark) .btn-blue:hover{background:var(--navy-2)!important;border-color:var(--navy-2)!important}
+section:not(.dark) .btn-outline{border-color:var(--line)!important;color:var(--ink)!important}
+
+/* ---------- nhãn khối: vạch thước kiểu bản vẽ ---------- */
+/* Lớp cũ vẽ .tag thành viên thuốc nền xanh đặc — mô-típ SaaS 2020. Thay bằng một vạch
+   ngang như thước tỷ lệ trên bản vẽ, chữ hoa giãn rộng. */
+.tag{background:none!important;color:var(--brass)!important;padding:0!important;border:0!important;
+  font-size:11.5px!important;letter-spacing:.16em!important;text-transform:uppercase;font-weight:600;
+  display:inline-flex;align-items:center;gap:12px}
+.tag::before{content:""!important;width:46px!important;height:1px!important;border-radius:0!important;
+  background:var(--brass)!important;display:block!important}
+.tag-dark{color:var(--brass-2)!important}
+.tag-dark::before{background:var(--brass-2)!important}
+
+/* ---------- tiêu đề hai tông ---------- */
+.two-tone span{color:var(--brass)!important;-webkit-text-fill-color:var(--brass)!important;background:none!important}
+.dark .two-tone span,section.dark .two-tone span{color:var(--brass-2)!important;-webkit-text-fill-color:var(--brass-2)!important}
+
+/* ---------- hero: lưới bản vẽ ---------- */
+.hero2{position:relative;background:var(--navy)!important;color:#fff;overflow:hidden;border:0!important}
+.hero2 h1,.hero2 h2{color:#fff!important}
+.hero2 p{color:rgba(255,255,255,.72)!important}
+.hero2::before{content:"";position:absolute;inset:0;z-index:0;
+  background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);
+  background-size:68px 68px;
+  mask-image:radial-gradient(ellipse 85% 70% at 30% 35%,#000 35%,transparent 78%)}
+/* Quầng đèn ấm hắt sau ảnh app, như đèn sảnh. */
+.hero2::after{content:"";position:absolute;right:-8%;top:-20%;width:760px;height:760px;border-radius:50%;z-index:0;
+  background:radial-gradient(circle,rgba(192,138,46,.16),transparent 62%);pointer-events:none}
+.hero2>*{position:relative;z-index:1}
+
+/* ---------- ảnh app: khung đồng thau + dấu góc bản vẽ ---------- */
+.shot-btn,.shot-card{border-radius:2px!important;overflow:visible!important}
+.shot-btn{position:relative;border:1px solid rgba(192,138,46,.30)!important;padding:8px;background:rgba(255,255,255,.03)}
+.hero2 .shot-btn{border-color:rgba(224,181,92,.38)!important}
+.shot-btn img{border-radius:1px!important}
+.shot-btn::before,.shot-btn::after{content:"";position:absolute;width:13px;height:13px;border:1px solid var(--brass);pointer-events:none}
+.shot-btn::before{top:-1px;left:-1px;border-right:0;border-bottom:0}
+.shot-btn::after{bottom:-1px;right:-1px;border-left:0;border-top:0}
+
+/* ---------- thẻ, ô, khối ---------- */
+.mod,.pain,.plan,.flow,.ai2-item{border-radius:2px!important;border-color:var(--line)!important}
+.mod:hover,.pain:hover{background:#fff!important}
+.ent-ic,.ent-ic-sm,.ent-ic-xs,.mig-ic,.pain-n{
+  border-radius:2px!important;background:none!important;border:1px solid var(--brass)!important;color:var(--brass)!important}
+.pain-n{font-variant-numeric:tabular-nums;font-weight:600}
+
+/* ---------- khối tối ---------- */
+.dark,section.dark{background:var(--navy-2)!important;color:#fff}
+.dark h2,.dark h3,section.dark h2,section.dark h3{color:#fff!important}
+.dark p,section.dark p{color:rgba(255,255,255,.72)!important}
+
+/* ---------- số liệu kiểu bảng thông số căn hộ ---------- */
+.scale .frame>div,.scale b{font-variant-numeric:tabular-nums}
+
+/* ---------- form ---------- */
+.f,input,select,textarea{border-radius:2px!important;border-color:var(--line)!important;background:#fff}
+.f:focus,input:focus,select:focus,textarea:focus{outline:0;border-color:var(--brass)!important;box-shadow:0 0 0 3px rgba(192,138,46,.14)!important}
+
+/* ---------- chân trang ---------- */
+footer{background:var(--navy)!important;color:rgba(255,255,255,.72)}
+footer a{color:rgba(255,255,255,.72)}
+footer a:hover{color:#fff}
+
+/* ---------- dải bóng cao ốc ngăn khối ---------- */
+/* Mô-típ trực tiếp nhất của ngành. Để dạng khối phẳng tối giản — vẽ chi tiết nhiều
+   thì thành hình minh hoạ rẻ tiền. Dùng SVG nhúng để khỏi thêm một request ảnh. */
+.skyline-band{display:block;width:100%;height:68px;background:var(--navy);line-height:0}
+.skyline-band svg{display:block;width:100%;height:68px}
+
+/* ============================================================================
+   VÁ ĐỢT 1 — bốn lỗi phát hiện khi xem bản đầy đủ (27/10)
+   ============================================================================ */
+
+/* 1. LOGO CHÌM TRÊN THANH ĐẦU.
+   Thanh đầu giờ là nền navy, mà logo vẫn là bản chữ navy nên chìm nghỉm — nhìn chỉ
+   còn một vệt xanh mảnh. Không sửa được bằng màu chữ vì logo là ảnh PNG, nên lọc
+   ảnh thành trắng: đảo màu rồi khử bão hoà, ra đúng bản trắng mà không cần thêm tệp.
+   Logo ở chân trang cũng nền tối nên dùng chung cách này. */
+header .logo-img,
+.footer .logo-img,
+.drawer .logo-img { filter: brightness(0) invert(1); }
+
+/* 2. KHUNG ẢNH CÒN MÀU TÍM.
+   `.g-violet` của lớp cũ là gradient tím-xanh, lạc hẳn khỏi bảng màu mới. Thay bằng
+   navy chuyển sang đồng thau nhạt — vẫn có chiều sâu nhưng đúng tông. */
+.g-violet {
+  background: radial-gradient(120% 90% at 0% 0%, rgba(192,138,46,.30) 0%, transparent 58%),
+              linear-gradient(135deg, var(--navy-2), var(--navy)) !important;
+}
+
+/* 3. CHỮ PHỤ ĐỀ ĐỒNG THAU QUÁ MỜ TRÊN NỀN GIẤY CÁT.
+   Đồng thau #C08A2E trên nền #F5F0E8 chỉ đạt tương phản khoảng 3.2:1 — dưới ngưỡng
+   đọc thoải mái. Đậm màu xuống cho chữ chạy dài; giữ nguyên màu sáng cho nhãn chữ
+   hoa cỡ nhỏ vì chúng ngắn và đã đậm sẵn. */
+.sec-head p, .sec-head h2 span,
+.two-tone span { color: #8A6113 !important; -webkit-text-fill-color: #8A6113 !important; }
+.dark .sec-head p, section.dark .sec-head p,
+.dark .two-tone span, section.dark .two-tone span { color: var(--brass-2) !important; -webkit-text-fill-color: var(--brass-2) !important; }
+
+/* 4. CHÂN TRANG VẪN NỀN TRẮNG.
+   Selector `footer` đơn lẻ không thắng được `.footer` của lớp cũ (hạng thấp hơn).
+   Nhắm đúng lớp. */
+.footer { background: var(--navy) !important; color: rgba(255,255,255,.72) !important; border-top: 0 !important; }
+.footer a, .footer p, .footer li, .footer span, .footer div { color: rgba(255,255,255,.72) !important; }
+.footer a:hover { color: #fff !important; }
+.footer b, .footer strong, .footer h3, .footer h4 { color: #fff !important; }
+
+/* ============================================================================
+   VÁ ĐỢT 2 — kéo trang đầy đủ về đúng phong cách bản dựng tay (27/10)
+   ============================================================================ */
+
+/* 1. DẢI BÓNG CAO ỐC NGĂN HERO VỚI KHỐI DƯỚI.
+   Đây là mô-típ trực tiếp nhất của ngành và là thứ bản dựng tay có mà bản này thiếu.
+   Dựng bằng SVG nhúng thẳng vào CSS nên KHÔNG phải sửa markup — quan trọng, vì markup
+   còn gắn với bộ từ điển đa ngôn ngữ.
+   Để khối phẳng tối giản, không vẽ cửa sổ hay chi tiết: chi tiết nhiều thì thành hình
+   minh hoạ rẻ tiền chứ không còn là dấu hiệu thị giác. */
+.hero2{ padding-bottom: calc(var(--pad-hero, 96px) + 72px) !important; }
+.hero2::after{
+  content:"" !important;
+  position:absolute !important; left:0; right:0; bottom:0; top:auto !important;
+  width:100% !important; height:72px !important; border-radius:0 !important;
+  background:
+    url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 72' preserveAspectRatio='none'%3E%3Cpath fill='%23F5F0E8' d='M0 72V54h62V36h30v18h54V26h26V12h22v14h24v28h58V42h40v12h70V20h30V6h20v14h26v34h66V40h44v14h74V30h28V16h20v14h26v24h62V46h46v8h78V24h26V10h22v14h24v30h56V42h42v12h76V32h30V18h20v14h26v22h62V48h48v6h86v18z'/%3E%3C/svg%3E")
+    bottom center / 100% 72px no-repeat !important;
+  pointer-events:none; z-index:2;
+}
+/* Quầng đèn ấm chuyển sang ::before cho khỏi tranh chỗ với dải cao ốc. */
+.hero2::before{
+  background-image:
+    radial-gradient(circle at 88% 8%, rgba(192,138,46,.16), transparent 42%),
+    linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px) !important;
+  background-size: 100% 100%, 68px 68px, 68px 68px !important;
+}
+
+/* 2. NHỊP GIÃN CÁCH RỘNG HƠN.
+   Bản dựng tay thoáng hơn hẳn. Trang cũ nén các khối sát nhau nên nhìn như tài liệu
+   kỹ thuật; nới ra thì mới ra chất ấn phẩm. */
+section{ padding-top: 84px !important; padding-bottom: 88px !important; }
+.sec-head{ margin-bottom: 44px !important; }
+.sec-head h2{ font-weight:700 !important; letter-spacing:-.035em !important; }
+
+/* 3. LƯỚI THẺ LIỀN MẠCH.
+   Thẻ rời có viền quanh mỗi ô nhìn như bảng kê. Ghép liền, ngăn bằng đúng 1px, giống
+   bảng chia lô trên mặt bằng tổng thể. */
+.mod{ border:0 !important; outline:1px solid var(--line); outline-offset:0; background:var(--sand) !important; transition:background .18s; }
+.mod:hover{ background:#fff !important; }
+
+/* 4. ĐƯỜNG KẺ TRÊN ĐẦU KHỐI SỐ LIỆU, kiểu bảng thông số căn hộ. */
+.scale .frame{ border-top:1px solid var(--ink); padding-top:30px; }
+
+/* ============================================================================
+   VÁ ĐỢT 3 — hai lỗi lộ ra sau khi thêm dải cao ốc (27/10)
+   ============================================================================ */
+
+/* 1. NÚT THỨ HAI Ở HERO LÀ `.btn-dark`, KHÔNG PHẢI `.btn-outline`.
+   Nền của nó là var(--ink) — mà tôi đã đè --ink thành #0E1A2B, gần trùng màu nền hero.
+   Kết quả là nó hiện ra như một khối tối lệch phía sau nút trắng. Trên nền tối phải
+   cho nó thành nút viền trắng; trên nền sáng giữ nguyên navy đặc. */
+.hero2 .btn-dark,
+.dark .btn-dark, section.dark .btn-dark{
+  background:transparent !important; color:#fff !important;
+  border:1px solid rgba(255,255,255,.32) !important; box-shadow:none !important;
+}
+.hero2 .btn-dark:hover,
+.dark .btn-dark:hover, section.dark .btn-dark:hover{ border-color:#fff !important; background:rgba(255,255,255,.06) !important; }
+
+/* Bóng đổ của lớp cũ tính theo nền sáng; trên nền tối nó thành vệt đen bẩn. */
+.hero2 .btn, .dark .btn, section.dark .btn, .footer .btn{ box-shadow:none !important; }
+
+/* 2. DÒNG NHÃN TRÊN TIÊU ĐỀ DÙNG LỚP `.eyebrow`.
+   Tôi mới chỉ xử lý `.tag`. Đây là dòng người dùng khen là "ổn" nên phải giữ đúng
+   kiểu đó: chữ hoa nhỏ, giãn rộng, màu đồng thau, có vạch thước phía trước. */
+.eyebrow{
+  color:var(--brass-2) !important; font-size:11.5px !important; font-weight:600 !important;
+  letter-spacing:.16em !important; text-transform:uppercase !important;
+  display:inline-flex !important; align-items:center; gap:12px; margin-bottom:18px !important;
+}
+.eyebrow::before{ content:""; width:46px; height:1px; background:var(--brass-2); display:block; flex:none; }
+/* Trên nền sáng thì đồng thau nhạt đọc không rõ — dùng bản đậm. */
+section:not(.dark):not(.hero2) .eyebrow{ color:#8A6113 !important; }
+section:not(.dark):not(.hero2) .eyebrow::before{ background:#8A6113; }
+
+/* ============================================================================
+   VÁ ĐỢT 4 — nút chính biến mất ở hero (27/10)
+   ============================================================================
+   `.hero2` là <section> nhưng KHÔNG mang lớp `dark`. Quy tắc "nút trên nền sáng thì
+   navy đặc" ở trên vì thế áp cả vào hero, thành nút navy trên nền navy — vô hình.
+   Mọi quy tắc nhắm "nền sáng" từ đây phải loại trừ `.hero2`.                        */
+.hero2 .btn-blue{ background:#fff !important; color:var(--navy) !important; border-color:#fff !important; }
+.hero2 .btn-blue:hover{ background:#ECE6DB !important; border-color:#ECE6DB !important; }

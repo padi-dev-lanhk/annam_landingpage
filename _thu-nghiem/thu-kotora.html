@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- CHỐNG CACHE: index.html không bị Cloudflare cache nên luôn mới; mọi file trong assets/ thì bị cache 30 ngày.
+     Khi sửa CSS hoặc JS: đổi luôn TÊN FILE (style-<ngày><chữ>.css, main-<ngày><chữ>.js) rồi sửa 2 thẻ bên dưới.
+     Khi thay ảnh: đổi số ?v=... ở tất cả đường dẫn ảnh (tìm thay cả file).
+     Làm vậy thì sau mỗi lần deploy không cần purge cache Cloudflare nữa. -->
+<title>VinaLand — thử phong cách nhà Kotora</title>
+<meta name="description" content="VinaLand: quản lý giỏ hàng, khách hàng và đội Sales trên một hệ thống. Theo dõi căn còn bán, lead cần chăm sóc và tiến độ cơ hội theo từng nhóm.">
+<meta property="og:title" content="VinaLand — Phần mềm quản lý sàn bất động sản">
+<meta property="og:description" content="Quản lý giỏ hàng, khách hàng và đội Sales trên một hệ thống.">
+<meta property="og:image" content="assets/screenshots/01-dashboard.webp?v=20261006a">
+<meta property="og:type" content="website">
+<link rel="icon" href="favicon.ico?v=20261001b" sizes="32x32">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32-20261001b.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon-20261001b.png">
+<meta name="theme-color" content="#1b1c1f">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@500;600&family=JetBrains+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="assets/style-20261020a.css">
+<link rel="stylesheet" href="assets/theme-kotora-20261027a.css">
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a class="logo" id="navLogo" href="#top" aria-label="VinaLand — về đầu trang" aria-controls="drawer">
+      <img class="logo-img" src="assets/vinaland.png?v=20261001c" width="535" height="286" alt="VinaLand">
+    </a>
+    <nav class="nav-links" aria-label="Menu chính">
+      <a href="#dashboard">Dashboard</a>
+      <a href="#solution">Chức năng</a>
+      <a href="#rollout">Triển khai</a>
+      <a href="#security">Bảo mật</a>
+      <a href="#pricing">Gói dịch vụ</a>
+      <a href="#ai">Trợ lý AI</a>
+      <a href="#faq">Hỏi đáp</a>
+    </nav>
+    <div class="nav-cta">
+      <!-- Chọn ngôn ngữ: tên ngôn ngữ luôn viết bằng chính ngôn ngữ đó nên không dịch (data-i18n-skip) -->
+      <div class="lang" id="lang" data-i18n-skip>
+        <button class="lang-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="langMenu" aria-label="Ngôn ngữ · Language · 言語">
+          <svg class="lang-globe" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg>
+          <span class="lang-code">VI</span>
+          <svg class="lang-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <ul class="lang-menu" id="langMenu" hidden>
+          <li><button type="button" data-lang="vi" lang="vi" aria-current="true">Tiếng Việt</button></li>
+          <li><button type="button" data-lang="en" lang="en">English</button></li>
+          <li><button type="button" data-lang="ja" lang="ja">日本語</button></li>
+        </ul>
+      </div>
+      <a class="btn btn-blue" href="#demo" data-cta="nav">Đặt lịch demo</a>
+    </div>
+  </div>
+</header>
+
+<!-- Menu trượt từ trái (mobile): mở khi bấm logo -->
+<div class="drawer" id="drawer" aria-hidden="true">
+  <div class="drawer-backdrop" data-drawer-close></div>
+  <nav class="drawer-panel" aria-label="Menu" role="dialog" aria-modal="true">
+    <div class="drawer-head">
+      <a class="logo logo-light" href="#top" data-drawer-close><img class="logo-img" src="assets/vinaland.png?v=20261001c" width="535" height="286" alt="VinaLand"></a>
+      <button class="drawer-x" type="button" aria-label="Đóng menu" data-drawer-close>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>
+      </button>
+    </div>
+    <ul class="drawer-links">
+      <li><a href="#top" data-drawer-close>Trang chủ</a></li>
+      <li><a href="#dashboard" data-drawer-close>Dashboard</a></li>
+      <li><a href="#solution" data-drawer-close>Chức năng</a></li>
+      <li><a href="#rollout" data-drawer-close>Triển khai</a></li>
+      <li><a href="#security" data-drawer-close>Bảo mật</a></li>
+      <li><a href="#pricing" data-drawer-close>Gói dịch vụ</a></li>
+      <li><a href="#ai" data-drawer-close>Trợ lý AI</a></li>
+      <li><a href="#faq" data-drawer-close>Hỏi đáp</a></li>
+    </ul>
+    <div class="drawer-foot">
+      <a class="btn btn-blue btn-xl btn-block" href="#demo" data-cta="drawer" data-drawer-close>Đặt lịch demo</a>
+    </div>
+  </nav>
+</div>
+
+<main id="top">
+  <!-- 01 HERO -->
+  <section class="hero2 frame">
+    <div class="hero2-copy">
+      <p class="eyebrow">Phần mềm quản lý sàn bất động sản</p>
+      <h1>Quản lý giỏ hàng, khách hàng và đội Sales trên một hệ thống</h1>
+      <p class="hero2-sub">Một nguồn dữ liệu cho cả sàn: quản lý nắm tình hình kinh doanh, Sales không còn mỗi người một file.</p>
+      <div class="hero2-ctas">
+        <a class="btn btn-blue btn-xl" href="#demo" data-cta="hero">Đặt lịch demo</a>
+        <a class="btn btn-dark btn-xl" href="#demo" data-cta="hero-trial">Trải nghiệm Free 90 ngày</a>
+      </div>
+    </div>
+    <figure class="hero2-shot">
+      <div class="window">
+        <div class="window-bar"><i></i><i></i><i></i><span>Bảng điều hành VinaLand</span></div>
+        <button class="shot-btn" type="button" data-zoom="assets/screenshots/01-dashboard.webp?v=20261006a" aria-label="Phóng to ảnh bảng điều hành">
+          <img src="assets/screenshots/01-dashboard.webp?v=20261006a" width="1440" height="900" alt="Bảng điều hành VinaLand: tổng sản phẩm, lead và khách hàng, cơ hội đang xử lý, pipeline theo giai đoạn">
+        </button>
+      </div>
+      <button class="hero2-phone" type="button" data-zoom="assets/screenshots/m02-products.webp?v=20261006a" aria-label="Phóng to ảnh giỏ hàng trên điện thoại">
+        <img src="assets/screenshots/m02-products.webp?v=20261006a" width="390" height="844" alt="Giỏ hàng VinaLand trên điện thoại">
+      </button>
+    </figure>
+  </section>
+
+  <!-- MODULE STRIP -->
+  <section class="modules frame" aria-label="Các phân hệ">
+    <div class="mod"><svg viewBox="0 0 24 24"><path d="M4 21V5l8-3 8 3v16M9 21v-4h6v4M8 8h2M14 8h2M8 12h2M14 12h2"/></svg>Giỏ hàng</div>
+    <div class="mod"><svg viewBox="0 0 24 24"><path d="M3 20h18M5 20V9l7-5 7 5v11M10 20v-5h4v5"/></svg>Dự án · Phân khu · Toà</div>
+    <div class="mod"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="4"/><path d="M2 21c0-4 3-6 7-6s7 2 7 6M17 11h5M19.5 8.5v5"/></svg>Lead</div>
+    <div class="mod"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>Khách hàng</div>
+    <div class="mod"><svg viewBox="0 0 24 24"><path d="M4 4h4v16H4zM10 4h4v10h-4zM16 4h4v6h-4z"/></svg>Cơ hội &amp; Pipeline</div>
+    <div class="mod"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Đặt cọc khoá căn</div>
+    <div class="mod"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M8 15l2 2 4-4"/></svg>Lịch &amp; công việc</div>
+    <div class="mod"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Báo cáo</div>
+    <div class="mod"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>Phân quyền</div>
+    <div class="mod"><svg viewBox="0 0 24 24"><path d="M12 3l1.8 4.7L18 9.5l-4.2 1.8L12 16l-1.8-4.7L6 9.5l4.2-1.8zM19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></svg>Sales Coach AI</div>
+  </section>
+
+  <!-- 03 PAIN POINTS -->
+  <section class="pains frame" id="pains">
+    <div class="sec-head">
+      <span class="tag">Thách thức của sàn</span>
+      <h2 class="two-tone">Sàn càng lớn, dữ liệu càng dễ thất lạc. <span>Bốn vấn đề thường gặp ở các sàn phân phối.</span></h2>
+    </div>
+    <div class="pain-grid">
+      <article class="pain">
+        <span class="pain-n">01</span>
+        <h3>Lead thất lạc</h3>
+        <p>Khách từ Facebook, Zalo, hotline, sự kiện nằm rải rác trong máy từng người. Không ai biết khách nào chưa được gọi.</p>
+      </article>
+      <article class="pain">
+        <span class="pain-n">02</span>
+        <h3>Rổ hàng phân tán</h3>
+        <p>Mỗi dự án một file Excel, mỗi đợt mở bán một bảng giá. Sales chào nhầm căn đã cọc, quản lý khó nắm tồn kho.</p>
+      </article>
+      <article class="pain">
+        <span class="pain-n">03</span>
+        <h3>Khó giám sát pipeline</h3>
+        <p>Giám đốc kinh doanh chỉ biết kết quả cuối tháng. Cơ hội bị chững, việc quá hạn không ai phát hiện kịp.</p>
+      </article>
+      <article class="pain">
+        <span class="pain-n">04</span>
+        <h3>Khó bàn giao khách</h3>
+        <p>Nhân sự nghỉ việc hoặc chuyển nhóm là mất luôn lịch sử chăm sóc. Người nhận phải hỏi khách từ đầu.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- 04 DASHBOARD QUẢN LÝ -->
+  <section class="dash frame" id="dashboard">
+    <div class="sec-head">
+      <span class="tag">Dành cho người quản lý</span>
+      <h2 class="two-tone">Mở máy là thấy sàn đang chạy thế nào. <span>Mỗi vai trò một góc nhìn theo phạm vi quyền của mình.</span></h2>
+    </div>
+    <div class="dash-grid">
+      <ul class="dash-list">
+        <li>
+          <span class="ent-ic ent-ic-xs" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="fl" d="M4.5 20.5V8.2l7.5-3.7 7.5 3.7v12.3z"/><path d="M4.5 20.5V8.2l7.5-3.7 7.5 3.7v12.3M2.5 20.5h19"/><path d="M8 11h2.2M13.8 11H16M8 14.6h2.2M13.8 14.6H16"/><path d="M10 20.5v-2.8h4v2.8"/></svg></span>
+          <div><b>Tồn kho theo trạng thái</b><p>Đang bán, đã cọc, đã bán, dừng bán — cập nhật theo thao tác của đội ngũ.</p></div>
+        </li>
+        <li>
+          <span class="ent-ic ent-ic-xs" aria-hidden="true"><svg viewBox="0 0 24 24"><circle class="fl" cx="9.2" cy="8" r="3.4"/><circle cx="9.2" cy="8" r="3.4"/><path d="M2.8 20.2c0-3.6 2.9-5.6 6.4-5.6s6.4 2 6.4 5.6"/><path d="M16.2 5.2a3.2 3.2 0 010 6M18 14.9c2.1.6 3.4 2.2 3.4 4.4"/></svg></span>
+          <div><b>Lead và khách hàng</b><p>Số lead đang có, số đã chuyển thành khách hàng và tỷ lệ chuyển đổi.</p></div>
+        </li>
+        <li>
+          <span class="ent-ic ent-ic-xs" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="fl" d="M3.2 4.5h17.6l-6.6 7.8v6.4l-4.4 2.3v-8.7z"/><path d="M3.2 4.5h17.6l-6.6 7.8v6.4l-4.4 2.3v-8.7z"/><path d="M6.6 8.4h10.8"/></svg></span>
+          <div><b>Pipeline theo giai đoạn</b><p>Số deal và giá trị ở từng bước: mới, tư vấn, đàm phán, cọc, chốt, mất.</p></div>
+        </li>
+        <li>
+          <span class="ent-ic ent-ic-xs" aria-hidden="true"><svg viewBox="0 0 24 24"><rect class="fl" x="3.2" y="3.5" width="17.6" height="17" rx="2.4"/><rect x="3.2" y="3.5" width="17.6" height="17" rx="2.4"/><path d="M7.6 16.2v-3.4M12 16.2V8.4M16.4 16.2v-5.6"/></svg></span>
+          <div><b>Báo cáo theo nhân viên, dự án, nguồn hàng</b><p>Lọc theo nhóm và thời gian: ai đang ra kết quả, dự án nào đang chững.</p></div>
+        </li>
+      </ul>
+      <div class="dash-shot">
+        <button class="shot-btn shot-card" type="button" data-zoom="assets/screenshots/14-reports.webp?v=20261006a" aria-label="Phóng to ảnh báo cáo">
+          <img src="assets/screenshots/14-reports.webp?v=20261006a" width="1440" height="900" loading="lazy" alt="Màn hình báo cáo VinaLand theo nguồn hàng, tuần và tháng">
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 CHỨC NĂNG CƠ BẢN ĐÃ CHẠY -->
+  <section class="flows frame" id="solution">
+    <aside class="flow-nav" aria-label="Chức năng đang dùng được">
+      <a href="#f-inventory" class="active">Giỏ hàng</a>
+      <a href="#f-leads">Lead &amp; khách hàng</a>
+      <a href="#f-deals">Cơ hội &amp; đặt cọc</a>
+      <a href="#f-tasks">Lịch &amp; công việc</a>
+    </aside>
+    <div class="flow-list">
+      <article class="flow" id="f-inventory">
+        <div class="flow-text">
+          <p class="two-tone">Giỏ hàng luôn chính xác. <span>Biết ngay căn nào còn, căn nào đã cọc.</span></p>
+          <ul class="flow-keys"><li>Theo dự án &middot; phân khu &middot; toà</li><li>Lọc giá, loại căn, hướng, nguồn hàng</li><li>Nhập &amp; xuất Excel theo file mẫu</li><li>Link chia sẻ rổ hàng gửi khách</li></ul>
+        </div>
+        <div class="flow-ill g-violet">
+          <button class="shot-btn shot-card" type="button" data-zoom="assets/screenshots/02-products.webp?v=20261006a" aria-label="Phóng to ảnh giỏ hàng">
+            <img src="assets/screenshots/02-products.webp?v=20261006a" width="1440" height="900" loading="lazy" alt="Màn hình giỏ hàng VinaLand: danh sách căn theo dự án, trạng thái và giá">
+          </button>
+        </div>
+      </article>
+      <article class="flow" id="f-leads">
+        <div class="flow-text">
+          <p class="two-tone">Lead nào cũng có người phụ trách. <span>Hết cảnh khách nằm trong máy riêng.</span></p>
+          <ul class="flow-keys"><li>Ghi nguồn: Facebook, Zalo, hotline</li><li>Chống trùng số điện thoại</li><li>Phân bổ lead cho từng Sales</li><li>Lưu nhu cầu &amp; lịch sử chăm sóc</li></ul>
+        </div>
+        <div class="flow-ill g-sunset">
+          <button class="shot-btn shot-card" type="button" data-zoom="assets/screenshots/07-leads.webp?v=20261006a" aria-label="Phóng to ảnh danh sách lead">
+            <img src="assets/screenshots/07-leads.webp?v=20261006a" width="1440" height="900" loading="lazy" alt="Màn hình danh sách lead VinaLand, thông tin cá nhân đã làm mờ">
+          </button>
+        </div>
+      </article>
+      <article class="flow" id="f-deals">
+        <div class="flow-text">
+          <p class="two-tone">Thấy trọn phễu bán hàng. <span>Deal đang ở đâu, ai đang giữ.</span></p>
+          <ul class="flow-keys"><li>Kanban hoặc danh sách theo giai đoạn</li><li>Đặt cọc là khoá căn, hết chào trùng</li><li>Ghi lý do khi mất deal</li><li>Thống kê theo dự án và theo Sales</li></ul>
+        </div>
+        <div class="flow-ill g-peach">
+          <button class="shot-btn shot-card" type="button" data-zoom="assets/screenshots/11-opportunities.webp?v=20261006a" aria-label="Phóng to ảnh pipeline cơ hội">
+            <img src="assets/screenshots/11-opportunities.webp?v=20261006a" width="1440" height="900" loading="lazy" alt="Màn hình pipeline cơ hội VinaLand dạng Kanban">
+          </button>
+        </div>
+      </article>
+      <article class="flow" id="f-tasks">
+        <div class="flow-text">
+          <p class="two-tone">Không bỏ sót lịch hẹn. <span>Việc quá hạn tự nổi lên.</span></p>
+          <ul class="flow-keys"><li>Lịch gọi lại, xem nhà, ký cọc</li><li>Đánh dấu việc quá hạn</li><li>Báo khi được giao lead mới</li><li>Nhắc tên trong trao đổi nội bộ</li></ul>
+        </div>
+        <div class="flow-ill g-mint">
+          <button class="shot-btn shot-card" type="button" data-zoom="assets/screenshots/13-tasks.webp?v=20261006a" aria-label="Phóng to ảnh lịch và công việc">
+            <img src="assets/screenshots/13-tasks.webp?v=20261006a" width="1440" height="900" loading="lazy" alt="Màn hình lịch và công việc VinaLand">
+          </button>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 06 TRIỂN KHAI & CHUYỂN DỮ LIỆU -->
+  <section class="ent frame" id="rollout">
+    <div class="sec-head">
+      <span class="tag">Triển khai</span>
+      <h2 class="two-tone">Chuyển từ Excel sang hệ thống theo sáu bước. <span>Đồng hành từ khảo sát đến nghiệm thu.</span></h2>
+    </div>
+    <ol class="steps steps-6">
+      <li><span>1</span><b>Chuẩn bị dữ liệu</b><p>Rà soát file Excel đang dùng, dọn trùng và thiếu.</p></li>
+      <li><span>2</span><b>Nhập thử</b><p>Nhập theo file mẫu trên môi trường thử, đối chiếu số liệu.</p></li>
+      <li><span>3</span><b>Cấu hình</b><p>Dự án, phân khu, nhóm kinh doanh, vai trò và phạm vi quyền.</p></li>
+      <li><span>4</span><b>Đào tạo</b><p>Hướng dẫn theo từng vai trò, kèm tài liệu để đào tạo lại nội bộ.</p></li>
+      <li><span>5</span><b>Chạy pilot</b><p>Một nhóm hoặc một dự án chạy trên dữ liệu thật.</p></li>
+      <li><span>6</span><b>Nghiệm thu</b><p>Rà soát lại dữ liệu và quyền, mở rộng cho toàn sàn, bàn giao vận hành.</p></li>
+    </ol>
+
+    <div class="rollout-data">
+      <div class="mig" role="img" aria-label="Sơ đồ: dữ liệu từ file Excel và từ Zalo, điện thoại được đưa vào VinaLand qua ba bước nhập theo file mẫu, kiểm tra trùng số điện thoại và đối chiếu trước khi nhập thật">
+        <div class="mig-srcs">
+          <div class="mig-src">
+            <span class="mig-ic mig-x" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="fl" d="M4.5 2.8h9l6 5.4v13a1.6 1.6 0 01-1.6 1.6H4.5a1.6 1.6 0 01-1.6-1.6V4.4a1.6 1.6 0 011.6-1.6z"/><path d="M4.5 2.8h9l6 5.4v13a1.6 1.6 0 01-1.6 1.6H4.5a1.6 1.6 0 01-1.6-1.6V4.4a1.6 1.6 0 011.6-1.6z"/><path d="M13.5 2.8v4.2a1.4 1.4 0 001.4 1.4h4.6"/><path d="M6.9 12.6h10.2M6.9 16.2h10.2M6.9 19.8h10.2M10.3 12.6v7.2M13.7 12.6v7.2"/></svg></span>
+            <div><b>File Excel</b><p>Bảng hàng, danh sách khách, lead</p></div>
+          </div>
+          <div class="mig-src">
+            <span class="mig-ic mig-z" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="fl" d="M12 3.4c4.9 0 8.8 3.3 8.8 7.3s-3.9 7.3-8.8 7.3c-.8 0-1.6-.1-2.3-.3l-4.3 2.3.9-3.4c-1.9-1.3-3.1-3.4-3.1-5.9 0-4 3.9-7.3 8.8-7.3z"/><path d="M12 3.4c4.9 0 8.8 3.3 8.8 7.3s-3.9 7.3-8.8 7.3c-.8 0-1.6-.1-2.3-.3l-4.3 2.3.9-3.4c-1.9-1.3-3.1-3.4-3.1-5.9 0-4 3.9-7.3 8.8-7.3z"/><path d="M8.4 9.4h7.2M8.4 12.6h4.6"/></svg></span>
+            <div><b>Zalo &amp; điện thoại</b><p>Khách nằm rải rác trong máy từng người</p></div>
+          </div>
+        </div>
+        <svg class="mig-arrow" viewBox="0 0 132 156" fill="none" aria-hidden="true">
+          <path d="M2 36 C 46 36, 58 66, 86 78"/>
+          <path d="M2 120 C 46 120, 58 90, 86 78"/>
+          <path d="M86 78 H 117"/>
+          <path class="mig-head" d="M109 70.5 L 117.5 78 L 109 85.5"/>
+        </svg>
+        <ol class="mig-steps">
+          <li><span>1</span>Nhập theo file mẫu tải từ hệ thống</li>
+          <li><span>2</span>Kiểm tra trùng số điện thoại</li>
+          <li><span>3</span>Đối chiếu số liệu rồi nhập thật</li>
+        </ol>
+      </div>
+      <div class="rollout-phone">
+        <button class="shot-btn" type="button" data-zoom="assets/screenshots/m04-leads.webp?v=20261006a" aria-label="Phóng to ảnh danh sách lead trên điện thoại">
+          <img src="assets/screenshots/m04-leads.webp?v=20261006a" width="390" height="844" loading="lazy" alt="Danh sách lead VinaLand trên trình duyệt điện thoại">
+        </button>
+        <p class="mig-dest">Dữ liệu vào VinaLand</p>
+      </div>
+    </div>
+
+    <p class="pilot-line">Trong giai đoạn pilot, hai bên cùng theo dõi bốn chỉ số: <b>thời gian phản hồi lead</b> &middot; <b>tỷ lệ lead được chăm sóc</b> &middot; <b>tỷ lệ chuyển đổi</b> &middot; <b>bàn giao không mất lịch sử</b></p>
+  </section>
+
+  <!-- 07 PHÂN QUYỀN & BẢO MẬT -->
+  <section class="scale frame" id="security">
+    <div class="scale-copy">
+      <span class="tag">Quản trị &amp; bảo mật</span>
+      <h2 class="two-tone">Dữ liệu được bảo vệ. <span>Quyền lợi Sales được tôn trọng.</span></h2>
+      <ul class="sec-list">
+        <li><b>Quyền theo vai trò và phạm vi</b><p>Xem, sửa, nhập, xuất ở phạm vi toàn công ty, nhóm hoặc cá nhân. Ma trận quyền do quản trị viên tự chỉnh trên giao diện.</p></li>
+        <li><b>Thông tin chủ nhà có quyền riêng</b><p>Tên và số điện thoại chủ nhà ký gửi chỉ hiện với vai trò được cấp quyền.</p></li>
+        <li><b>Lịch sử chăm sóc và bàn giao</b><p>Bàn giao khách lưu người chuyển và người nhận — công sức của Sales không bị xoá.</p></li>
+        <li><b>Đăng nhập hai lớp và nhật ký thao tác</b><p>Mã OTP, thiết bị tin cậy, giới hạn số lần đăng nhập sai, nhật ký thay đổi dữ liệu quan trọng.</p></li>
+      </ul>
+    </div>
+    <div class="scale-shot">
+      <div class="perm-ill g-violet">
+        <button class="shot-btn shot-card" type="button" data-zoom="assets/screenshots/17-permissions.webp?v=20261006a" aria-label="Phóng to ảnh ma trận phân quyền">
+          <img src="assets/screenshots/17-permissions.webp?v=20261006a" width="1440" height="900" loading="lazy" alt="Màn hình ma trận phân quyền theo vai trò và phạm vi trong VinaLand">
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 GÓI DỊCH VỤ -->
+  <section class="pricing frame" id="pricing">
+    <div class="sec-head">
+      <span class="tag">Gói dịch vụ</span>
+      <h2 class="two-tone">Chọn gói theo quy mô đội Sales. <span>Báo giá cụ thể sau buổi khảo sát, gồm đủ các khoản dưới đây.</span></h2>
+    </div>
+    <div class="fee">
+      <div><span class="ent-ic ent-ic-sm"><svg viewBox="0 0 24 24" aria-hidden="true"><rect class="fl" x="5" y="4.5" width="14" height="17" rx="2"/><rect x="5" y="4.5" width="14" height="17" rx="2"/><path d="M9 4.5V3.8A1.3 1.3 0 0110.3 2.5h3.4A1.3 1.3 0 0115 3.8v.7a1 1 0 01-1 1h-4a1 1 0 01-1-1zM8.5 11l1.3 1.3L12 10M8.5 16l1.3 1.3L12 15M14 11.3h2M14 16.3h2"/></svg></span><b>Phí khởi tạo</b><p>Khảo sát, cấu hình, nhập dữ liệu và đào tạo ban đầu. Trả một lần.</p></div>
+      <div><span class="ent-ic ent-ic-sm"><svg viewBox="0 0 24 24" aria-hidden="true"><rect class="fl" x="3" y="4.5" width="15" height="5" rx="0"/><path d="M11 20.5H5a2 2 0 01-2-2v-12a2 2 0 012-2h11a2 2 0 012 2V10M3 9.5h15M7 2.5v4M14 2.5v4"/><path d="M21 15.5a3.8 3.8 0 00-6.8-1.6M14 19a3.8 3.8 0 006.8-1.6M14 12.5v1.6h1.6M21 20.5v-1.6h-1.6"/></svg></span><b>Tài khoản sử dụng</b><p>Tính theo số tài khoản, trả theo tháng hoặc năm.</p></div>
+      <div><span class="ent-ic ent-ic-sm"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="fl" d="M4 13.5h2.5v5H5a1 1 0 01-1-1zM20 13.5h-2.5v5H19a1 1 0 001-1z"/><path d="M4 17.5V12a8 8 0 0116 0v5.5"/><path d="M4 13.5h2.5v5H5a1 1 0 01-1-1zM20 13.5h-2.5v5H19a1 1 0 001-1z"/><path d="M18.5 18.5c0 1.7-1.6 2.5-4 2.5h-1.5"/><circle cx="12" cy="21" r="1"/><path d="M12 8.5v3l2 1.2"/></svg></span><b>Hỗ trợ</b><p>Kênh tiếp nhận, thời gian phản hồi và xử lý sự cố ghi trong hợp đồng.</p></div>
+      <div><span class="ent-ic ent-ic-sm"><svg viewBox="0 0 24 24" aria-hidden="true"><circle class="fl" cx="8" cy="6.5" r="2.2"/><circle class="fl" cx="16" cy="12" r="2.2"/><circle class="fl" cx="10" cy="17.5" r="2.2"/><path d="M3.5 6.5h2.3M10.2 6.5h10.3M3.5 12h10.3M18.2 12h2.3M3.5 17.5h4.3M12.2 17.5h8.3"/><circle cx="8" cy="6.5" r="2.2"/><circle cx="16" cy="12" r="2.2"/><circle cx="10" cy="17.5" r="2.2"/></svg></span><b>Tính năng mở rộng</b><p>Báo cáo riêng, quy trình riêng, khảo sát tích hợp. Báo giá theo yêu cầu.</p></div>
+    </div>
+    <div class="plans">
+      <div class="plan">
+        <h3>Starter</h3><p class="plan-sub">Chuẩn hoá dữ liệu</p>
+        <ul><li>Giỏ hàng, dự án, phân khu</li><li>Lead &amp; khách hàng</li><li>Cơ hội, công việc, báo cáo</li><li>Phân quyền theo vai trò</li></ul>
+        <a class="btn btn-outline btn-block" href="#demo" data-plan="Starter" data-cta="plan-starter">Yêu cầu tư vấn</a>
+      </div>
+      <div class="plan plan-hl">
+        <h3>Professional</h3><p class="plan-sub">Nhiều nhóm, nhiều dự án</p>
+        <ul><li>Toàn bộ Starter</li><li>Phân quyền theo nhóm và phạm vi</li><li>Đặt cọc khoá căn, link chia sẻ rổ hàng</li><li>Sales Coach AI &amp; AI Matching</li><li>Hỗ trợ ưu tiên</li></ul>
+        <a class="btn btn-blue btn-block" href="#demo" data-plan="Professional" data-cta="plan-professional">Yêu cầu tư vấn</a>
+      </div>
+      <div class="plan">
+        <h3>Enterprise</h3><p class="plan-sub">Vận hành quy mô lớn</p>
+        <ul><li>Cấu hình theo hợp đồng</li><li>Khảo sát tích hợp riêng</li><li>Cam kết hỗ trợ riêng</li><li>Nhiều nhóm, nhiều chi nhánh</li></ul>
+        <a class="btn btn-outline btn-block" href="#demo" data-plan="Enterprise" data-cta="plan-enterprise">Yêu cầu tư vấn</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 TRỢ LÝ AI -->
+  <section class="dark" id="ai">
+    <div class="dark-inner">
+      <span class="tag tag-dark">Trợ lý AI</span>
+      <h2>AI lo phần tra cứu và gợi ý, Sales lo phần tư vấn</h2>
+      <p class="dark-sub">Làm việc ngay trên dữ liệu của doanh nghiệp, trong đúng phạm vi quyền của từng người.</p>
+
+      <div class="ai2-grid">
+        <div class="ai2-item">
+          <h3>Sales Coach AI</h3>
+          <p>Luyện tình huống khách phản đối, chấm điểm và góp ý sau mỗi buổi tập.</p>
+        </div>
+        <div class="ai2-item">
+          <h3>Tra cứu tài liệu nội bộ</h3>
+          <p>Tải chính sách bán hàng, tài liệu dự án lên hệ thống rồi tìm theo nội dung.</p>
+        </div>
+        <div class="ai2-item">
+          <h3>AI Matching — ghép khách với căn</h3>
+          <p>Có căn mới thì tìm khách hợp, có khách mới thì tìm căn hợp. Mỗi điểm số đều kèm lý do.</p>
+        </div>
+        <div class="ai2-item">
+          <h3>Trợ lý tính toán &amp; gợi ý ưu tiên</h3>
+          <p>Tính phí sang tên, khoản vay, hoa hồng; nhắc cơ hội đang chững.</p>
+        </div>
+      </div>
+
+      <div class="ai2-shot">
+        <div class="aim-head">
+          <div class="sec-head">
+            <span class="tag tag-dark">AI Matching</span>
+            <h3 class="two-tone">Đúng căn cho đúng khách. <span>Gợi ý hai chiều, mỗi điểm số đều có lý do.</span></h3>
+          </div>
+          <div class="aim-tabs" role="tablist" aria-label="Chiều ghép">
+            <button class="aim-tab" role="tab" id="am-t1" aria-controls="am-p1" aria-selected="true">Tìm khách cho sản phẩm</button>
+            <button class="aim-tab" role="tab" id="am-t2" aria-controls="am-p2" aria-selected="false" tabindex="-1">Tìm sản phẩm cho khách</button>
+          </div>
+        </div>
+        <div class="aim-stage g-dusk">
+          <div class="aim-panel" role="tabpanel" id="am-p1" aria-labelledby="am-t1">
+            <button class="shot-btn shot-card" type="button" data-zoom="assets/screenshots/20-ai-matching-sp.webp?v=20261006a" aria-label="Phóng to ảnh AI Matching: tìm khách cho sản phẩm">
+              <img src="assets/screenshots/20-ai-matching-sp.webp?v=20261006a" width="1440" height="900" loading="lazy" alt="AI Matching tìm khách phù hợp cho một căn: điểm phù hợp, lý do khớp và điểm cần lưu ý">
+            </button>
+          </div>
+          <div class="aim-panel" role="tabpanel" id="am-p2" aria-labelledby="am-t2" hidden>
+            <button class="shot-btn shot-card" type="button" data-zoom="assets/screenshots/21-ai-matching-kh.webp?v=20261006a" aria-label="Phóng to ảnh AI Matching: tìm sản phẩm cho khách">
+              <img src="assets/screenshots/21-ai-matching-kh.webp?v=20261006a" width="1440" height="900" loading="lazy" alt="AI Matching tìm căn phù hợp cho một khách: nhu cầu khai báo và danh sách căn kèm điểm">
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 FAQ -->
+  <section class="faq frame" id="faq">
+    <div class="sec-head">
+      <span class="tag">Hỏi đáp</span>
+      <h2 class="two-tone">Câu hỏi thường gặp.</h2>
+    </div>
+    <div class="faq-list">
+      <details><summary>Triển khai mất bao lâu?</summary><p>Tuỳ số dự án, khối lượng dữ liệu và mức tuỳ chỉnh. Lộ trình cụ thể theo sáu bước được gửi sau buổi khảo sát — không có mốc chung cho mọi sàn.</p></details>
+      <details><summary>Dữ liệu cũ trên Excel có chuyển sang được không?</summary><p>Được. Nhập từ Excel theo file mẫu tải từ hệ thống, có kiểm tra trùng số điện thoại trước khi ghi. Dữ liệu đang ở phần mềm khác thì hai bên khảo sát khả năng chuyển đổi trước khi cam kết.</p></details>
+      <details><summary>Có kết nối được với tổng đài hoặc form trên website không?</summary><p>Hiện chưa có kết nối tự động. Lead nhập tay hoặc từ Excel, có trường ghi nguồn. Cần kết nối tổng đài hoặc form website thì chúng tôi khảo sát tích hợp và báo giá riêng.</p></details>
+      <details><summary>Ai được xem dữ liệu khách hàng?</summary><p>Theo ma trận phân quyền doanh nghiệp tự cấu hình: toàn công ty, theo nhóm hoặc chỉ khách của mình. Thông tin nhạy cảm như tên và số điện thoại chủ nhà ký gửi có quyền xem riêng.</p></details>
+      <details><summary>Xuất dữ liệu ra Excel được không?</summary><p>Hiện xuất được giỏ hàng, theo đúng phạm vi quyền của người xuất. Xuất dữ liệu khách hàng và ghi nhật ký mỗi lần xuất nằm trong kế hoạch phát triển tiếp theo.</p></details>
+      <details><summary>AI có tự ý dùng dữ liệu khách hàng không?</summary><p>Không. AI chỉ truy cập dữ liệu trong phạm vi quyền của người dùng đang đăng nhập. Phạm vi dữ liệu và nơi xử lý được ghi rõ trong hợp đồng trước khi bật.</p></details>
+      <details><summary>Chi phí được tính như thế nào?</summary><p>Gồm phí khởi tạo, chi phí theo số tài khoản sử dụng, gói hỗ trợ và phần tính năng mở rộng nếu có. Báo giá gửi sau buổi khảo sát; chúng tôi không đăng bảng giá chung.</p></details>
+      <details><summary>Có dùng được trên điện thoại không?</summary><p>Có. VinaLand chạy trên trình duyệt điện thoại, không cần cài ứng dụng.</p></details>
+    </div>
+  </section>
+
+  <!-- 11 FORM DEMO -->
+  <section class="cta" id="demo">
+    <div class="cta-inner demo-wrap">
+      <div class="demo-copy">
+        <h2>Đặt lịch demo VinaLand</h2>
+        <p>Demo 45 phút trên dữ liệu mẫu hoặc bảng hàng của doanh nghiệp. Đội ngũ tư vấn liên hệ lại để xác nhận thời gian.</p>
+        <ul class="demo-points"><li>Xem giao diện thật theo từng vai trò</li><li>Trao đổi quy trình triển khai và chi phí</li><li>Không cần chuẩn bị trước</li></ul>
+        <!-- Hotline chính thức, cập nhật 2026-09-30. -->
+        <div class="demo-contact">
+          <a href="tel:+842466858488" data-cta="hotline">Hotline: 024 6685 8488</a>
+        </div>
+      </div>
+      <form class="demo-form" id="demoForm" novalidate data-endpoint="https://formsubmit.co/ajax/hakylan@gmail.com">
+        <div class="f-row">
+          <label class="f"><span>Họ và tên <i>*</i></span><input name="name" autocomplete="name" required maxlength="80"><em class="f-err"></em></label>
+          <label class="f"><span>Công ty <i>*</i></span><input name="company" autocomplete="organization" required maxlength="120"><em class="f-err"></em></label>
+        </div>
+        <div class="f-row">
+          <label class="f"><span>Số điện thoại <i>*</i></span><input name="phone" type="tel" inputmode="tel" autocomplete="tel" required maxlength="15"><em class="f-err"></em></label>
+          <label class="f"><span>Số nhân viên kinh doanh <i>*</i></span>
+            <select name="size" required><option value="">Chọn quy mô</option><option value="Dưới 20">Dưới 20</option><option value="20 – 50">20 – 50</option><option value="51 – 200">51 – 200</option><option value="Trên 200">Trên 200</option></select><em class="f-err"></em></label>
+        </div>
+        <details class="f-more">
+          <summary>Thêm thông tin (không bắt buộc)</summary>
+          <div class="f-row">
+            <label class="f"><span>Email</span><input name="email" type="email" autocomplete="email" maxlength="120"><em class="f-err"></em></label>
+            <label class="f"><span>Vai trò</span>
+              <select name="role"><option value="">Chưa chọn</option><option value="CEO / Chủ sàn">CEO / Chủ sàn</option><option value="Giám đốc kinh doanh">Giám đốc kinh doanh</option><option value="Trưởng nhóm / Trưởng phòng">Trưởng nhóm / Trưởng phòng</option><option value="Sales">Sales</option><option value="Khác">Khác</option></select></label>
+          </div>
+          <label class="f"><span>Gói quan tâm</span>
+            <select name="plan"><option value="">Chưa rõ, cần tư vấn</option><option>Starter</option><option>Professional</option><option>Enterprise</option></select></label>
+          <label class="f"><span>Nhu cầu</span><textarea name="need" rows="3" maxlength="1000" placeholder="Ví dụ: đang quản lý 3 dự án bằng Excel, cần phân lead cho 40 Sales"></textarea></label>
+        </details>
+        <label class="f-hp" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off"></label>
+        <label class="f-check"><input type="checkbox" name="consent" required><span>Tôi đồng ý để VinaLand liên hệ tư vấn qua điện thoại hoặc email đã cung cấp. <i>*</i></span></label>
+        <em class="f-err f-err-consent"></em>
+        <button class="btn btn-blue btn-xl btn-block" type="submit">Gửi yêu cầu demo</button>
+        <p class="f-msg" id="formMsg" role="status" aria-live="polite"></p>
+      </form>
+      <div class="demo-done" id="demoDone" hidden tabindex="-1">
+        <span class="done-ic" aria-hidden="true">✓</span>
+        <h3>Đã nhận yêu cầu demo</h3>
+        <p id="doneText">Cảm ơn anh/chị. Đội ngũ tư vấn VinaLand sẽ liên hệ để xác nhận lịch demo.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <a class="logo logo-light" href="#top"><img class="logo-img logo-img-foot" src="assets/vinaland.png?v=20261001c" width="535" height="286" alt="VinaLand"></a>
+      <p class="f-tag">Phần mềm quản lý sàn bất động sản</p>
+      <div class="foot-legal">
+      <p><b>Đơn vị cung cấp:</b> PadiTech Company</p>
+      <p><b>Văn phòng Hà Nội:</b> 539 Vũ Tông Phan, Khương Đình, Thanh Xuân, Hà Nội</p>
+      <p><b>Văn phòng TP. HCM:</b> 47 Hồ Bá Kiện, Phường 15, Quận 10, TP. Hồ Chí Minh</p>
+      <p><b>Hotline:</b> <a href="tel:+842466858488">024 6685 8488</a></p>
+      </div>
+    </div>
+    <div class="fcol"><h3>Chức năng</h3><a href="#dashboard">Dashboard quản lý</a><a href="#f-inventory">Giỏ hàng</a><a href="#f-leads">Lead &amp; khách hàng</a><a href="#f-deals">Cơ hội &amp; đặt cọc</a></div>
+    <div class="fcol"><h3>Nền tảng</h3><a href="#rollout">Triển khai &amp; chuyển dữ liệu</a><a href="#security">Quản trị &amp; bảo mật</a><a href="#pricing">Gói dịch vụ</a><a href="#ai">Trợ lý AI</a></div>
+  </div>
+
+
+</footer>
+
+<dialog class="zoom" id="zoom" aria-label="Ảnh phóng to">
+  <form method="dialog"><button class="zoom-x" aria-label="Đóng">×</button></form>
+  <img alt="" id="zoomImg">
+</dialog>
+
+<script src="assets/i18n-20261006a.js"></script>
+<script src="assets/main-20261020a.js"></script>
+</body>
+</html>

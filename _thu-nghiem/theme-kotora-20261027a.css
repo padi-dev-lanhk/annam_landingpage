@@ -1,0 +1,191 @@
+/* ============================================================================
+   LỚP CHỦ ĐỀ THEO PHONG CÁCH NHÀ KOTORA — nạp SAU style-20261020a.css
+   ============================================================================
+
+   Người dùng chỉ sang kotora.app làm chuẩn (27/10). Kotora là sản phẩm anh em cùng
+   nhà PadiTech, nên đi theo nó thì hai sản phẩm có chung một bộ nhận diện.
+
+   ĐO TỪ TRANG THẬT, không đoán bằng mắt — các giá trị dưới đây lấy bằng cách đọc
+   computed style của mọi phần tử trên kotora.app rồi lấy giá trị xuất hiện nhiều nhất:
+
+     chữ chính    rgb(13,15,20)      #0D0F14
+     xanh thương  rgb(30,78,150)     #1E4E96   ← đậm và trầm hơn xanh cũ của VinaLand
+     xanh nhạt    rgb(156,195,255)   #9CC3FF   ← dùng cho dòng phụ trong tiêu đề
+     chữ phụ      rgb(75,82,98)      #4B5262
+     nền xám      rgb(245,246,248)   #F5F6F8
+     nền xanh mờ  rgb(238,243,252)   #EEF3FC
+     bo góc       14px · 12px · 22px · 10px · 99px (nút)
+
+   LƯU Ý VỀ HƯỚNG TRƯỚC: bản `theme-bds-20261027a.css` đi hướng navy–giấy cát–đồng
+   thau, góc gần vuông, có dải bóng cao ốc. Hướng đó xung khắc với phong cách Kotora
+   nên KHÔNG trộn hai lớp. File cũ vẫn giữ để so sánh; muốn quay lại thì đổi dòng
+   <link> trong index.html.
+
+   Mô-típ bất động sản còn giữ được trong hệ này: lưới bản vẽ rất mờ ở nền hero, và
+   icon dạng nét mô tả công trình. Những thứ còn lại (đồng thau, giấy cát, góc vuông,
+   bóng cao ốc) đã bỏ vì phá nhịp của hệ.
+   ============================================================================ */
+
+:root{
+  --kt-blue:#1E4E96;
+  --kt-blue-2:#17417F;
+  --kt-blue-light:#9CC3FF;
+  --kt-blue-pale:#EEF3FC;
+
+  --bg:#FFFFFF;
+  --bg-soft:#F5F6F8;
+  --ink:#0D0F14;
+  --ink-2:#4B5262;
+  --ink-3:#8B92A1;
+  --line:#E4E7EC;
+  --line-2:#EEF0F3;
+  --blue:#1E4E96;
+  --blue-soft:#EEF3FC;
+  --blue-band:#DCE7F8;
+  --dark:#1E4E96;
+  --dark-2:#17417F;
+  --dark-line:rgba(255,255,255,.18);
+  --dark-ink:#FFFFFF;
+  --dark-ink-2:rgba(255,255,255,.80);
+
+  /* Bo góc rộng rãi — đây là nét dễ nhận nhất của hệ này. */
+  --radius:14px; --r-xs:10px; --r-sm:12px; --r-md:14px; --r-lg:18px; --r-xl:22px;
+}
+
+body{background:#fff;color:var(--ink)}
+h1,h2,h3{font-weight:700;letter-spacing:-.025em;line-height:1.22}
+h1{font-size:clamp(28px,3.1vw,44px)}
+h2{font-size:clamp(23px,2.4vw,32px)}
+
+/* ---------- thanh đầu: thẻ trắng nổi, bo góc, cách mép ---------- */
+/* Kotora không dán thanh đầu sát mép mà để nó nổi như một thẻ trong khung xanh.
+   Đây là chi tiết tạo cảm giác "nhẹ" cho cả trang. */
+header.nav{
+  background:transparent !important; border:0 !important; backdrop-filter:none !important;
+  padding:16px 0 !important;
+}
+header.nav>.frame, header.nav>div{
+  background:#fff !important; border:1px solid var(--line) !important;
+  border-radius:var(--r-md) !important; padding:10px 18px !important;
+  box-shadow:0 2px 10px rgba(13,15,20,.06) !important;
+}
+header.nav a{ color:var(--ink-2) !important; }
+header.nav a:hover{ color:var(--ink) !important; }
+header.nav .logo, header.nav .logo *{ color:var(--ink) !important; }
+header.nav .logo-img{ filter:none !important; }
+
+/* ---------- nút: bo tròn hẳn ---------- */
+.btn{ border-radius:99px !important; font-weight:600 !important; letter-spacing:0 !important; }
+.btn-blue{ background:var(--kt-blue) !important; color:#fff !important; border:1px solid var(--kt-blue) !important; box-shadow:none !important; }
+.btn-blue:hover{ background:var(--kt-blue-2) !important; border-color:var(--kt-blue-2) !important; }
+.btn-dark{ background:var(--ink) !important; color:#fff !important; border:1px solid var(--ink) !important; box-shadow:none !important; }
+.btn-outline{ background:#fff !important; color:var(--ink) !important; border:1px solid var(--line) !important; box-shadow:none !important; }
+
+/* Trong hero xanh thì đảo lại: nút chính trắng, nút phụ viền trắng. */
+.hero2 .btn-blue{ background:#fff !important; color:var(--kt-blue) !important; border-color:#fff !important; }
+.hero2 .btn-blue:hover{ background:#EEF3FC !important; border-color:#EEF3FC !important; }
+.hero2 .btn-dark, .hero2 .btn-outline{
+  background:transparent !important; color:#fff !important; border:1px solid rgba(255,255,255,.45) !important;
+}
+.hero2 .btn-dark:hover, .hero2 .btn-outline:hover{ background:rgba(255,255,255,.10) !important; border-color:#fff !important; }
+
+/* ---------- hero: nền xanh hoàng gia ---------- */
+.hero2{
+  position:relative; overflow:hidden; border:0 !important;
+  background:linear-gradient(160deg, #2A5FAE 0%, var(--kt-blue) 46%, var(--kt-blue-2) 100%) !important;
+  color:#fff; border-radius:var(--r-xl) !important; padding:76px 58px 84px !important;
+}
+.hero2 h1{ color:#fff !important; }
+/* Dòng phụ trong tiêu đề lấy màu xanh nhạt — nét đặc trưng của hệ này. */
+.hero2 h1 span, .hero2 .two-tone span{ color:var(--kt-blue-light) !important; -webkit-text-fill-color:var(--kt-blue-light) !important; }
+.hero2 p, .hero2-sub{ color:rgba(255,255,255,.84) !important; }
+
+/* Lưới bản vẽ — mô-típ bất động sản duy nhất giữ lại trong hệ này, để rất mờ. */
+.hero2::before{
+  content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
+  background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
+  background-size:64px 64px;
+  mask-image:radial-gradient(ellipse 90% 80% at 25% 30%,#000 30%,transparent 76%);
+}
+.hero2::after{ content:none !important; }
+.hero2>*{ position:relative; z-index:1; }
+
+/* Nhãn trên tiêu đề: viên thuốc viền mảnh, có chấm — kiểu của hệ này. */
+.eyebrow{
+  display:inline-flex !important; align-items:center; gap:9px;
+  color:#fff !important; font-size:12.5px !important; font-weight:600 !important;
+  letter-spacing:0 !important; text-transform:none !important;
+  border:1px solid rgba(255,255,255,.34); border-radius:99px;
+  padding:6px 15px !important; margin-bottom:22px !important;
+}
+.eyebrow::before{ content:""; width:6px; height:6px; border-radius:50%; background:var(--kt-blue-light); display:block; flex:none; }
+section:not(.hero2) .eyebrow{ color:var(--kt-blue) !important; border-color:var(--blue-band); }
+section:not(.hero2) .eyebrow::before{ background:var(--kt-blue); }
+
+/* ---------- nhãn khối ---------- */
+.tag{
+  background:var(--kt-blue-pale) !important; color:var(--kt-blue) !important;
+  border:0 !important; border-radius:99px !important; padding:6px 14px !important;
+  font-size:12.5px !important; font-weight:600 !important; letter-spacing:0 !important;
+  text-transform:none !important; display:inline-flex; align-items:center; gap:8px;
+}
+.tag::before{ content:"" !important; width:6px !important; height:6px !important; border-radius:50% !important; background:var(--kt-blue) !important; }
+.tag-dark{ background:rgba(255,255,255,.14) !important; color:#fff !important; }
+.tag-dark::before{ background:var(--kt-blue-light) !important; }
+
+/* ---------- tiêu đề hai tông ---------- */
+.two-tone span{ color:var(--kt-blue) !important; -webkit-text-fill-color:var(--kt-blue) !important; background:none !important; }
+.dark .two-tone span, section.dark .two-tone span{ color:var(--kt-blue-light) !important; -webkit-text-fill-color:var(--kt-blue-light) !important; }
+
+/* ---------- ô icon: vuông bo tròn, nền xanh rất nhạt ---------- */
+.ent-ic, .ent-ic-sm, .ent-ic-xs, .mig-ic, .pain-n{
+  background:var(--kt-blue-pale) !important; color:var(--kt-blue) !important;
+  border:0 !important; border-radius:var(--r-sm) !important;
+}
+.pain-n{ font-weight:700; }
+
+/* ---------- thẻ và khối ---------- */
+.mod, .pain, .plan, .flow, .ai2-item, .shot-card{
+  border-radius:var(--r-md) !important; border:1px solid var(--line) !important;
+  background:#fff !important; outline:0 !important;
+}
+.mod:hover, .pain:hover{ box-shadow:0 6px 20px rgba(13,15,20,.07) !important; }
+
+/* ---------- ảnh app: thẻ trắng bo góc, không dấu góc bản vẽ ---------- */
+.shot-btn{
+  border-radius:var(--r-md) !important; border:1px solid var(--line) !important;
+  padding:0 !important; background:#fff !important; overflow:hidden !important;
+}
+.shot-btn::before, .shot-btn::after{ content:none !important; }
+.shot-btn img{ border-radius:0 !important; }
+.hero2 .shot-btn, .hero2 .window{ border-color:rgba(255,255,255,.22) !important; box-shadow:0 18px 50px rgba(8,24,56,.28) !important; }
+.window{ border-radius:var(--r-md) !important; }
+
+/* ---------- khối tối → đổi thành khối xanh ---------- */
+.dark, section.dark{
+  background:linear-gradient(160deg, #2A5FAE 0%, var(--kt-blue) 50%, var(--kt-blue-2) 100%) !important;
+  color:#fff; border-radius:var(--r-xl) !important;
+}
+.dark h2, .dark h3, section.dark h2, section.dark h3{ color:#fff !important; }
+.dark p, section.dark p{ color:rgba(255,255,255,.82) !important; }
+
+/* ---------- nền xen kẽ ---------- */
+.g-violet{ background:linear-gradient(160deg,#2A5FAE,var(--kt-blue-2)) !important; }
+
+/* ---------- form ---------- */
+.f, input, select, textarea{ border-radius:var(--r-xs) !important; border-color:var(--line) !important; }
+.f:focus, input:focus, select:focus, textarea:focus{
+  outline:0; border-color:var(--kt-blue) !important; box-shadow:0 0 0 3px rgba(30,78,150,.14) !important;
+}
+
+/* ---------- chân trang ---------- */
+.footer{ background:var(--bg-soft) !important; color:var(--ink-2) !important; border-top:1px solid var(--line) !important; }
+.footer a, .footer p, .footer li, .footer span, .footer div{ color:var(--ink-2) !important; }
+.footer a:hover{ color:var(--ink) !important; }
+.footer b, .footer strong, .footer h3, .footer h4{ color:var(--ink) !important; }
+.footer .logo-img{ filter:none !important; }
+
+/* ---------- nhịp ---------- */
+section{ padding-top:76px !important; padding-bottom:80px !important; }
+.sec-head{ margin-bottom:40px !important; }

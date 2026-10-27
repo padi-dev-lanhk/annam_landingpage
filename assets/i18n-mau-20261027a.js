@@ -12,6 +12,19 @@ Object.assign(window.VINALAND_DICT || (window.VINALAND_DICT = {}), {
   ],
   "Xem thử →": ["See it →", "見てみる →"],
   "Đóng thông báo": ["Close announcement", "お知らせを閉じる"],
+  // Hai tin còn lại của thanh thông báo — chữ nằm trong mã, không có trong HTML.
+  "BẢO MẬT": ["SECURITY", "セキュリティ"],
+  "Phân quyền theo vai trò và phạm vi, bàn giao khách không mất lịch sử": [
+    "Permissions by role and scope; handovers keep the full history",
+    "役割と範囲に基づく権限。引き継いでも履歴は残ります",
+  ],
+  "Xem cách làm →": ["See how →", "やり方を見る →"],
+  "TRIỂN KHAI": ["ROLLOUT", "導入"],
+  "Chuyển từ Excel sang hệ thống theo sáu bước, có pilot trước khi mở rộng": [
+    "Move from Excel to a system in six steps, with a pilot before you scale",
+    "Excelからシステムへ6つのステップで。拡大前にパイロット運用",
+  ],
+  "Xem lộ trình →": ["See the roadmap →", "ロードマップを見る →"],
 
   // --- hero ---
   "Giỏ hàng · Khách hàng · Đội Sales · AI": [

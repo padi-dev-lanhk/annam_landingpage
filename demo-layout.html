@@ -66,7 +66,15 @@ a{color:inherit}
 .ann .frame{display:flex;align-items:center;justify-content:center;gap:10px;min-height:44px;padding-right:56px}
 .ann b{background:var(--brand-mid);color:#fff;font-size:11.5px;font-weight:700;
   padding:3px 9px;border-radius:var(--r-pill);letter-spacing:.02em}
-.ann a{color:#fff;font-weight:600;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.4)}
+/* Tin chạy: cả dòng là một đường dẫn, riêng phần "Xem thử →" mới gạch chân. */
+.ann-tin{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;transition:opacity .22s}
+.ann-tin.mo{opacity:0}
+.ann-tin i{font-style:normal;font-weight:600;white-space:nowrap;border-bottom:1px solid rgba(255,255,255,.4)}
+.ann-tin:hover i{border-bottom-color:#fff}
+.ann-cham{display:flex;gap:5px;flex:none}
+.ann-cham i{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.28);transition:background .22s}
+.ann-cham i.dang{background:#fff}
+@media (prefers-reduced-motion:reduce){.ann-tin{transition:none}}
 .ann button{position:absolute;right:28px;top:50%;transform:translateY(-50%);background:none;border:0;
   color:rgba(255,255,255,.6);font-size:18px;cursor:pointer;line-height:1}
 .ann button:hover{color:#fff}
@@ -610,7 +618,7 @@ h1,h2,h3{text-wrap:balance}
    Các mục trên thanh điều hướng, liên kết trong thanh thông báo và nút đóng đều
    dưới ngưỡng bấm thoải mái bằng ngón tay. Nới vùng bấm mà không đổi chỗ chữ. */
 .nav a{padding:10px 0;display:inline-block}
-.ann a{padding:9px 0;display:inline-block}
+.ann-tin{padding:9px 0}
 .ann button{width:40px;height:40px;display:grid;place-items:center}
 
 @media (max-width:860px){
@@ -628,10 +636,13 @@ h1,h2,h3{text-wrap:balance}
   .brand{font-size:18px}
   .brand img{height:34px}
 
-  /* 4. THANH THÔNG BÁO ngắt chữ xấu trên khổ hẹp. Bỏ liên kết phụ, chỉ giữ ý chính. */
+  /* 4. THANH THÔNG BÁO ngắt chữ xấu trên khổ hẹp. Bỏ liên kết phụ, chỉ giữ ý chính.
+     Đệm phải phải chừa đủ chỗ cho nút đóng, nếu không ba chấm chỉ số tin nằm
+     đè lên dấu ×; đệm trái 16px cho viên "MỚI" khỏi dính mép màn hình. */
   .ann{font-size:12.5px}
-  .ann .frame{padding:8px 44px 8px 0;min-height:0}
-  .ann a{display:none}
+  .ann .frame{padding:8px 56px 8px 16px;min-height:0}
+  .ann button{right:12px}
+  .ann-tin i{display:none}
 
   /* 6. TRANG DÀI 13.236px trên điện thoại vì mọi lưới đều rơi xuống một cột.
      Để lưới bốn và ba cột thành HAI cột — thẻ vẫn đọc tốt mà trang ngắn đi đáng kể.
@@ -729,10 +740,13 @@ h1,h2,h3{text-wrap:balance}
 <!-- 1 ───────────────────────────────── thanh thông báo -->
 <div class="ann" id="ann">
   <div class="frame">
-    <b>MỚI</b>
-    <span>Trợ lý AI ghép khách với căn, có giải trình từng tiêu chí</span>
-    <a href="#swap">Xem thử →</a>
-    <button type="button" aria-label="Đóng thông báo" onclick="document.getElementById('ann').remove()">×</button>
+    <a class="ann-tin" id="ann-tin" href="#ai">
+      <b>MỚI</b>
+      <span>Trợ lý AI ghép khách với căn, có giải trình từng tiêu chí</span>
+      <i>Xem thử →</i>
+    </a>
+    <span class="ann-cham" id="ann-cham" aria-hidden="true"><i class="dang"></i><i></i><i></i></span>
+    <button type="button" aria-label="Đóng thông báo">×</button>
   </div>
 </div>
 
@@ -1290,6 +1304,50 @@ const apDungNgonNgu = (() => {
   });
   document.addEventListener("click", (e) => { if (!bang.hidden && !hop.contains(e.target)) mo(false); });
   document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !bang.hidden) { mo(false); nut.focus(); } });
+})();
+
+/* Thanh thông báo — ba tin, mỗi tin 3 giây, chạy đúng MỘT vòng rồi dừng ở tin cuối.
+   Quay vòng mãi thì dải chữ nhấp nháy suốt buổi, kéo mắt khỏi nội dung chính.
+   Rê chuột hoặc đặt tiêu điểm vào thì hoãn đổi tin — đang đọc dở không bị cướp chữ. */
+(function () {
+  const bang = document.getElementById("ann");
+  if (!bang) return;
+  const tin = document.getElementById("ann-tin");
+  const cham = [...document.getElementById("ann-cham").children];
+  const oNhan = tin.querySelector("b"), oChu = tin.querySelector("span"), oThem = tin.querySelector("i");
+
+  const DS = [
+    { nhan: "MỚI", chu: "Trợ lý AI ghép khách với căn, có giải trình từng tiêu chí",
+      them: "Xem thử →", neo: "#ai" },
+    { nhan: "BẢO MẬT", chu: "Phân quyền theo vai trò và phạm vi, bàn giao khách không mất lịch sử",
+      them: "Xem cách làm →", neo: "#bao-mat" },
+    { nhan: "TRIỂN KHAI", chu: "Chuyển từ Excel sang hệ thống theo sáu bước, có pilot trước khi mở rộng",
+      them: "Xem lộ trình →", neo: "#trien-khai" },
+  ];
+  let i = 0, dangDoc = false, hen = null;
+
+  // Chữ đi qua datChu() nên đổi ngôn ngữ giữa chừng vẫn dịch lại được.
+  function ve(k) {
+    const t = DS[k];
+    datChu(oNhan, t.nhan);
+    datChu(oChu, t.chu);
+    datChu(oThem, t.them);
+    tin.setAttribute("href", t.neo);
+    cham.forEach((c, n) => c.classList.toggle("dang", n === k));
+  }
+  function doi() {
+    if (dangDoc) { hen = setTimeout(doi, 800); return; }
+    i++;
+    tin.classList.add("mo");
+    setTimeout(() => { ve(i); tin.classList.remove("mo"); }, 220);
+    if (i < DS.length - 1) hen = setTimeout(doi, 3000);
+  }
+  ve(0);
+  hen = setTimeout(doi, 3000);
+  for (const [su, co] of [["mouseenter", true], ["mouseleave", false], ["focusin", true], ["focusout", false]]) {
+    bang.addEventListener(su, () => { dangDoc = co; });
+  }
+  bang.querySelector("button").addEventListener("click", () => { clearTimeout(hen); bang.remove(); });
 })();
 
 /* Tab chuyển ảnh trong hero.

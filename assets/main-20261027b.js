@@ -130,11 +130,11 @@ const apDungNgonNgu = (() => {
   const oNhan = tin.querySelector("b"), oChu = tin.querySelector("span"), oThem = tin.querySelector("i");
 
   const DS = [
-    { nhan: "MỚI", chu: "Trợ lý AI ghép khách với căn, có giải trình từng tiêu chí",
+    { nhan: "MỚI", chu: "Trợ lý AI gợi ý khách nào hợp căn nào, kèm lý do cho từng gợi ý",
       them: "Xem thử →", neo: "#ai" },
-    { nhan: "BẢO MẬT", chu: "Phân quyền theo vai trò và phạm vi, bàn giao khách không mất lịch sử",
+    { nhan: "BẢO MẬT", chu: "Phân quyền theo vai trò, bàn giao khách vẫn giữ nguyên lịch sử",
       them: "Xem cách làm →", neo: "#bao-mat" },
-    { nhan: "TRIỂN KHAI", chu: "Chuyển từ Excel sang hệ thống theo sáu bước, có pilot trước khi mở rộng",
+    { nhan: "TRIỂN KHAI", chu: "Chuyển dữ liệu từ Excel qua sáu bước, chạy thử một nhóm trước khi mở rộng",
       them: "Xem lộ trình →", neo: "#trien-khai" },
   ];
   let i = 0, dangDoc = false, hen = null;

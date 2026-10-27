@@ -621,16 +621,12 @@ h1,h2,h3{text-wrap:balance}
   .sec-head{margin-bottom:30px}
   .sec-head h2{max-width:none}
   .split h2{max-width:none}
-  .costs{grid-template-columns:repeat(2,1fr)}
-  .cost{padding:18px 16px 18px 0}
-  .cost:nth-child(2){border-right:0}
   .form .fr{grid-template-columns:1fr}
 }
 
 @media (max-width:520px){
   /* Dưới 520px thì hai cột cũng chật, trả về một cột. */
-  .g4,.g3,.costs{grid-template-columns:1fr}
-  .cost{border-right:0}
+  .g4,.g3{grid-template-columns:1fr}
 }
 
 

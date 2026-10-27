@@ -183,6 +183,17 @@ Object.assign(window.VINALAND_DICT || (window.VINALAND_DICT = {}), {
     "© 2026 VinaLand — real estate agency management software.",
     "© 2026 VinaLand — 不動産仲介会社向け管理ソフトウェア。",
   ],
+  /* Địa chỉ văn phòng. Tên đường là tên riêng nên không dịch nghĩa: bản tiếng Anh
+     bỏ dấu cho dễ đọc và gõ lại, bản tiếng Nhật xếp từ lớn tới nhỏ theo lối Nhật
+     nhưng giữ nguyên tên đường bằng chữ Latin để còn tra bản đồ được. */
+  "539 Vũ Tông Phan, Khương Đình, Thanh Xuân, Hà Nội": [
+    "539 Vu Tong Phan, Khuong Dinh Ward, Thanh Xuan District, Hanoi",
+    "ハノイ市タインスアン区クオンディン坊 539 Vu Tong Phan",
+  ],
+  "47 Hồ Bá Kiện, Phường 15, Quận 10, TP. Hồ Chí Minh": [
+    "47 Ho Ba Kien, Ward 15, District 10, Ho Chi Minh City",
+    "ホーチミン市10区15坊 47 Ho Ba Kien",
+  ],
   "Phim giới thiệu VinaLand": ["VinaLand intro film", "VinaLand紹介動画"],
   "Phóng to ảnh giao diện": ["Enlarge the interface screenshot", "画面のスクリーンショットを拡大"],
   "Gọi điện": ["Call", "電話する"],

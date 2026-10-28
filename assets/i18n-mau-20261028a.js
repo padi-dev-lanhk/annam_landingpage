@@ -537,3 +537,81 @@ Object.assign(window.VINALAND_DICT, {
   "một danh sách khách": ["one customer list,", "ひとつの顧客リスト、"],
   "cho cả sàn": ["for the whole floor", "それを全社で"],
 });
+
+/* ---------- Lượt làm ấm giọng 28/10/2026 ----------
+   Thêm người vào câu (chúng tôi / anh chị / anh em Sales), trả nhãn cụt về câu
+   nói bình thường. Câu nào chỉ thêm chủ ngữ thì giữ nguyên bản dịch cũ. */
+Object.assign(window.VINALAND_DICT, {
+  "Từ lúc khách để lại số đến lúc bàn giao căn, anh chị và đội Sales làm việc trên cùng một nơi.": [
+    "From the moment a customer leaves a phone number to the day you hand over the unit, you and your sales team work in the same place.",
+    "顧客が電話番号を残した時点から住戸を引き渡す日まで、経営陣も営業チームも同じ場所で動けます。",
+  ],
+  "Phân quyền rõ ràng, công sức của anh em Sales không bị xoá": [
+    "Clear permissions, and nobody's work on the sales floor gets wiped",
+    "権限は明確に。営業メンバーの積み上げは消えません",
+  ],
+  "Bốn chuyện sàn nào cũng gặp, nhất là khi quân số đông lên.": [
+    "Four things every brokerage runs into, especially once the headcount grows.",
+    "どの仲介会社にも起きる4つのこと。人数が増えるほど顕著になります。",
+  ],
+  "Lead đến rồi đi mất": [
+    "Leads arrive, then disappear",
+    "リードは来るが、消えていく",
+  ],
+  "Không biết việc đang chạy tới đâu": [
+    "No idea how far things have moved",
+    "どこまで進んだのか分からない",
+  ],
+  "Bàn giao xong là mất lịch sử": [
+    "Hand over, and the history is gone",
+    "引き継いだ途端に履歴が消える",
+  ],
+  "Giám đốc kinh doanh thường phải chờ tới cuối tháng mới biết kết quả. Deal chững lại hay việc quá hạn thì phải có người báo mới biết.": [
+    "Sales directors only see results at month end. Stalled deals and overdue tasks go unnoticed.",
+    "営業部長が結果を知るのは月末だけ。停滞した商談や期限切れのタスクに誰も気づけません。",
+  ],
+  "Một bạn nghỉ hoặc chuyển nhóm là lịch sử chăm sóc đi theo luôn. Người nhận phải hỏi lại khách từ đầu.": [
+    "When someone leaves or moves team, the care history goes with them. Whoever takes over has to ask the customer everything again.",
+    "担当者が退職・異動すると対応履歴ごと失われます。引き継いだ人は顧客に一から聞き直すことになります。",
+  ],
+  "AI đọc dữ liệu của chính sàn mình, và chỉ đọc trong phạm vi quyền của người đang dùng.": [
+    "Works directly on your company's data, within each user's permission scope.",
+    "自社のデータ上で、各ユーザーの権限範囲内で動作します。",
+  ],
+  "Sales tập xử lý tình huống khách từ chối, xong buổi nào có chấm điểm và góp ý buổi đó.": [
+    "Practice handling customer objections, with a score and feedback after each session.",
+    "顧客の反論への対応を練習し、毎回スコアとフィードバックを受け取れます。",
+  ],
+  "Bàn giao có ghi người chuyển và người nhận, nên công sức của anh em Sales không mất.": [
+    "Customer handovers record who handed over and who received — reps' work is never erased.",
+    "顧客の引き継ぎでは引き渡し元と引き継ぎ先を記録。営業担当者の努力が消えることはありません。",
+  ],
+  "Chúng tôi đi cùng sàn từ buổi khảo sát đến lúc nghiệm thu.": [
+    "We stay with you from the first survey through to sign-off.",
+    "最初のヒアリングから検収まで、私たちが伴走します。",
+  ],
+  "Hai bên rà lại file Excel sàn đang dùng, dọn chỗ trùng và chỗ thiếu.": [
+    "Review your current Excel files, clean up duplicates and gaps.",
+    "現在のExcelファイルを確認し、重複や欠損を整理。",
+  ],
+  "Nhập thử theo file mẫu vào môi trường riêng, rồi đối chiếu lại với bản gốc.": [
+    "Import via template into a test environment and reconcile the numbers.",
+    "テスト環境にテンプレートで取り込み、数値を照合。",
+  ],
+  "Chúng tôi hướng dẫn theo từng vai trò và để lại tài liệu, sau này sàn tự đào tạo người mới.": [
+    "Role-based training, with materials for retraining in-house.",
+    "役割別のトレーニングと、社内研修用の資料を提供。",
+  ],
+  "Rà lại dữ liệu và quyền lần cuối, mở rộng ra toàn sàn rồi bàn giao cho đội vận hành.": [
+    "Re-check data and permissions, roll out company-wide, hand over operations.",
+    "データと権限を再確認し、全社へ展開して運用を引き継ぎ。",
+  ],
+  "Chúng tôi khảo sát xong mới báo giá, và báo đủ bốn khoản bên dưới.": [
+    "We quote only after the survey, and the quote covers all four items below.",
+    "お見積りはヒアリングの後にご提示し、下記4項目をすべて含みます。",
+  ],
+  "Buổi demo 45 phút, chạy trên dữ liệu mẫu hoặc trên chính bảng hàng của sàn. Nhận được yêu cầu là chúng tôi gọi lại để hẹn giờ với anh chị.": [
+    "A 45-minute demo on sample data or your own inventory sheet. Our consultants will get back to you to confirm the time.",
+    "サンプルデータまたは貴社の物件表を使った45分のデモです。担当コンサルタントから日時確認のご連絡をいたします。",
+  ],
+});

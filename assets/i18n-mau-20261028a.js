@@ -615,3 +615,68 @@ Object.assign(window.VINALAND_DICT, {
     "サンプルデータまたは貴社の物件表を使った45分のデモです。担当コンサルタントから日時確認のご連絡をいたします。",
   ],
 });
+
+/* ---------- Lượt bớt lặp từ 28/10/2026 ----------
+   Chữ "theo" trước đó xuất hiện 25 lần khắp trang. Giữ lại chỗ nào là thuật ngữ
+   quen, còn lại đổi cách nói. Nghĩa không đổi nên phần lớn giữ bản dịch cũ. */
+Object.assign(window.VINALAND_DICT, {
+  "sàn đang dùng tạm": [
+    "your agency is making do with",
+    "いま間に合わせで使っているものを",
+  ],
+  "Tuỳ số dự án, khối lượng dữ liệu và mức tuỳ chỉnh. Khảo sát xong chúng tôi gửi lộ trình sáu bước kèm mốc thời gian cho đúng sàn của anh chị, chứ không có mốc chung cho mọi sàn.": [
+    "It depends on how many projects you run, how much data there is and how much needs customising. After the survey we send a six-step plan with dates for your own agency, rather than one timeline for everyone.",
+    "案件数、データ量、カスタマイズの度合いによります。ヒアリングの後、御社専用の日程を入れた6ステップの計画をお送りします。すべての会社に共通の期間というものはありません。",
+  ],
+  "Lọc theo nhóm hoặc khoảng thời gian để biết ai đang ra số, dự án nào đang chững.": [
+    "Filter by team and period: who's delivering, which projects are stalling.",
+    "チームと期間で絞り込み：成果を出しているのは誰か、停滞しているプロジェクトはどれか。",
+  ],
+  "Đưa chính sách bán hàng và tài liệu dự án lên hệ thống, cần gì cứ hỏi, máy tìm trong chính nội dung tài liệu.": [
+    "Put your sales policies and project documents in the system, then just ask; it searches inside the documents themselves.",
+    "販売方針や案件資料をシステムに入れておけば、あとは聞くだけ。資料の中身から探します。",
+  ],
+  "Tìm căn cho khách hoặc tìm khách cho căn. Mỗi gợi ý đều nói rõ hợp ở chỗ nào, lệch ở chỗ nào.": [
+    "Find a unit for a customer, or a customer for a unit. Every suggestion says where it fits and where it doesn't.",
+    "顧客に合う住戸も、住戸に合う顧客も探せます。どの点が合い、どの点がずれているかも示します。",
+  ],
+  "Nhập thử bằng file mẫu vào môi trường riêng, rồi đối chiếu lại với bản gốc.": [
+    "Import via template into a test environment and reconcile the numbers.",
+    "テスト環境にテンプレートで取り込み、数値を照合。",
+  ],
+  "Chúng tôi hướng dẫn riêng cho từng vai trò và để lại tài liệu, sau này sàn tự đào tạo người mới.": [
+    "Role-based training, with materials for retraining in-house.",
+    "役割別のトレーニングと、社内研修用の資料を提供。",
+  ],
+  "Nhập bằng file mẫu tải từ hệ thống": [
+    "Import using the template from the system",
+    "システムのテンプレートで取り込み",
+  ],
+  "Tính trên số tài khoản, trả tháng hoặc trả năm.": [
+    "Charged per account, billed monthly or yearly.",
+    "アカウント数に応じた料金で、月払いまたは年払い。",
+  ],
+  "Xem giao diện thật của từng vai trò": [
+    "See the real screens each role gets",
+    "各役割が実際に見る画面を確認",
+  ],
+});
+
+Object.assign(window.VINALAND_DICT, {
+  "Chia nhỏ tới từng dự án, phân khu, từng toà. Căn nào còn, căn nào đã cọc, cả sàn nhìn chung một bảng.": [
+    "Broken down to each project, zone and building. Which units are free, which are on deposit, with the whole floor looking at one sheet.",
+    "案件・区画・棟まで細かく分けて管理。空き住戸と手付金済みの住戸を、全社が同じ表で確認します。",
+  ],
+  "Xem, sửa, nhập, xuất trong phạm vi toàn công ty, trong nhóm, hoặc chỉ phần của mình. Quản trị viên tự chỉnh ma trận quyền ngay trên giao diện.": [
+    "View, edit, import and export across the whole company, within a team, or only your own records. Admins adjust the permission matrix right in the interface.",
+    "閲覧・編集・取り込み・書き出しの範囲を、全社、チーム内、自分の担当分のいずれかに設定。権限マトリクスは管理者が画面上で調整できます。",
+  ],
+  "Do chính doanh nghiệp đặt trong ma trận phân quyền: toàn công ty, trong nhóm, hoặc chỉ khách của mình. Riêng tên và số điện thoại chủ nhà ký gửi có quyền xem tách riêng.": [
+    "You set it yourself in the permission matrix: the whole company, within a team, or only your own customers. The names and phone numbers of listing owners sit behind a separate permission.",
+    "権限マトリクスで御社が設定します。全社、チーム内、自分の顧客のみのいずれかです。預託オーナーの氏名と電話番号は別の権限で管理されます。",
+  ],
+  "Sơ đồ: dữ liệu từ file Excel và từ Zalo, điện thoại được đưa vào VinaLand qua ba việc: nhập bằng file mẫu, kiểm tra trùng số điện thoại, đối chiếu số liệu rồi nhập thật": [
+    "Diagram: data from Excel files and from Zalo and phones moves into VinaLand through three steps: import with the template, check for duplicate phone numbers, reconcile the figures, then import for real",
+    "図：ExcelファイルやZalo・スマホにあるデータがVinaLandへ移る流れ。テンプレートで取り込み、電話番号の重複を確認し、数値を照合してから本番取り込み",
+  ],
+});

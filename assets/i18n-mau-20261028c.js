@@ -770,11 +770,11 @@ Object.assign(window.VINALAND_DICT, {
     "すべてがひとつの顧客台帳とひとつの在庫表に",
   ],
   "Khi dữ liệu nằm ở nhiều nơi,": [
-    "When the data sits in several places,",
+    "When data sits in several places,",
     "データが散らばっていると、",
   ],
   "quản lý khó nắm tình hình thực tế": [
-    "it is hard to see where things really stand",
+    "it is hard to see the real picture",
     "実際の状況がつかみにくくなる",
   ],
   "Bốn tình huống thường gặp khi sàn đông người và nhiều dự án.": [
@@ -912,4 +912,189 @@ Object.assign(window.VINALAND_DICT, {
 Object.assign(window.VINALAND_DICT, {
   "khách hàng, đội Sales": ["customers, sales team", "顧客も、営業チームも"],
   "trên một hệ thống": ["in one system", "ひとつのシステムで"],
+});
+
+/* ---------- Rút gọn lời theo brief khách 28/10/2026 ----------
+   Khoá từ điển là chính câu tiếng Việt: rút gọn lời Việt là phải thêm khoá mới,
+   nếu không bản EN/JA rơi về tiếng Việt. Sửa tệp này thì ĐỔI LUÔN TÊN TỆP. */
+Object.assign(window.VINALAND_DICT, {
+  "Theo dõi tình trạng căn, lịch sử chăm sóc và tiến độ giao dịch tại một nơi. Quản lý nắm tình hình, Sales chủ động công việc.": [
+    "Track unit status, care history and deal progress in one place. Managers see where things stand, and sales reps know what to do next.",
+    "住戸のステータス、対応履歴、商談の進捗をひとつの場所で追えます。管理者は状況を把握し、営業は次の動きが分かります。",
+  ],
+  "Phân quyền theo vai trò, mọi thao tác đều có nhật ký": [
+    "Role-based permissions, with a log of every action",
+    "役割ごとの権限設定と、すべての操作の記録",
+  ],
+  "Số căn còn lại, khách đang ở bước nào, deal nào sắp chốt.": [
+    "Units still available, the stage each customer is at, and the deals about to close.",
+    "残りの住戸数、各顧客がいる段階、まもなく成約しそうな商談。",
+  ],
+  "Dự án, phân khu, từng toà. Căn nào còn, căn nào đã cọc, cả sàn xem chung một bảng.": [
+    "Projects, zones and individual buildings. What is available and what is on deposit, on one sheet for everyone.",
+    "案件、区画、棟ごとに。空いている住戸と手付金済みの住戸を、全社で同じ表で確認できます。",
+  ],
+  "Cơ hội đi qua các bước: tư vấn, đàm phán, đặt cọc, chốt. Chững ở đâu nhìn ra ngay.": [
+    "Deals move through the stages: consulting, negotiation, deposit, closing. Where one stalls shows at a glance.",
+    "商談は提案、交渉、手付金、成約と段階を進みます。どこで止まっているかがすぐ分かります。",
+  ],
+  "Hồ sơ dự án, chính sách bán hàng và tài liệu để chung một chỗ.": [
+    "Project files, sales policies and documents kept in one place.",
+    "案件資料、販売方針、各種ドキュメントをひとつの場所に。",
+  ],
+  "Mỗi việc một công cụ,": [
+    "A separate tool for each job,",
+    "仕事ごとに別の道具を、",
+  ],
+  "Mỗi dự án một file Excel, mỗi Sales một danh sách khách, lịch hẹn nằm trên điện thoại riêng. Nắm tình hình phải đi tổng hợp.": [
+    "One Excel file per project, a separate customer list for each sales rep, appointments on personal phones. Seeing where things stand means pulling it all together first.",
+    "案件ごとに別のExcel、営業ごとに別の顧客リスト、予定は個人のスマホの中。状況を把握するには、まず集計し直すことになります。",
+  ],
+  "Khách từ nhiều nguồn nằm rải rác trong máy từng người. Cuối ngày khó biết ai chưa được gọi.": [
+    "Customers come in from several channels and end up scattered across individual phones. At the end of the day it is hard to tell who has not been called.",
+    "複数の経路から来た顧客が、担当者それぞれの端末に散らばります。一日の終わりに、誰にまだ電話していないのか分かりません。",
+  ],
+  "Các nhóm cập nhật không cùng lúc. Sales dễ chào nhầm căn đã có người cọc, quản lý khó nắm còn bao nhiêu.": [
+    "The teams do not update at the same time. A sales rep can offer a unit that already has a deposit, and managers struggle to see what is left.",
+    "チームごとの更新がそろいません。手付金済みの住戸を案内してしまうこともあり、残りがいくつなのか把握しにくくなります。",
+  ],
+  "Thường phải chờ tới cuối tháng mới biết kết quả. Giao dịch chững hay việc quá hạn, có người báo mới biết.": [
+    "The numbers usually only arrive at month end. A stalled deal or an overdue task surfaces only when someone reports it.",
+    "結果が分かるのは月末になりがちです。止まった商談や期限切れのタスクは、誰かが報告して初めて分かります。",
+  ],
+  "Nhân viên nghỉ hoặc chuyển nhóm, lịch sử chăm sóc nằm lại máy cũ. Người nhận phải hỏi khách từ đầu.": [
+    "When someone leaves or moves team, the care history stays on their old device. Whoever takes over has to ask the customer from scratch.",
+    "担当者が退職・異動すると、対応履歴は以前の端末に残ります。引き継いだ人は、顧客に一から聞き直すことになります。",
+  ],
+  "Số căn theo từng trạng thái: đang bán, đã cọc, đã bán, dừng bán.": [
+    "Unit counts by status: on sale, on deposit, sold, withdrawn.",
+    "ステータス別の住戸数：販売中、手付金済み、成約、販売停止。",
+  ],
+  "Số lead, số đã thành khách và tỷ lệ chuyển đổi.": [
+    "Lead count, how many became customers, and the conversion rate.",
+    "リード数、顧客になった数、転換率。",
+  ],
+  "Số cơ hội và giá trị theo từng bước: mới, tư vấn, đàm phán, cọc, chốt, mất.": [
+    "Deal count and value at each stage: new, consulting, negotiation, deposit, won, lost.",
+    "各段階の商談数と金額：新規、提案、交渉、手付金、成約、失注。",
+  ],
+  "Lọc theo nhóm và thời gian để biết ai đang ra số, dự án nào chững.": [
+    "Filter by team and period to see who is producing and which projects have stalled.",
+    "チームと期間で絞り込み、誰が成果を出し、どの案件が止まっているかを確認できます。",
+  ],
+  "AI làm việc trên dữ liệu của sàn, trong phạm vi quyền của người đang đăng nhập.": [
+    "The AI works on your own data, within the permissions of whoever is signed in.",
+    "AIは自社のデータ上で動き、ログイン中のユーザーの権限の範囲で読み取ります。",
+  ],
+  "Sales luyện xử lý tình huống khách từ chối, mỗi buổi có chấm điểm và góp ý.": [
+    "Sales reps practise handling objections, and each session comes with a score and feedback.",
+    "営業が断られる場面の対応を練習でき、セッションごとに採点とフィードバックが出ます。",
+  ],
+  "Đưa chính sách bán hàng và tài liệu dự án lên hệ thống, cần gì cứ hỏi, AI tìm trong tài liệu.": [
+    "Put your sales policies and project documents into the system, then just ask; the AI searches inside the documents.",
+    "販売方針と案件資料をシステムに入れておけば、聞くだけでAIが資料の中から探します。",
+  ],
+  "Tìm căn phù hợp với khách và ngược lại. Mỗi gợi ý nói rõ hợp ở chỗ nào, lệch ở chỗ nào.": [
+    "Find a unit for a customer, or the other way round. Every suggestion says where it fits and where it does not.",
+    "顧客に合う住戸も、その逆も探せます。どの点が合い、どの点がずれているかも示します。",
+  ],
+  "Xem, sửa, nhập, xuất theo phạm vi toàn công ty, trong nhóm hoặc chỉ phần của mình. Ma trận quyền do quản trị viên tự chỉnh.": [
+    "View, edit, import and export across the whole company, within a team, or only your own records. Administrators adjust the permission matrix themselves.",
+    "閲覧・編集・取り込み・書き出しを、全社、チーム内、自分の担当分のいずれかの範囲で。権限マトリクスは管理者が自分で調整します。",
+  ],
+  "Bàn giao ghi rõ người chuyển và người nhận, lịch sử chăm sóc đi theo khách.": [
+    "A handover records who passed the customer on and who received them, and the care history goes with the customer.",
+    "引き継ぎでは引き渡した人と受け取った人を記録し、対応履歴も顧客とともに移ります。",
+  ],
+  "Mã OTP, thiết bị tin cậy, khoá sau nhiều lần đăng nhập sai và nhật ký thay đổi dữ liệu.": [
+    "One-time passcodes, trusted devices, lock-out after repeated failed sign-ins, and a log of data changes.",
+    "ワンタイムパスワード、信頼済み端末、ログイン失敗が続いた場合のロック、データ変更の記録。",
+  ],
+  "Rà lại file Excel sàn đang dùng, dọn chỗ trùng và chỗ thiếu.": [
+    "We go through the Excel files you use today and clean up duplicates and gaps.",
+    "現在お使いのExcelファイルを見直し、重複や抜けを整理します。",
+  ],
+  "Nhập bằng file mẫu vào môi trường riêng rồi đối chiếu với bản gốc.": [
+    "Import with the template file into a separate environment, then check it against the original.",
+    "テンプレートファイルで別環境に取り込み、元のデータと照合します。",
+  ],
+  "Hướng dẫn theo từng vai trò và để lại tài liệu để sàn tự đào tạo người mới.": [
+    "Training per role, with documentation left behind so you can train new staff yourselves.",
+    "役割ごとに指導し、資料をお渡しするので、新しい担当者は御社で育成できます。",
+  ],
+  "Rà lại dữ liệu và quyền lần cuối, mở rộng ra toàn sàn rồi bàn giao.": [
+    "A final check of data and permissions, then roll out to the whole brokerage and hand over.",
+    "データと権限を最終確認し、全社に展開して引き渡します。",
+  ],
+  "Báo giá sau khi khảo sát nhu cầu và dữ liệu.": [
+    "We quote after reviewing your needs and your data.",
+    "ご要望とデータを確認したうえでお見積りします。",
+  ],
+  "Kênh tiếp nhận, thời gian phản hồi và cách xử lý sự cố ghi trong hợp đồng.": [
+    "Support channels, response times and incident handling are written into the contract.",
+    "受付窓口、応答時間、障害対応の方法は契約書に明記します。",
+  ],
+  "Tuỳ số dự án, khối lượng dữ liệu và mức tuỳ chỉnh. Khảo sát xong chúng tôi gửi lộ trình sáu bước kèm mốc thời gian cho đúng sàn của anh chị.": [
+    "It depends on the number of projects, the volume of data and how much customisation you need. After the review we send a six-step plan with dates for your own brokerage.",
+    "案件数、データ量、カスタマイズの度合いによって変わります。調査のうえ、御社向けの6ステップの工程と日程をお送りします。",
+  ],
+  "Được. Tải file mẫu, điền rồi nhập lên, hệ thống kiểm tra trùng số điện thoại trước khi ghi. Nếu dữ liệu đang ở phần mềm khác, hai bên khảo sát trước khi cam kết.": [
+    "Yes. Download the template, fill it in and upload it; the system checks for duplicate phone numbers before saving. If your data is in another system, we review it together before committing.",
+    "できます。テンプレートをダウンロードして記入し、アップロードすると、保存前に電話番号の重複を確認します。他のソフトにデータがある場合は、お約束の前に双方で確認します。",
+  ],
+  "Hiện chưa. Lead nhập tay hoặc từ Excel, có trường ghi nguồn khách. Nhu cầu nối với tổng đài hay form website sẽ được khảo sát và báo giá riêng.": [
+    "Not yet. Leads are entered by hand or from Excel, with a field for the source. If you need a link to a call centre or a website form, we will review it and quote separately.",
+    "現在はできません。リードは手入力かExcelからの取り込みで、獲得元の項目があります。コールセンターやウェブサイトのフォームとの連携が必要な場合は、個別に調査してお見積りします。",
+  ],
+  "Do doanh nghiệp đặt trong ma trận phân quyền: toàn công ty, trong nhóm hoặc chỉ khách của mình. Thông tin chủ nhà ký gửi có quyền xem tách riêng.": [
+    "Your company sets it in the permission matrix: the whole company, within a team, or only your own customers. Details of owners who list with you carry their own separate permission.",
+    "権限マトリクスで御社が設定します。全社、チーム内、自分の顧客のみのいずれかです。委託オーナーの情報は、別の閲覧権限で管理します。",
+  ],
+  "Không. AI chỉ đọc đúng phần dữ liệu người đang đăng nhập có quyền xem. Phạm vi và nơi xử lý ghi trong hợp đồng.": [
+    "No. The AI only reads the data the signed-in user is allowed to see. The scope and the place of processing are written into the contract.",
+    "いいえ。AIはログイン中のユーザーが閲覧できるデータしか読み取りません。対象範囲と処理場所は契約書に明記します。",
+  ],
+  "Buổi demo 45 phút, chạy trên dữ liệu mẫu hoặc chính bảng hàng của sàn. Nhận yêu cầu là chúng tôi gọi lại hẹn giờ.": [
+    "A 45-minute demo, run on sample data or on your own inventory sheet. Once we have your request we call back to arrange a time.",
+    "45分のデモを、サンプルデータまたは御社の在庫表で行います。お申し込みをいただき次第、日程調整のためご連絡します。",
+  ],
+});
+
+/* Dòng giữa tiêu đề đổi "khách hàng, đội Sales" → "khách hàng và đội Sales" (28/10/2026). */
+Object.assign(window.VINALAND_DICT, {
+  // Bản Anh giữ nguyên câu đang chạy: mọi biến thể có "and" đều rộng hơn cột chữ 593px.
+  "khách hàng và đội Sales": ["customers, sales team", "顧客も、営業チームも"],
+});
+
+/* ---------- Rút gọn tiêu đề section theo brief khách 28/10/2026 ----------
+   Tiêu đề cũ dài, mang tính diễn giải; khách muốn 2–6 từ cho dễ quét.
+   Mỗi nút văn bản là một khoá riêng, nên tiêu đề hai màu cần hai khoá.
+   "Triển khai", "Phân quyền", "trên một hệ thống" đã có sẵn ở trên — dùng lại.
+   "AI" không cần khoá: ba ngôn ngữ viết giống nhau. */
+Object.assign(window.VINALAND_DICT, {
+  // 1. Hero — "Quản lý sàn BĐS trên một hệ thống"
+  "Quản lý sàn BĐS": ["Manage your agency", "不動産仲介の運営を"],
+  // 2. Chức năng — "Quản lý tập trung"
+  "Quản lý": ["Centralised", "管理を"],
+  "tập trung": ["management", "ひとつに"],
+  // 3. Ghi chú dưới ảnh phân hệ
+  "Một hồ sơ khách, một bảng hàng": [
+    "One customer record, one inventory sheet",
+    "顧客台帳ひとつ、在庫表ひとつ",
+  ],
+  // 4. Vấn đề — "Những điểm nghẽn thường gặp"
+  "Những": ["Common", "よくある"],
+  "điểm nghẽn thường gặp": ["bottlenecks", "つまずきポイント"],
+  // 5. Dành cho người quản lý — "Tổng quan kinh doanh"
+  "Tổng quan": ["Business", "経営の"],
+  "kinh doanh": ["overview", "全体像"],
+  // 6. AI — "AI hỗ trợ Sales"
+  "hỗ trợ Sales": ["for sales teams", "が営業を支援"],
+  // 7. Bảo mật — "Phân quyền & bảo mật"
+  "& bảo mật": ["& security", "とセキュリティ"],
+  // 8. Triển khai — "Triển khai 6 bước"
+  "6 bước": ["in 6 steps", "は6ステップ"],
+  // 9. Gói dịch vụ — "Gói dịch vụ"
+  "Gói": ["Service", "ご利用"],
+  "dịch vụ": ["plans", "プラン"],
 });

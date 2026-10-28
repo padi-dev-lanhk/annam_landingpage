@@ -103,7 +103,7 @@ a{color:inherit}
 .eyebrow{font-size:15px;font-weight:700;color:var(--brand);margin:0 0 4px}
 .eyebrow-sub{font-size:12.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin:0 0 22px}
 
-.hero h1{font-size:clamp(32px,4vw,58px);max-width:600px}
+.hero h1{font-size:clamp(31px,3.93vw,40px);max-width:600px}
 /* Dòng giữa đổi màu — cấu trúc ba dòng này là thứ làm tiêu đề dễ nhớ. */
 .hero h1 span{color:var(--brand);display:block}
 .hero .lead{margin:20px 0 30px;font-size:17.5px;color:var(--ink-2);max-width:44ch}
@@ -139,14 +139,14 @@ a{color:inherit}
 
 /* ---------- 4. khối "thay cho" ---------- */
 .swap{padding:80px 0}
-.sec-head{text-align:center;max-width:46ch;margin:0 auto 52px}
+.sec-head{text-align:center;max-width:600px;margin:0 auto 52px}
 .sec-head h2{font-size:clamp(26px,3vw,40px)}
 .sec-head h2 span{color:var(--brand)}
 .sec-head p{margin:16px 0 0;color:var(--ink-2);font-size:17px;text-wrap:balance}
 /* Tiếng Nhật không có dấu cách giữa các từ, mà `ch` là bề ngang chữ "0" (nửa thân)
    nên 20ch chỉ còn khoảng 10 chữ Nhật một dòng — tiêu đề gãy ngang giữa từ
    ("営業チー / ムの規模"). Đặt trần theo `em` để dòng dài bằng bản tiếng Việt. */
-html[lang="ja"] .sec-head{max-width:30em}
+html[lang="ja"] .sec-head{max-width:37.5em}
 html[lang="ja"] .sec-head h2{max-width:20em}
 
 /* Ba cột: thẻ phân hệ · dải nối · ảnh app. Dải nối KHÔNG có gap hai bên — nét đứt
@@ -578,7 +578,7 @@ html[lang="ja"] .sec-head h2{max-width:20em}
    `text-wrap:balance` để trình duyệt tự chia đều các dòng; khoá thêm bề ngang
    cho chắc, vì balance chỉ áp dụng khi tiêu đề ngắn hơn một ngưỡng nhất định. */
 h1,h2,h3{text-wrap:balance}
-.sec-head h2{max-width:20ch;margin-left:auto;margin-right:auto}
+.sec-head h2{margin-left:auto;margin-right:auto}
 .split h2{max-width:14ch}
 
 /* 2. VÙNG BẤM NHỎ HƠN 32px.

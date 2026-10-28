@@ -680,3 +680,236 @@ Object.assign(window.VINALAND_DICT, {
     "図：ExcelファイルやZalo・スマホにあるデータがVinaLandへ移る流れ。テンプレートで取り込み、電話番号の重複を確認し、数値を照合してから本番取り込み",
   ],
 });
+
+/* ---------- Viết lại lời theo brief khách 28/10/2026 ----------
+   Khoá từ điển là chính câu tiếng Việt, nên đổi lời là phải thêm khoá, nếu không
+   bản EN/JA rơi về tiếng Việt. */
+Object.assign(window.VINALAND_DICT, {
+  "Quản lý giỏ hàng,": [
+    "Manage inventory,",
+    "物件在庫も、",
+  ],
+  "khách hàng và đội Sales": [
+    "customers and your sales team",
+    "顧客も、営業チームも",
+  ],
+  "trên cùng một hệ thống": [
+    "in one system",
+    "ひとつのシステムで",
+  ],
+  "Bảng hàng đang nằm ở file nào? Khách này ai đang phụ trách? Giao dịch nào chờ đặt cọc? VinaLand gom những thông tin đó về một chỗ, để quản lý và đội Sales cùng theo dõi.": [
+    "Which file is the inventory sheet in? Who owns this customer? Which deals are waiting on a deposit? VinaLand keeps that information in one place, so managers and the sales team follow the same picture.",
+    "在庫表はどのファイルにあるのか。この顧客の担当は誰か。手付金待ちの商談はどれか。VinaLandはそうした情報をひとつにまとめ、管理者と営業チームが同じ状況を追えるようにします。",
+  ],
+  "Những việc đang làm bằng nhiều công cụ,": [
+    "The work spread across several tools,",
+    "いくつもの道具に分かれている仕事を、",
+  ],
+  "giờ quản lý": [
+    "now managed",
+    "ひとつの場所で",
+  ],
+  "tập trung một chỗ": [
+    "in one place",
+    "まとめて管理",
+  ],
+  "Mỗi dự án một file Excel, mỗi Sales một danh sách khách riêng, lịch hẹn thì nằm trên điện thoại cá nhân. Quản lý muốn nắm tình hình lại phải đi tổng hợp.": [
+    "One Excel file per project, a separate customer list for each sales rep, appointments on personal phones. To see where things stand, a manager has to pull it all together first.",
+    "案件ごとに別々のExcel、営業ごとに別々の顧客リスト、予定は個人のスマホの中。管理者が状況を把握するには、まず自分で集計し直すことになります。",
+  ],
+  "Quản lý:": [
+    "Manages:",
+    "管理：",
+  ],
+  "dự án, phân khu và trạng thái từng căn": [
+    "projects, zones and the status of each unit",
+    "案件・区画・各住戸のステータス",
+  ],
+  "Lưu:": [
+    "Stores:",
+    "保存：",
+  ],
+  "thông tin khách, nguồn khách và lịch sử chăm sóc": [
+    "customer details, lead source and care history",
+    "顧客情報・獲得元・対応履歴",
+  ],
+  "Theo dõi:": [
+    "Tracks:",
+    "追跡：",
+  ],
+  "giai đoạn giao dịch và người phụ trách": [
+    "the stage of each deal and who owns it",
+    "商談の段階と担当者",
+  ],
+  "Nhắc:": [
+    "Reminds:",
+    "通知：",
+  ],
+  "lịch hẹn và các đầu việc liên quan": [
+    "appointments and the tasks that go with them",
+    "予定と関連するタスク",
+  ],
+  "Xem:": [
+    "Shows:",
+    "表示：",
+  ],
+  "số liệu lọc theo nhân viên, dự án, nguồn hàng": [
+    "figures filtered by staff, project and listing source",
+    "担当者・案件・物件元で絞り込んだ数値",
+  ],
+  "Hỗ trợ:": [
+    "Helps with:",
+    "支援：",
+  ],
+  "tra cứu tài liệu, ghép khách với căn, tính toán": [
+    "document lookup, matching customers to units, calculations",
+    "資料検索、顧客と住戸のマッチング、各種計算",
+  ],
+  "Tất cả nằm trong một hồ sơ khách và một bảng hàng": [
+    "All of it in one customer record and one inventory sheet",
+    "すべてがひとつの顧客台帳とひとつの在庫表に",
+  ],
+  "Khi dữ liệu nằm ở nhiều nơi,": [
+    "When the data sits in several places,",
+    "データが散らばっていると、",
+  ],
+  "quản lý khó nắm tình hình thực tế": [
+    "it is hard to see where things really stand",
+    "実際の状況がつかみにくくなる",
+  ],
+  "Bốn tình huống thường gặp khi sàn đông người và nhiều dự án.": [
+    "Four situations that come up once there are more people and more projects.",
+    "人も案件も増えてくると出てくる、4つの場面。",
+  ],
+  "Lead chưa được theo dõi tập trung": [
+    "Leads are not tracked in one place",
+    "リードが一か所で管理されていない",
+  ],
+  "Khách đến từ Facebook, Zalo, hotline, sự kiện nhưng nằm rải rác trong máy từng người. Cuối ngày khó biết còn ai chưa được gọi.": [
+    "Customers come in from Facebook, Zalo, the hotline and events, but end up scattered across individual phones. At the end of the day it is hard to tell who has not been called.",
+    "Facebook、Zalo、ホットライン、イベントから顧客が来ても、担当者それぞれの端末に散らばります。一日の終わりに、誰にまだ連絡していないのか分かりません。",
+  ],
+  "Bảng hàng mỗi nhóm một bản": [
+    "Each team has its own inventory sheet",
+    "チームごとに別々の在庫表",
+  ],
+  "Bảng hàng thay đổi nhưng các nhóm chưa cập nhật cùng nhau. Sales có thể chào nhầm căn đã có người cọc, quản lý khó nắm còn bao nhiêu.": [
+    "The inventory changes, but the teams do not update together. A sales rep can offer a unit that already has a deposit, and managers struggle to see what is left.",
+    "在庫は動くのに、チームごとの更新がそろいません。手付金済みの住戸を案内してしまうこともあり、残りがいくつなのか把握しにくくなります。",
+  ],
+  "Giao dịch chững mà chưa ai biết": [
+    "Deals stall without anyone noticing",
+    "商談が止まっても気づけない",
+  ],
+  "Giám đốc kinh doanh thường phải chờ tới cuối tháng mới biết kết quả. Giao dịch chững lại hay việc quá hạn thì phải có người báo mới biết.": [
+    "Sales directors often wait until month end to see the numbers. A stalled deal or an overdue task only surfaces when someone reports it.",
+    "営業責任者が結果を知るのは月末になりがちです。止まった商談や期限切れのタスクは、誰かが報告して初めて分かります。",
+  ],
+  "Bàn giao khách mất thời gian": [
+    "Handing over customers takes time",
+    "顧客の引き継ぎに時間がかかる",
+  ],
+  "Nhân viên chuyển nhóm hoặc nghỉ việc, lịch sử chăm sóc nằm ở máy cũ. Người nhận thường phải hỏi lại khách từ đầu.": [
+    "When someone moves team or leaves, the care history stays on their old device. Whoever takes over usually has to ask the customer everything again.",
+    "担当者が異動・退職すると、対応履歴は以前の端末に残ったままです。引き継いだ人は、顧客に一から聞き直すことになりがちです。",
+  ],
+  "Nắm tình hình kinh doanh": [
+    "See how business is going",
+    "営業状況の把握を、",
+  ],
+  "mà không phải hỏi từng nhóm": [
+    "without asking each team",
+    "チームごとに聞いて回らずに",
+  ],
+  "Mỗi vai trò xem được đúng phần việc và phần dữ liệu của mình.": [
+    "Each role sees exactly its own work and its own data.",
+    "役割ごとに、自分の担当分と自分のデータだけが見えます。",
+  ],
+  "Tình trạng giỏ hàng": [
+    "Inventory status",
+    "在庫の状況",
+  ],
+  "Tình hình khách hàng": [
+    "Customer picture",
+    "顧客の状況",
+  ],
+  "Tiến độ giao dịch": [
+    "Deal progress",
+    "商談の進捗",
+  ],
+  "Báo cáo theo nhân viên và dự án": [
+    "Reports by staff and project",
+    "担当者別・案件別のレポート",
+  ],
+  "Người quản lý xem tình hình kinh doanh trên một màn hình": [
+    "A manager reviewing how business is going on one screen",
+    "マネージャーが営業状況を一画面で確認している様子",
+  ],
+  "Tra cứu nhanh hơn,": [
+    "Look things up faster,",
+    "調べ物を速く、",
+  ],
+  "dành thời gian cho việc tư vấn khách": [
+    "and keep the time for advising customers",
+    "空いた時間は顧客への提案に",
+  ],
+  "AI làm việc trên dữ liệu của chính sàn, và chỉ đọc trong phạm vi quyền của người đang đăng nhập.": [
+    "The AI works on your own data, and only reads within the permissions of whoever is signed in.",
+    "AIは自社のデータ上で動き、ログイン中のユーザーの権限の範囲でしか読み取りません。",
+  ],
+  "Sales luyện xử lý tình huống khách từ chối, xong buổi nào có chấm điểm và góp ý buổi đó.": [
+    "Sales reps practise handling objections, and each session ends with a score and feedback.",
+    "営業が断られる場面の対応を練習でき、セッションごとに採点とフィードバックが出ます。",
+  ],
+  "Tìm khách phù hợp với căn, hoặc tìm căn phù hợp với khách. Mỗi gợi ý đều nói rõ hợp ở chỗ nào, lệch ở chỗ nào.": [
+    "Find customers for a unit, or units for a customer. Every suggestion says where it fits and where it does not.",
+    "住戸に合う顧客も、顧客に合う住戸も探せます。どの点が合い、どの点がずれているかも示します。",
+  ],
+  "Doanh nghiệp quyết định": [
+    "You decide",
+    "誰が何を見て扱えるかは、",
+  ],
+  "ai được xem và xử lý dữ liệu nào": [
+    "who sees and handles which data",
+    "御社が決めます",
+  ],
+  "Đưa dữ liệu từ Excel lên hệ thống": [
+    "Moving your Excel data into the system,",
+    "Excelのデータをシステムへ、",
+  ],
+  "theo từng bước": [
+    "step by step",
+    "ひとつずつ",
+  ],
+  "Triển khai VinaLand mất bao lâu?": [
+    "How long does it take to roll VinaLand out?",
+    "VinaLandの導入にはどのくらいかかりますか？",
+  ],
+  "Dữ liệu đang quản lý bằng Excel có chuyển sang được không?": [
+    "Can the data we keep in Excel be moved across?",
+    "いまExcelで管理しているデータは移行できますか？",
+  ],
+  "Khách đăng ký qua website hoặc tổng đài có tự động vào VinaLand không?": [
+    "Do customers who register on the website or call the hotline land in VinaLand automatically?",
+    "ウェブサイトやコールセンター経由の問い合わせは、自動でVinaLandに入りますか？",
+  ],
+  "Ai được xem thông tin khách hàng?": [
+    "Who can see customer information?",
+    "顧客情報は誰が見られますか？",
+  ],
+  "AI có truy cập được toàn bộ dữ liệu của sàn không?": [
+    "Can the AI reach all of our data?",
+    "AIは当社のデータすべてにアクセスできるのですか？",
+  ],
+  "Có dùng VinaLand trên điện thoại được không?": [
+    "Can VinaLand be used on a phone?",
+    "VinaLandはスマートフォンでも使えますか？",
+  ],
+});
+
+/* Tiêu đề hero: hai dòng dưới rộng 596px và 595px, trong khi cột chỉ 593px nên bị
+   gãy đôi. Rút lại cho vừa, giữ nguyên ý. */
+Object.assign(window.VINALAND_DICT, {
+  "khách hàng, đội Sales": ["customers, sales team", "顧客も、営業チームも"],
+  "trên một hệ thống": ["in one system", "ひとつのシステムで"],
+});

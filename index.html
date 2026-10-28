@@ -4,7 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <!-- CHỐNG CACHE: index.html không bị Cloudflare cache nên luôn mới; mọi file trong assets/ thì bị cache 30 ngày.
-     Khi sửa CSS hoặc JS: đổi luôn TÊN FILE (style-<ngày><chữ>.css, main-<ngày><chữ>.js) rồi sửa 2 thẻ bên dưới.
+     Khi sửa CSS hoặc JS: đổi luôn TÊN FILE (style-<ngày><chữ>.css, main-<ngày><chữ>.js) rồi sửa thẻ bên dưới.
+     Quy tắc này áp dụng cho CẢ file từ điển i18n-*.js. Sửa nội dung mà giữ nguyên tên thì
+     Cloudflare vẫn trả bản cũ suốt 30 ngày: trang hiện lời tiếng Việt mới, nhưng đổi sang
+     EN/JA thì những câu mới rơi về tiếng Việt — nhìn ra thành lẫn lộn hai thứ tiếng.
      Khi thay ảnh: đổi số ?v=... ở tất cả đường dẫn ảnh (tìm thay cả file).
      Làm vậy thì sau mỗi lần deploy không cần purge cache Cloudflare nữa. -->
 <title>VinaLand — Phần mềm quản lý sàn bất động sản</title>
@@ -516,7 +519,7 @@
   </div>
 </div>
 <script src="assets/i18n-20261006a.js"></script>
-<script src="assets/i18n-mau-20261028a.js"></script>
+<script src="assets/i18n-mau-20261028b.js"></script>
 <script src="assets/main-20261027b.js"></script>
 </body>
 </html>

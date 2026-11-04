@@ -183,14 +183,23 @@ const apDungNgonNgu = (() => {
    duyệt bắt đầu tải ngay khi mở trang dù người xem không bấm. Gán src lúc mở, gỡ
    lúc đóng — trang chỉ tải phim khi thật sự cần. Ảnh bìa 20 KB vẫn hiện ngay. */
 (function () {
-  const PHIM = "assets/video/gioi-thieu-vinaland.mp4";
+  /* Mỗi ngôn ngữ một bản phim riêng: giao diện trong clip, nhãn nung trong hình và
+     lời đọc đều theo ngôn ngữ đang chọn. Người xem đổi ngôn ngữ rồi mở lại là lấy
+     đúng bản mới — dong() đã gỡ src nên lần mở sau luôn gán lại. */
+  const PHIM = {
+    vi: "assets/video/gioi-thieu-vinaland.mp4",
+    en: "assets/video/gioi-thieu-vinaland-en.mp4",
+    ja: "assets/video/gioi-thieu-vinaland-ja.mp4",
+  };
+  const duongPhim = () => PHIM[LANG] ?? PHIM.vi;
   const hop = document.getElementById("hop-phim");
   const v = document.getElementById("phim");
   const nut = document.getElementById("mo-phim");
   if (!hop || !v || !nut) return;
 
   const mo = () => {
-    if (!v.getAttribute("src")) v.setAttribute("src", PHIM);
+    const src = duongPhim();
+    if (v.getAttribute("src") !== src) { v.setAttribute("src", src); v.load(); }
     hop.classList.add("mo");
     document.body.style.overflow = "hidden";
     v.play().catch(() => {});   // trình duyệt chặn tự phát thì người xem tự bấm

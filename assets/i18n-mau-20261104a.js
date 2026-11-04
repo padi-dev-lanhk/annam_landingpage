@@ -1098,3 +1098,53 @@ Object.assign(window.VINALAND_DICT, {
   "Gói": ["Service", "ご利用"],
   "dịch vụ": ["plans", "プラン"],
 });
+
+/* ---------- Bản Nhật dùng LINE thay cho Zalo (04/11/2026) ----------
+   Zalo là ứng dụng nhắn tin của thị trường Việt, người Nhật không dùng. Chỉ đổi
+   cột tiếng Nhật; bản Việt và bản Anh giữ nguyên vì vẫn đang nói về sàn Việt Nam.
+   Ghi đè ở đây chứ không sửa i18n-20261006a.js: tệp này nạp sau nên Object.assign
+   thắng, và chỉ phải đổi tên một tệp khi qua Cloudflare. */
+Object.assign(window.VINALAND_DICT, {
+  // Thẻ "Zalo" trong khối Nguồn khách trước nay chưa có khoá nào.
+  "Zalo": ["Zalo", "LINE"],
+  "Khách từ Facebook, Zalo, hotline, sự kiện nằm rải rác trong máy từng người. Không ai biết khách nào chưa được gọi.": [
+    "Leads from Facebook, Zalo, the hotline and events sit on individual phones. Nobody knows which ones haven't been called.",
+    "Facebook、LINE、電話、イベントからのリードが担当者ごとの端末に散在。まだ連絡していない顧客が誰にも分かりません。",
+  ],
+  "Ghi nguồn: Facebook, Zalo, hotline": [
+    "Source tracking: Facebook, Zalo, hotline",
+    "流入元を記録：Facebook、LINE、電話",
+  ],
+  "Sơ đồ: dữ liệu từ file Excel và từ Zalo, điện thoại được đưa vào VinaLand qua ba bước nhập theo file mẫu, kiểm tra trùng số điện thoại và đối chiếu trước khi nhập thật": [
+    "Diagram: data from Excel files and from Zalo and phones goes into VinaLand in three steps: import via template, check for duplicate phone numbers, and reconcile before the real import",
+    "図：ExcelファイルやLINE・電話のデータを、テンプレートでの取り込み、電話番号の重複チェック、本番前の照合という3ステップで VinaLand に移行",
+  ],
+  "Zalo & điện thoại": [
+    "Zalo & phones",
+    "LINEと電話",
+  ],
+  "danh bạ và tin nhắn Zalo nằm trong điện thoại của từng nhân viên": [
+    "contacts and Zalo chats living on each person's phone",
+    "担当者それぞれのスマホに散らばる連絡先とLINEのやり取り",
+  ],
+  "Sơ đồ: dữ liệu từ file Excel và từ Zalo, điện thoại được đưa vào VinaLand qua ba việc — nhập theo file mẫu, kiểm tra trùng số điện thoại, đối chiếu số liệu rồi nhập thật": [
+    "Diagram: data from Excel files and from Zalo and phones moves into VinaLand through three steps — import with the template, check for duplicate phone numbers, reconcile the figures, then import for real",
+    "図：ExcelファイルやLINE・スマホにあるデータがVinaLandへ移る流れ。テンプレートで取り込み、電話番号の重複を確認し、数値を照合してから本番取り込み",
+  ],
+  "danh bạ và tin nhắn Zalo nằm trong máy từng người": [
+    "contacts and Zalo chats living on each person's phone",
+    "担当者それぞれのスマホに散らばる連絡先とLINEのやり取り",
+  ],
+  "Khách từ Facebook, Zalo, hotline, sự kiện nằm rải rác trong máy từng người. Cuối ngày không ai biết còn ai chưa được gọi.": [
+    "Leads from Facebook, Zalo, the hotline and events sit on individual phones. Nobody knows which ones haven't been called.",
+    "Facebook、LINE、電話、イベントからのリードが担当者ごとの端末に散在。まだ連絡していない顧客が誰にも分かりません。",
+  ],
+  "Sơ đồ: dữ liệu từ file Excel và từ Zalo, điện thoại được đưa vào VinaLand qua ba việc: nhập bằng file mẫu, kiểm tra trùng số điện thoại, đối chiếu số liệu rồi nhập thật": [
+    "Diagram: data from Excel files and from Zalo and phones moves into VinaLand through three steps: import with the template, check for duplicate phone numbers, reconcile the figures, then import for real",
+    "図：ExcelファイルやLINE・スマホにあるデータがVinaLandへ移る流れ。テンプレートで取り込み、電話番号の重複を確認し、数値を照合してから本番取り込み",
+  ],
+  "Khách đến từ Facebook, Zalo, hotline, sự kiện nhưng nằm rải rác trong máy từng người. Cuối ngày khó biết còn ai chưa được gọi.": [
+    "Customers come in from Facebook, Zalo, the hotline and events, but end up scattered across individual phones. At the end of the day it is hard to tell who has not been called.",
+    "Facebook、LINE、ホットライン、イベントから顧客が来ても、担当者それぞれの端末に散らばります。一日の終わりに、誰にまだ連絡していないのか分かりません。",
+  ],
+});

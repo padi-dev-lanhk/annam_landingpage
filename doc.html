@@ -1,0 +1,782 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- Trang hướng dẫn sử dụng. Ảnh trong assets/huong-dan/ chụp từ bản production (nhánh main) ngày 12/11/2026,
+     dữ liệu demo. Khi thay ảnh: đổi số ?v=... ở mọi đường dẫn ảnh (tìm thay cả file) — xem quy tắc chống cache ở đầu index.html. -->
+<title>Hướng dẫn sử dụng — VinaLand</title>
+<meta name="description" content="Hướng dẫn sử dụng VinaLand: đăng nhập, quản lý lead và khách hàng, giỏ hàng, cơ hội, công việc, báo cáo và quản trị hệ thống.">
+<meta property="og:title" content="Hướng dẫn sử dụng VinaLand">
+<meta property="og:description" content="Từng bước sử dụng phần mềm quản lý sàn bất động sản VinaLand, theo từng vai trò.">
+<meta property="og:image" content="assets/huong-dan/dashboard.webp?v=20261112a">
+<meta property="og:type" content="article">
+<link rel="icon" href="favicon.ico?v=20261001b" sizes="32x32">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32-20261001b.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon-20261001b.png">
+<meta name="theme-color" content="#121A22">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap&subset=vietnamese,latin" rel="stylesheet">
+<link rel="stylesheet" href="assets/style-20261028c.css">
+<style>
+/* ---------- Riêng trang hướng dẫn. Dùng lại biến màu, header, footer, nút của style chung. ---------- */
+.hd-dau{background:linear-gradient(180deg,var(--tint) 0%,#fff 100%);border-bottom:1px solid var(--line)}
+.hd-dau .frame{padding-top:56px;padding-bottom:44px}
+.hd-nho{font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--brand-mid)}
+.hd-dau h1{font-size:clamp(32px,4.4vw,52px);margin:12px 0 16px;max-width:20ch}
+.hd-dau .hd-mo{font-size:18px;color:var(--ink-2);max-width:62ch;margin:0}
+.hd-meta{margin-top:18px;font-size:13.5px;color:var(--ink-3)}
+.hd-vai{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-top:30px}
+.hd-vai a{display:block;background:#fff;border:1px solid var(--line);border-radius:var(--r-md);padding:16px;text-decoration:none;
+  box-shadow:var(--sh-card);transition:border-color .15s,transform .15s}
+.hd-vai a:hover{border-color:var(--brand-light);transform:translateY(-2px)}
+.hd-vai b{display:block;font-size:15px;color:var(--brand)}
+.hd-vai span{display:block;font-size:13.5px;color:var(--ink-2);margin-top:6px;line-height:1.5}
+
+.hd-than{display:grid;grid-template-columns:250px minmax(0,1fr);gap:56px;padding-top:44px;padding-bottom:80px}
+.hd-ml{position:sticky;top:96px;align-self:start;max-height:calc(100vh - 116px);overflow:auto;padding-right:6px}
+.hd-ml summary{display:none}
+.hd-ml ol{list-style:none;margin:0;padding:0;counter-reset:m}
+.hd-ml li{counter-increment:m}
+.hd-ml a{display:flex;gap:10px;padding:7px 10px;border-radius:10px;font-size:14.5px;color:var(--ink-2);text-decoration:none;line-height:1.35}
+.hd-ml a::before{content:counter(m);font-size:12px;font-weight:700;color:var(--ink-3);min-width:16px;padding-top:2px}
+.hd-ml a:hover{background:var(--bg);color:var(--ink)}
+.hd-ml a.on{background:var(--tint);color:var(--brand);font-weight:600}
+.hd-ml a.on::before{color:var(--brand-mid)}
+
+.hd-bai{max-width:860px;min-width:0}
+.hd-bai section{padding-bottom:30px;margin-bottom:34px;border-bottom:1px solid var(--line)}
+.hd-bai section:last-child{border-bottom:0}
+.hd-bai h2{font-size:clamp(26px,3vw,34px);margin:0 0 14px}
+.hd-bai h3{font-size:20px;margin:30px 0 10px;letter-spacing:-.02em;line-height:1.3}
+.hd-bai p,.hd-bai li{color:var(--ink-2)}
+.hd-bai p{margin:0 0 14px}
+.hd-bai strong{color:var(--ink)}
+.hd-bai ol,.hd-bai ul{padding-left:22px;margin:0 0 16px}
+.hd-bai li{margin:5px 0}
+.hd-bai code,.hd-nut{font-family:inherit;font-size:.92em;font-weight:600;color:var(--brand);background:var(--tint);
+  border:1px solid var(--tint-2);border-radius:7px;padding:1px 7px;white-space:nowrap}
+.hd-bai .hd-h4{font-size:17px;margin:24px 0 8px;letter-spacing:-.01em;color:var(--ink)}
+.hd-bai figure{margin:18px 0 24px}
+.hd-bai figure img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:var(--r-md);
+  box-shadow:var(--sh-card);cursor:zoom-in;background:var(--bg)}
+.hd-bai figure.hd-dt{display:flex;gap:16px;flex-wrap:wrap}
+.hd-bai figure.hd-dt img{width:min(260px,46%)}
+.hd-bai figcaption{font-size:13.5px;color:var(--ink-3);margin-top:8px;width:100%}
+.hd-bang{overflow-x:auto;margin:0 0 18px;border:1px solid var(--line);border-radius:var(--r-sm)}
+.hd-bang table{border-collapse:collapse;width:100%;font-size:14.5px}
+.hd-bang th,.hd-bang td{padding:10px 13px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+.hd-bang th{background:var(--bg);font-size:13px;font-weight:700;color:var(--ink)}
+.hd-bang tr:last-child td{border-bottom:0}
+.hd-bang td{color:var(--ink-2)}
+.hd-meo{border-left:4px solid var(--brand-mid);background:var(--tint);border-radius:0 var(--r-sm) var(--r-sm) 0;padding:13px 16px;margin:0 0 18px;font-size:15px;color:var(--ink-2)}
+.hd-meo.canh{border-left-color:#D97706;background:#FFF7E6}
+.hd-meo b{color:var(--ink)}
+.hd-tt{display:inline-block;font-size:12.5px;font-weight:700;padding:2px 9px;border-radius:var(--r-pill);white-space:nowrap}
+.tt-cho{background:#FEF3C7;color:#92400E}.tt-ban{background:#DBEAFE;color:#1D4ED8}.tt-dung{background:#FEE2E2;color:#B91C1C}
+.tt-chot{background:#EDE9FE;color:#6D28D9}.tt-xong{background:#DCFCE7;color:#15803D}
+.hd-cuoi{background:var(--ink);color:#fff;border-radius:var(--r-lg);padding:30px;display:flex;gap:20px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.hd-cuoi h3{color:#fff;margin:0 0 6px}
+.hd-cuoi p{color:rgba(255,255,255,.75);margin:0}
+
+.hd-phong{position:fixed;inset:0;z-index:90;background:rgba(18,26,34,.88);display:none;align-items:center;justify-content:center;padding:24px;cursor:zoom-out}
+.hd-phong.mo{display:flex}
+.hd-phong img{max-width:100%;max-height:100%;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+
+@media (max-width:1100px){.hd-vai{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:960px){
+  .hd-than{grid-template-columns:1fr;gap:20px;padding-top:24px}
+  .hd-ml{position:static;max-height:none;border:1px solid var(--line);border-radius:var(--r-md);padding:4px 8px;background:#fff}
+  .hd-ml summary{display:block;padding:10px 6px;font-weight:700;cursor:pointer}
+  .hd-ml:not([open]) ol{display:none}
+}
+@media (max-width:640px){
+  .hd-dau .frame{padding-top:36px;padding-bottom:30px}
+  .hd-vai{grid-template-columns:1fr 1fr}
+  .hd-dau .hd-mo{font-size:16.5px}
+  .top .nav{display:none}
+  .hd-bai figure.hd-dt img{width:calc(50% - 8px)}
+}
+@media (max-width:420px){.hd-vai{grid-template-columns:1fr}}
+</style>
+</head>
+<body id="top">
+
+<header class="top">
+  <div class="frame">
+    <a class="brand" href="index.html" aria-label="VinaLand — về trang chủ"><img src="assets/vinaland.png" alt="VinaLand"></a>
+    <nav class="nav">
+      <a href="index.html">Trang chủ</a><a href="index.html#swap">Chức năng</a><a href="doc.html" aria-current="page" style="color:var(--ink);font-weight:700">Hướng dẫn</a><a href="index.html#hoi-dap">Hỏi đáp</a>
+    </nav>
+    <div class="right">
+      <a class="btn btn-solid" href="index.html#demo">Đặt lịch demo</a>
+    </div>
+  </div>
+</header>
+
+<div class="hd-dau">
+  <div class="frame">
+    <div class="hd-nho">Hướng dẫn sử dụng</div>
+    <h1>Dùng VinaLand từng bước, theo đúng việc của bạn</h1>
+    <p class="hd-mo">Tài liệu này đi qua mọi màn hình của VinaLand: đăng nhập, lead và khách hàng, giỏ hàng, cơ hội, công việc, báo cáo và quản trị. Chọn vai trò của bạn để đi thẳng tới phần cần đọc trước.</p>
+    <p class="hd-meta">Cập nhật 12/11/2026 · Ảnh minh hoạ dùng dữ liệu mẫu, số điện thoại đã được làm mờ.</p>
+    <div class="hd-vai">
+      <a href="#khach-hang"><b>Nhân viên kinh doanh</b><span>Lead, khách hàng, cơ hội và việc cần làm của mình</span></a>
+      <a href="#phan-bo"><b>Trưởng phòng kinh doanh</b><span>Phân bổ lead, đổi sale, theo dõi việc của nhóm</span></a>
+      <a href="#san-pham"><b>Quản lý sản phẩm</b><span>Giỏ hàng, giá, nhập Excel, báo cáo nguồn hàng</span></a>
+      <a href="#telesale"><b>Telesale</b><span>Đưa sản phẩm mới lên hệ thống chờ duyệt</span></a>
+      <a href="#quan-tri"><b>Quản trị viên</b><span>Người dùng, phân quyền, bảo mật, danh mục</span></a>
+    </div>
+  </div>
+</div>
+
+<div class="frame hd-than">
+  <details class="hd-ml" open>
+    <summary>Mục lục</summary>
+    <ol>
+      <li><a href="#bat-dau">Tài khoản và đăng nhập</a></li>
+      <li><a href="#vai-tro">Vai trò và quyền</a></li>
+      <li><a href="#dashboard">Dashboard</a></li>
+      <li><a href="#khach-hang">Lead và khách hàng</a></li>
+      <li><a href="#san-pham">Sản phẩm BĐS</a></li>
+      <li><a href="#du-an">Dự án</a></li>
+      <li><a href="#co-hoi">Cơ hội và pipeline</a></li>
+      <li><a href="#cong-viec">Lịch và công việc</a></li>
+      <li><a href="#bao-cao">Báo cáo</a></li>
+      <li><a href="#thong-bao">Thông báo</a></li>
+      <li><a href="#ai">Trợ lý AI và Sales Coach</a></li>
+      <li><a href="#quan-tri">Quản trị hệ thống</a></li>
+      <li><a href="#hoi-dap">Câu hỏi thường gặp</a></li>
+    </ol>
+  </details>
+
+  <article class="hd-bai">
+
+<!-- 1 ─────────────────────────────── -->
+<section id="bat-dau">
+  <h2>Tài khoản, đăng nhập và giao diện</h2>
+  <p>Nhân viên không tự đăng ký được — mọi tài khoản do quản trị viên tạo. Lần đầu đăng nhập trên một thiết bị, nhân viên cần thêm <strong>mã OTP</strong> do Super Admin đọc cho. Quy trình đầy đủ gồm bốn bước:</p>
+  <div class="hd-bang"><table>
+    <thead><tr><th>#</th><th>Việc</th><th>Ai làm</th><th>Khi nào</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td><a href="#cai-otp">Cài OTP cho hệ thống</a></td><td>Super Admin</td><td>Một lần duy nhất, trước khi mời nhân viên</td></tr>
+      <tr><td>2</td><td>Tạo tài khoản, gửi tên đăng nhập và mật khẩu cho nhân viên</td><td>Quản trị viên</td><td>Mỗi nhân viên mới</td></tr>
+      <tr><td>3</td><td>Đăng nhập lần đầu, nhập mã OTP</td><td>Nhân viên</td><td>Mỗi thiết bị mới</td></tr>
+      <tr><td>4</td><td>Đọc mã OTP cho nhân viên</td><td>Super Admin</td><td>Khi nhân viên gọi xin mã</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3 id="cai-otp">Bước 1 — Super Admin cài OTP (làm một lần)</h3>
+  <p><strong>OTP là gì?</strong> Lúc cài, hệ thống và điện thoại của Super Admin cùng giữ một khoá bí mật. Mỗi 30 giây, hai bên tự tính ra cùng một dãy 6 số mà không cần mạng hay tin nhắn — giống ứng dụng sinh mã OTP của ngân hàng. Nhân viên đăng nhập trên thiết bị mới phải nhập đúng dãy số đó, nên mật khẩu có bị lộ thì người ngoài vẫn không vào được.</p>
+  <p>Khi hệ thống chưa cài OTP, mọi tài khoản <strong>không phải Super Admin</strong> đều không đăng nhập được — màn hình báo <em>"Hệ thống chưa được setup TOTP. Vui lòng liên hệ Super Admin để cấu hình."</em> Vì vậy đây là việc đầu tiên khi bắt đầu dùng hệ thống.</p>
+
+  <h4 class="hd-h4">1.1 Kiểm tra hệ thống đã cài OTP chưa</h4>
+  <p>Đăng nhập bằng tài khoản <strong>Super Admin</strong>, vào <em>Cấu hình → Bảo mật đăng nhập</em>. Nhìn khung <strong>TOTP đăng nhập</strong> ở đầu trang:</p>
+  <div class="hd-bang"><table>
+    <thead><tr><th>Bạn thấy</th><th>Nghĩa là</th><th>Làm gì</th></tr></thead>
+    <tbody>
+      <tr><td>Nhãn vàng <strong>Chưa setup</strong> và nút <span class="hd-nut">Setup TOTP</span></td><td>Chưa cài — nhân viên chưa đăng nhập được</td><td>Làm tiếp từ 1.2</td></tr>
+      <tr><td>Nhãn xanh <strong>Đã setup</strong>, nút <span class="hd-nut">Đổi TOTP</span> và <span class="hd-nut">Backup code recover</span></td><td>Đã cài rồi</td><td><strong>Bỏ qua Bước 1.</strong> Chỉ cần biết ai đang giữ điện thoại có mã và mã dự phòng cất ở đâu.</td></tr>
+      <tr><td>Không thấy thẻ <em>Bảo mật đăng nhập</em> trong Cấu hình</td><td>Bạn không đăng nhập bằng tài khoản Super Admin</td><td>Đăng nhập lại bằng tài khoản Super Admin</td></tr>
+    </tbody>
+  </table></div>
+
+  <h4 class="hd-h4">1.2 Chuẩn bị</h4>
+  <ul>
+    <li><strong>Một máy tính</strong> đang đăng nhập tài khoản Super Admin, mở sẵn trang <em>Bảo mật đăng nhập</em>.</li>
+    <li><strong>Điện thoại của người sẽ giữ mã</strong> — người mà nhân viên sẽ gọi xin OTP. Cài ứng dụng <strong>Google Authenticator</strong> (miễn phí): iPhone tải trên App Store, Android tải trên Google Play.</li>
+    <li>Nếu muốn có <strong>người giữ mã dự phòng</strong>, chuẩn bị luôn điện thoại thứ hai đã cài Google Authenticator (xem 1.4).</li>
+    <li>Giấy bút hoặc trình quản lý mật khẩu của công ty để cất 10 mã dự phòng ở bước 1.6.</li>
+  </ul>
+
+  <h4 class="hd-h4">1.3 Bấm Setup TOTP trên máy tính</h4>
+  <p>Bấm <span class="hd-nut">Setup TOTP</span>. Hộp thoại hiện ba dòng hướng dẫn ngắn, một <strong>mã QR</strong> và bên dưới là dòng <em>"Hoặc nhập tay key"</em> kèm một chuỗi ký tự. Giữ nguyên hộp thoại này, chuyển sang điện thoại.</p>
+  <figure><img src="assets/huong-dan/totp-qr.webp?v=20261112a" alt="Hộp thoại Setup TOTP với mã QR" width="1440" height="900" loading="lazy"><figcaption>Hộp thoại Setup TOTP. Mã QR và khoá trong ảnh đã được làm mờ — mã của bạn sẽ hiện rõ.</figcaption></figure>
+  <div class="hd-meo"><b>Bấm Hủy lúc này không sao.</b> Hệ thống chỉ lưu khoá mới khi bạn nhập đúng 6 số ở 1.5. Đóng hộp thoại trước đó thì mọi thứ giữ nguyên như cũ.</div>
+
+  <h4 class="hd-h4">1.4 Quét mã QR bằng điện thoại</h4>
+  <ol>
+    <li>Mở <strong>Google Authenticator</strong>. Lần đầu dùng, bấm <em>Bắt đầu</em>; nếu đã có sẵn các mục khác, bấm dấu <strong>+</strong> ở góc dưới.</li>
+    <li>Chọn <strong>Quét mã QR</strong>, cho phép ứng dụng dùng camera.</li>
+    <li>Đưa camera vào mã QR trên màn hình máy tính. Ứng dụng tự thêm một mục mới — tài khoản <strong>Hệ thống</strong> — với dãy 6 số và một vòng đếm ngược 30 giây.</li>
+    <li><strong>Không quét được</strong> (camera hỏng, màn hình loá)? Chọn <strong>Nhập khoá thiết lập</strong>, gõ chuỗi ký tự ở dòng <em>"Hoặc nhập tay key"</em> trên máy tính, loại khoá để <em>Dựa trên thời gian</em>, rồi lưu.</li>
+    <li><strong>Người giữ mã dự phòng</strong> quét <strong>cùng mã QR này</strong> trên điện thoại thứ hai, ngay bây giờ — hai điện thoại sẽ luôn hiện cùng một dãy số. Sau khi đóng hộp thoại thì không lấy lại được mã QR này nữa.</li>
+  </ol>
+
+  <h4 class="hd-h4">1.5 Nhập 6 số để xác nhận</h4>
+  <p>Gõ dãy 6 số đang hiện trên điện thoại vào ô <strong>Mã OTP (6 chữ số)</strong> trên máy tính, bấm <span class="hd-nut">Xác nhận</span>. Bước này chứng minh điện thoại và hệ thống đã khớp khoá với nhau.</p>
+  <ul>
+    <li>Nếu vòng đếm ngược trên điện thoại sắp hết, chờ dãy số mới rồi hãy gõ.</li>
+    <li>Báo <em>"Mã OTP không đúng. Vui lòng scan lại QR và thử."</em>: kiểm tra giờ trên điện thoại đang để <strong>tự động</strong> (sai giờ là sai mã), rồi gõ lại dãy số mới. Vẫn lỗi thì xoá mục vừa thêm trong ứng dụng, quét lại mã QR.</li>
+  </ul>
+
+  <h4 class="hd-h4">1.6 Lưu 10 mã dự phòng — chỉ hiện một lần</h4>
+  <p>Xác nhận đúng, hộp thoại chuyển sang <strong>✅ TOTP đã setup</strong> và hiện <strong>10 mã dự phòng</strong> dạng <code>ABCDE-12345</code>.</p>
+  <figure><img src="assets/huong-dan/totp-ma-du-phong.webp?v=20261112a" alt="Màn hình 10 mã dự phòng" width="1440" height="900" loading="lazy"><figcaption>10 mã dự phòng. Các mã trong ảnh chỉ là minh hoạ.</figcaption></figure>
+  <ol>
+    <li>Bấm <span class="hd-nut">Copy</span> để chép cả 10 mã, dán vào trình quản lý mật khẩu của công ty — hoặc chép tay ra giấy và cất vào két.</li>
+    <li><strong>Không</strong> lưu mã dự phòng trên chính chiếc điện thoại giữ mã: mất điện thoại là mất luôn cả hai.</li>
+    <li>Chỉ bấm <span class="hd-nut">Hoàn tất</span> sau khi đã cất mã. Đóng hộp thoại là các mã không hiện lại nữa.</li>
+  </ol>
+  <p>Khung <em>TOTP đăng nhập</em> chuyển sang nhãn xanh <strong>Đã setup</strong>, kèm dòng <em>"Backup codes: 10/10 còn dùng"</em>. Mỗi mã dự phòng chỉ dùng được một lần.</p>
+
+  <h4 class="hd-h4">1.7 Thử lại cho chắc</h4>
+  <p>Mở một <strong>tab ẩn danh</strong> trên máy tính, đăng nhập bằng một tài khoản nhân viên. Hệ thống phải hỏi mã OTP; nhập dãy số đang hiện trên điện thoại và vào được Dashboard là đã cài đúng. Lần thử này để lại một dòng trong bảng <em>Thiết bị đã đăng ký</em> — đóng tab ẩn danh là dòng đó không dùng lại được nữa, có thể bấm thu hồi cho gọn danh sách.</p>
+
+  <div class="hd-meo canh"><b>Một mã OTP chung cho cả công ty.</b> Mọi nhân viên đăng nhập trên thiết bị mới đều phải gọi người giữ mã. Nên có thêm một người giữ mã dự phòng (quét cùng mã QR ở 1.4) để công việc không tắc khi người chính vắng mặt.</div>
+
+  <h4 class="hd-h4">Khi nào bấm "Đổi TOTP"?</h4>
+  <p><span class="hd-nut">Đổi TOTP</span> đi lại đúng các bước 1.3 → 1.6 với một mã QR mới. Chỉ dùng khi <strong>điện thoại giữ mã bị mất</strong> hoặc <strong>đổi người giữ mã</strong> (người cũ nghỉ việc, chuyển bộ phận). Khi bạn xác nhận xong:</p>
+  <ul>
+    <li>Mục cũ trong Google Authenticator của mọi người đang giữ mã <strong>không dùng được nữa</strong> — ai cần cấp OTP phải quét mã QR mới.</li>
+    <li>Một bộ 10 mã dự phòng mới thay cho bộ cũ.</li>
+    <li>Thiết bị nhân viên đã được ghi nhớ <strong>không bị ảnh hưởng</strong> — họ vẫn đăng nhập bình thường.</li>
+  </ul>
+
+  <h4 class="hd-h4">Mất điện thoại giữ mã</h4>
+  <ul>
+    <li><strong>Còn điện thoại dự phòng</strong> (người giữ mã thứ hai): vẫn cấp OTP bình thường. Nên bấm <span class="hd-nut">Đổi TOTP</span> sớm để chiếc điện thoại bị mất không còn sinh được mã.</li>
+    <li><strong>Không còn điện thoại nào, nhưng còn mã dự phòng</strong>: Super Admin vẫn đăng nhập được (tài khoản Super Admin không cần OTP). Vào <em>Bảo mật đăng nhập</em> → <span class="hd-nut">Backup code recover</span>, nhập một mã dự phòng → <span class="hd-nut">Khôi phục</span>. OTP được đặt lại và <strong>thiết bị của mọi nhân viên bị thu hồi</strong> — làm lại Bước 1 ngay với điện thoại mới, rồi báo cả công ty chuẩn bị nhập OTP lại ở lần đăng nhập sau.</li>
+  </ul>
+  <figure><img src="assets/huong-dan/totp-khoi-phuc.webp?v=20261112a" alt="Hộp khôi phục TOTP bằng mã dự phòng" width="1440" height="900" loading="lazy"><figcaption>Khôi phục bằng mã dự phòng khi mất điện thoại giữ mã.</figcaption></figure>
+
+  <h3 id="tao-tai-khoan">Bước 2 — Quản trị viên tạo tài khoản cho nhân viên</h3>
+  <ol>
+    <li>Vào <em>Cấu hình → Người dùng</em>, bấm <span class="hd-nut">Thêm người dùng</span>.</li>
+    <li>Điền thông tin theo bảng dưới.</li>
+    <li>Bấm <span class="hd-nut">Lưu</span>. Tài khoản dùng được ngay.</li>
+  </ol>
+  <figure><img src="assets/huong-dan/nguoi-dung-them.webp?v=20261112a" alt="Form thêm người dùng" width="1440" height="900" loading="lazy"><figcaption>Form thêm người dùng: chọn vai trò và nhóm cho nhân viên.</figcaption></figure>
+  <div class="hd-bang"><table>
+    <thead><tr><th>Ô</th><th>Quy định</th><th>Ghi chú</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Họ tên</strong> *</td><td>Bắt buộc</td><td>Tên hiện trên danh sách lead, cơ hội, nhật ký thao tác — nên ghi đủ họ tên thật.</td></tr>
+      <tr><td><strong>Tên đăng nhập</strong> *</td><td>Ít nhất 3 ký tự; chỉ gồm chữ không dấu, số, dấu <code>_</code> và <code>.</code></td><td><strong>Không đổi được sau khi tạo.</strong> Nên đặt theo một quy ước chung, ví dụ <code>an.nguyen</code>.</td></tr>
+      <tr><td>Email</td><td>Không bắt buộc</td><td>Không được trùng với người khác.</td></tr>
+      <tr><td>SĐT</td><td>Không bắt buộc</td><td></td></tr>
+      <tr><td><strong>Mật khẩu</strong> *</td><td>Ít nhất 8 ký tự, có ít nhất 1 chữ hoa, 1 số và 1 ký tự đặc biệt</td><td>Ví dụ <code>Matkhau@2026</code>. Thiếu điều kiện nào, hệ thống báo đúng điều kiện đó và không lưu.</td></tr>
+      <tr><td><strong>Vai trò</strong> *</td><td>Chọn ít nhất một; chọn được nhiều</td><td>Quyết định nhân viên thấy menu nào, làm được gì — xem <a href="#vai-tro">mục 2</a>.</td></tr>
+      <tr><td>Nhóm</td><td>Không bắt buộc</td><td>Nhân viên kinh doanh nên gán nhóm: trưởng phòng chỉ phân bổ lead được cho người trong nhóm mình.</td></tr>
+      <tr><td>Đang hoạt động</td><td>Mặc định bật</td><td>Bỏ tick là tài khoản không đăng nhập được.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="hd-meo"><b>Gửi thông tin đăng nhập cho nhân viên:</b> gửi riêng cho từng người (tin nhắn cá nhân, không gửi vào nhóm chat), gồm đường dẫn hệ thống, tên đăng nhập và mật khẩu. Hiện nhân viên <strong>chưa tự đổi được mật khẩu</strong> — muốn đổi thì nhờ quản trị viên đặt lại (xem <a href="#quen-mat-khau">bên dưới</a>).</div>
+
+  <h3>Bước 3 — Nhân viên đăng nhập lần đầu</h3>
+  <ol>
+    <li>Mở đường dẫn hệ thống <strong>trên đúng máy hoặc điện thoại sẽ dùng hằng ngày</strong>, bằng trình duyệt bình thường (Chrome, Safari, Edge…) — không dùng tab ẩn danh.</li>
+    <li>Nhập <strong>Tên đăng nhập</strong> và <strong>Mật khẩu</strong> quản trị viên đã gửi. Bấm biểu tượng con mắt nếu muốn xem lại mật khẩu vừa gõ. Bấm <span class="hd-nut">Đăng nhập</span>.
+      <figure><img src="assets/huong-dan/dang-nhap.webp?v=20261112a" alt="Màn hình đăng nhập VinaLand" width="1440" height="900" loading="lazy"><figcaption>Màn hình đăng nhập.</figcaption></figure></li>
+    <li>Màn hình chuyển sang hộp <strong>Cần mã OTP</strong>. Gọi điện hoặc nhắn Super Admin: <em>"Em là [họ tên], đang đăng nhập lần đầu, xin mã OTP."</em></li>
+    <li>Nhập 6 số Super Admin đọc vào ô <strong>Mã OTP (6 chữ số)</strong>, bấm <span class="hd-nut">Xác thực</span>. Mã chỉ đúng trong khoảng một phút — nhập ngay khi nghe.</li>
+    <li>Vào được Dashboard là xong. Trình duyệt này đã được ghi nhớ: <strong>những lần sau chỉ cần mật khẩu</strong>.</li>
+  </ol>
+  <figure><img src="assets/huong-dan/dang-nhap-otp.webp?v=20261112a" alt="Màn hình nhập mã OTP" width="1440" height="900" loading="lazy"><figcaption>Sau khi nhập đúng mật khẩu trên thiết bị mới, hệ thống hỏi mã OTP.</figcaption></figure>
+  <div class="hd-meo"><b>Có 10 phút để nhập OTP.</b> Quá 10 phút kể từ lúc nhập mật khẩu, hệ thống báo <em>"Phiên xác thực hết hạn"</em> — bấm <span class="hd-nut">← Quay lại</span> và đăng nhập lại từ đầu, rồi xin mã mới.</div>
+
+  <h4 class="hd-h4">Khi nào phải nhập OTP lại?</h4>
+  <p>Hệ thống ghi nhớ <strong>từng trình duyệt</strong>, không phải từng chiếc máy. Bạn sẽ được hỏi OTP lại khi:</p>
+  <ul>
+    <li>Đăng nhập trên máy hoặc điện thoại khác, <strong>hoặc trình duyệt khác</strong> trên cùng máy (ví dụ đã dùng Chrome, nay mở bằng Edge).</li>
+    <li>Dùng <strong>tab ẩn danh</strong> — trình duyệt quên mọi thứ khi đóng tab, nên lần nào cũng phải nhập OTP.</li>
+    <li>Đã <strong>xoá dữ liệu duyệt web</strong> (cookie, dữ liệu trang web) của trình duyệt.</li>
+    <li>Trình duyệt đó <strong>hơn 365 ngày</strong> không đăng nhập lần nào.</li>
+    <li>Quản trị viên đã <strong>thu hồi thiết bị</strong> của bạn (thường khi mất máy).</li>
+  </ul>
+
+  <h3>Bước 4 — Super Admin đọc mã OTP cho nhân viên</h3>
+  <ol>
+    <li><strong>Xác nhận đúng người</strong> trước khi đọc mã: nhận cuộc gọi từ số quen, hoặc hỏi lại thông tin chỉ nhân viên đó biết. Mã OTP mở cửa cho một thiết bị lạ vào hệ thống.</li>
+    <li>Mở Google Authenticator, đọc <strong>6 số đang hiện</strong> ở mục của hệ thống CRM — mục được thêm lúc cài OTP ở bước 1, tài khoản <em>Hệ thống</em>.</li>
+    <li>Mã đổi mỗi 30 giây. Nếu vòng đếm ngược sắp hết, chờ mã mới rồi đọc để nhân viên kịp nhập.</li>
+  </ol>
+  <div class="hd-meo canh"><b>Không chụp màn hình, không gửi ảnh mã QR</b> của Google Authenticator cho ai. Ai có mã QR đó đều tự sinh được OTP cho mọi thiết bị.</div>
+
+  <h3>Lỗi thường gặp khi đăng nhập</h3>
+  <div class="hd-bang"><table>
+    <thead><tr><th>Màn hình báo</th><th>Nguyên nhân</th><th>Cách xử lý</th></tr></thead>
+    <tbody>
+      <tr><td>Tên đăng nhập hoặc mật khẩu không đúng</td><td>Gõ sai, bật Caps Lock, hoặc tài khoản đã bị vô hiệu</td><td>Bấm con mắt để kiểm tra mật khẩu. Vẫn lỗi thì hỏi quản trị viên tài khoản còn hoạt động không.</td></tr>
+      <tr><td>Tài khoản tạm khóa. Thử lại sau 15 phút.</td><td>Sai mật khẩu 5 lần trong 15 phút</td><td>Chờ 15 phút. Không nhớ mật khẩu thì nhờ quản trị viên đặt lại thay vì thử tiếp.</td></tr>
+      <tr><td>Quá nhiều lần đăng nhập sai từ IP. Thử lại sau 5 phút.</td><td>Nhiều lần sai từ cùng một mạng (ví dụ cả văn phòng chung Wi-Fi)</td><td>Chờ 5 phút rồi thử lại.</td></tr>
+      <tr><td>Hệ thống chưa được setup TOTP…</td><td>Super Admin chưa làm bước 1</td><td>Báo Super Admin cài OTP.</td></tr>
+      <tr><td>Mã OTP không đúng</td><td>Gõ nhầm, hoặc mã đã sang chu kỳ mới</td><td>Xin Super Admin đọc mã đang hiện và nhập ngay.</td></tr>
+      <tr><td>Phiên xác thực hết hạn…</td><td>Quá 10 phút sau khi nhập mật khẩu</td><td>Bấm <em>Quay lại</em>, đăng nhập lại từ đầu.</td></tr>
+      <tr><td>Tài khoản tạm khóa. Thử lại sau 60 phút.</td><td>Sai OTP 10 lần trong một giờ</td><td>Chờ một giờ, hoặc báo quản trị viên nếu nghi có người dò mã.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3 id="quen-mat-khau">Quên mật khẩu, mất máy, nhân viên nghỉ việc</h3>
+  <ul>
+    <li><strong>Quên mật khẩu:</strong> quản trị viên vào <em>Cấu hình → Người dùng</em>, bấm biểu tượng <em>Đổi mật khẩu</em> trên dòng của nhân viên, nhập mật khẩu mới và gửi riêng cho họ. Mật khẩu mới có hiệu lực ngay; thiết bị đã ghi nhớ vẫn giữ, không phải nhập OTP lại.</li>
+    <li><strong>Mất máy hoặc điện thoại:</strong> Super Admin vào <em>Cấu hình → Bảo mật đăng nhập</em>, tìm thiết bị đó trong bảng <em>Thiết bị đã đăng ký</em> và bấm thu hồi, rồi đổi luôn mật khẩu của nhân viên. Sau hai việc này, máy bị mất không đăng nhập lại được nữa. Lưu ý: nếu trên máy đó đang có một phiên còn mở, phiên ấy vẫn dùng được thêm một thời gian ngắn cho tới khi tự hết hạn — vì vậy nên làm ngay khi biết mất máy.</li>
+    <li><strong>Nhân viên nghỉ việc:</strong> chuyển lead và khách hàng của họ cho người khác (<a href="#phan-bo">Đổi sale</a>), rồi bấm <em>Vô hiệu</em> trên dòng của họ ở <em>Người dùng</em>. Tài khoản không đăng nhập được nữa nhưng mọi dữ liệu, lịch sử họ tạo vẫn còn nguyên. Làm việc này trước giờ nhân viên rời công ty — phiên đang mở (nếu có) chỉ tự hết hạn sau một thời gian ngắn.</li>
+  </ul>
+  <figure><img src="assets/huong-dan/nguoi-dung-doi-mk.webp?v=20261112a" alt="Hộp đổi mật khẩu" width="1440" height="900" loading="lazy"><figcaption>Quản trị viên đặt lại mật khẩu cho nhân viên.</figcaption></figure>
+  <figure><img src="assets/huong-dan/bao-mat.webp?v=20261112a" alt="Trang bảo mật đăng nhập" width="1440" height="900" loading="lazy"><figcaption>Bảo mật đăng nhập: trạng thái OTP, mã dự phòng và danh sách thiết bị đã đăng ký.</figcaption></figure>
+  <div class="hd-meo"><b>Tài khoản Super Admin đăng nhập không cần OTP</b> trên mọi thiết bị. Vì vậy mật khẩu Super Admin phải thật mạnh, không dùng chung, và chỉ giao cho người chịu trách nhiệm hệ thống.</div>
+
+  <h3>Bố cục màn hình</h3>
+  <ul>
+    <li><strong>Menu bên trái</strong> — chỉ hiện những mục vai trò của bạn được dùng. Nút ở góc trên trái thanh tiêu đề để thu gọn hoặc mở rộng menu.</li>
+    <li><strong>Chuông thông báo</strong> — số màu đỏ là thông báo chưa đọc. Bấm vào tiêu đề để mở đúng lead, task hoặc cơ hội liên quan; <span class="hd-nut">Xem tất cả</span> để mở trang Thông báo.</li>
+    <li><strong>Biểu tượng mặt trời</strong> — đổi giao diện <em>Sáng</em>, <em>Tối</em> hoặc <em>Theo hệ thống</em>.</li>
+    <li><strong>Tên của bạn</strong> ở góc phải — hiện vai trò và nút <span class="hd-nut">Đăng xuất</span>.</li>
+    <li><strong>Nút tròn màu tím</strong> ở góc dưới phải — Trợ lý AI tra cứu tài liệu của công ty (xem <a href="#ai">mục 11</a>).</li>
+  </ul>
+  <p>Hệ thống tự kiểm tra phiên làm việc. Khi phiên hết hạn, bạn được đưa về màn đăng nhập và quay lại đúng trang đang xem sau khi đăng nhập lại.</p>
+
+  <h3>Dùng trên điện thoại</h3>
+  <p>VinaLand chạy ngay trên trình duyệt điện thoại, không cần cài ứng dụng. Menu thu vào nút <span class="hd-nut">☰</span> ở góc trên; danh sách sản phẩm tự chuyển sang dạng thẻ dễ đọc, có nút chuyển qua lại giữa <em>Bảng</em> và <em>Thẻ</em>.</p>
+  <figure class="hd-dt">
+    <img src="assets/huong-dan/mobile-menu.webp?v=20261112a" alt="Menu VinaLand trên điện thoại" width="780" height="1688" loading="lazy">
+    <img src="assets/huong-dan/mobile-san-pham.webp?v=20261112a" alt="Danh sách sản phẩm dạng thẻ trên điện thoại" width="780" height="1688" loading="lazy">
+    <figcaption>Trên điện thoại: menu dạng ngăn kéo và giỏ hàng dạng thẻ.</figcaption>
+  </figure>
+</section>
+
+<!-- 2 ─────────────────────────────── -->
+<section id="vai-tro">
+  <h2>Vai trò và quyền</h2>
+  <p>Mỗi người dùng có một hoặc nhiều vai trò. Vai trò quyết định <strong>bạn thấy menu nào</strong> và <strong>phạm vi dữ liệu</strong>: <em>Của mình</em>, <em>Nhóm</em> hoặc <em>Toàn bộ</em>. Bảng dưới là cấu hình mặc định — quản trị viên có thể chỉnh lại cho phù hợp với công ty (xem <a href="#phan-quyen">Phân quyền</a>).</p>
+  <div class="hd-bang"><table>
+    <thead><tr><th>Vai trò</th><th>Việc chính</th><th>Phạm vi mặc định</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Nhân viên KD</strong></td><td>Chăm sóc lead và khách hàng, tạo cơ hội, ghi trao đổi, làm task</td><td>Lead, khách, cơ hội, task <em>của mình</em>; xem toàn bộ giỏ hàng và dự án</td></tr>
+      <tr><td><strong>Trưởng phòng KD</strong></td><td>Theo dõi công việc của nhóm, quản lý thành viên, chăm sóc khách của mình</td><td>Người dùng, task <em>theo nhóm</em>; lead, khách hàng và cơ hội <em>của mình</em></td></tr>
+      <tr><td><strong>QL Sản phẩm</strong></td><td>Quản lý dự án, giỏ hàng, giá, nhập/xuất Excel, duyệt sản phẩm Telesale gửi lên, xem báo cáo</td><td>Toàn bộ dự án và sản phẩm, kể cả thông tin chủ nhà</td></tr>
+      <tr><td><strong>Telesale</strong></td><td>Đưa sản phẩm mới tìm được lên hệ thống để QL Sản phẩm duyệt</td><td>Xem toàn bộ giỏ hàng; tạo, sửa sản phẩm <em>của mình</em> khi còn ở trạng thái Chờ</td></tr>
+      <tr><td><strong>Admin IT</strong></td><td>Người dùng, nhóm, phân quyền, danh mục, nhật ký</td><td>Toàn bộ cấu hình hệ thống</td></tr>
+      <tr><td><strong>Super Admin</strong></td><td>Toàn quyền, giữ bảo mật đăng nhập và tài liệu AI</td><td>Toàn bộ</td></tr>
+    </tbody>
+  </table></div>
+  <div class="hd-meo"><b>Tên và số điện thoại chủ nhà</b> chỉ hiện với vai trò được cấp quyền <em>xem thông tin nhạy cảm</em>. Người không có quyền sẽ không thấy các cột này trên danh sách, trong chi tiết sản phẩm, lẫn khi tìm kiếm.</div>
+</section>
+
+<!-- 3 ─────────────────────────────── -->
+<section id="dashboard">
+  <h2>Dashboard</h2>
+  <p>Trang đầu tiên sau khi đăng nhập. Nội dung thay đổi theo vai trò:</p>
+  <ul>
+    <li><strong>Quản lý cấp cao</strong> thấy bức tranh toàn công ty: tổng sản phẩm theo trạng thái, lead và khách hàng, cơ hội đang xử lý, giá trị đã chốt theo tháng, sản phẩm theo dự án, phân khu, loại hình, mức giá; xếp hạng nhóm và sale; cảnh báo lead "ngủ" hơn 14 ngày, deal đứng yên, cơ hội sắp hết hạn.</li>
+    <li><strong>Nhân viên và trưởng phòng KD</strong> thấy việc của mình hoặc của nhóm: số lead, cơ hội và giá trị pipeline, task quá hạn, lead lâu chưa tương tác, <em>Việc hôm nay</em>, <em>Cơ hội đến hạn 7 ngày tới</em> và <em>Lead cần chăm sóc</em>.</li>
+  </ul>
+  <figure><img src="assets/huong-dan/dashboard.webp?v=20261112a" alt="Dashboard tổng quan" width="1440" height="900" loading="lazy"><figcaption>Dashboard tổng quan của quản lý.</figcaption></figure>
+</section>
+
+<!-- 4 ─────────────────────────────── -->
+<section id="khach-hang">
+  <h2>Lead và khách hàng</h2>
+  <p>Menu <strong>Khách hàng</strong> có hai tab: <strong>Lead</strong> — người mới để lại thông tin, đang được chăm sóc; và <strong>Khách hàng tiềm năng</strong> — lead đã có nhu cầu rõ, hoặc khách tạo trực tiếp. Lead chuyển thành khách hàng thì toàn bộ thông tin, nhu cầu và lịch sử trao đổi đi theo.</p>
+  <figure><img src="assets/huong-dan/khach-hang.webp?v=20261112a" alt="Danh sách lead" width="1440" height="900" loading="lazy"><figcaption>Tab Lead: thẻ tổng hợp, ô tìm kiếm, bộ lọc và danh sách.</figcaption></figure>
+
+  <h3>Tìm và lọc lead</h3>
+  <ul>
+    <li>Ô tìm kiếm nhận <strong>tên, số điện thoại, email hoặc mã lead</strong>.</li>
+    <li>Lọc theo trạng thái, nguồn, dự án quan tâm, sale phụ trách, nhóm. Nút <span class="hd-nut">Pool</span> lọc các lead chưa có ai phụ trách.</li>
+    <li><span class="hd-nut">Bộ lọc đã lưu</span> → <em>Lưu bộ lọc hiện tại</em> để lần sau mở lại bằng một lần bấm.</li>
+    <li>Trên mỗi dòng: biểu tượng điện thoại để <strong>gọi ngay</strong> (trên điện thoại), biểu tượng ghi chú để <strong>ghi nhanh</strong> một dòng.</li>
+  </ul>
+
+  <h3>Thêm lead</h3>
+  <ol>
+    <li>Bấm <span class="hd-nut">Thêm Lead</span>.</li>
+    <li>Điền <strong>Tên khách hàng</strong> và <strong>SĐT</strong> (bắt buộc), các thông tin cá nhân khác nếu có. Tỉnh/Thành phố chọn trước rồi mới chọn Quận/Huyện.</li>
+    <li>Phần <strong>Nhu cầu BĐS</strong>: loại BĐS, mục đích, layout, dự án và phân khu quan tâm, khoảng giá (tỷ), khoảng diện tích, khu vực quan tâm (chọn được nhiều nơi).</li>
+    <li>Phần <strong>Thông tin Lead</strong>: nguồn lead, trạng thái, sale phụ trách (mặc định là bạn).</li>
+    <li>Bấm <span class="hd-nut">Lưu Lead</span>.</li>
+  </ol>
+  <figure><img src="assets/huong-dan/lead-them.webp?v=20261112a" alt="Form thêm lead" width="1440" height="900" loading="lazy"><figcaption>Form thêm mới lead.</figcaption></figure>
+  <div class="hd-meo"><b>Chống trùng số điện thoại.</b> Ngay khi bạn gõ xong số, hệ thống báo nếu số đó đã thuộc một lead hoặc khách hàng khác, kèm tên người đang phụ trách. Số trùng không lưu được — tránh hai sale cùng gọi một khách.</div>
+
+  <h3>Nhập lead từ Excel</h3>
+  <ol>
+    <li>Bấm <span class="hd-nut">Import Excel</span> → <span class="hd-nut">Tải template mẫu</span>. Hàng 2 của file mẫu là ví dụ — xoá trước khi điền.</li>
+    <li>Điền dữ liệu (Họ tên và SĐT bắt buộc; giá nhập theo <strong>tỷ</strong>; lựa chọn ghi bằng chữ tiếng Việt như trên giao diện), rồi chọn file.</li>
+    <li>Bấm <span class="hd-nut">Kiểm tra dữ liệu</span>. Hệ thống đọc thử và báo từng dòng hợp lệ hay lỗi — <strong>chưa tạo lead nào</strong> ở bước này.</li>
+    <li>Sửa file nếu cần, rồi <span class="hd-nut">Xác nhận Import</span>. Lead mới được giao cho người import, trạng thái <em>Mới</em>.</li>
+  </ol>
+
+  <h3>Chăm sóc lead: trang chi tiết</h3>
+  <p>Bấm vào tên lead để mở trang chi tiết. Bên trái là các tab, bên phải là thông tin lead và lịch sử trạng thái.</p>
+  <ul>
+    <li><strong>Trao đổi</strong> — ghi lại cuộc gọi, email, cuộc gặp hoặc ghi chú; chọn kết quả (<em>Đã liên hệ được</em>, <em>Không bắt máy</em>, <em>Hẹn lại</em>…) và ngày hẹn lại nếu có. Bấm <span class="hd-nut">Lưu hoạt động</span>.</li>
+    <li><strong>Chat nội bộ</strong> — trao đổi với đồng nghiệp ngay trên hồ sơ khách. Gõ <code>@</code> để nhắc tên — người được nhắc nhận thông báo ngay. <em>Enter</em> để gửi, <em>Shift + Enter</em> để xuống dòng.</li>
+    <li><strong>Lịch sử đổi sale</strong> và <strong>Thông tin cá nhân</strong>.</li>
+  </ul>
+  <figure><img src="assets/huong-dan/lead-chi-tiet.webp?v=20261112a" alt="Chi tiết lead" width="1440" height="900" loading="lazy"><figcaption>Chi tiết lead: ghi trao đổi, chat nội bộ, lịch sử trạng thái.</figcaption></figure>
+
+  <h3>Đổi trạng thái và chuyển thành khách hàng</h3>
+  <ol>
+    <li>Trên trang chi tiết lead, bấm <span class="hd-nut">Đổi trạng thái</span>.</li>
+    <li>Chọn trạng thái mới: <em>Mới, Đã liên hệ, Đang tư vấn, Tiềm năng, Không có nhu cầu, Tạm hoãn</em>.</li>
+    <li>Chọn <strong>Không có nhu cầu</strong> thì phải chọn lý do (giá cao, không hợp khu vực, đã mua nơi khác…).</li>
+    <li>Chọn <strong>Tiềm năng</strong> nghĩa là <strong>chuyển lead thành Khách hàng tiềm năng</strong>: chọn <em>Phân nhóm khách hàng</em> (Mới, VIP, Đầu tư, Thân thiết) rồi <span class="hd-nut">Xác nhận chuyển đổi</span>. Hệ thống mở ngay hồ sơ khách hàng mới, đã chép sẵn thông tin và nhu cầu.</li>
+  </ol>
+  <figure><img src="assets/huong-dan/lead-doi-trang-thai.webp?v=20261112a" alt="Hộp đổi trạng thái lead" width="1440" height="900" loading="lazy"><figcaption>Hộp đổi trạng thái lead.</figcaption></figure>
+
+  <h3 id="phan-bo">Phân bổ lead và đổi sale</h3>
+  <ul>
+    <li><strong>Phân bổ nhiều lead một lúc</strong>: tick chọn các dòng trên danh sách → <span class="hd-nut">Phân bổ</span> → chọn sale (hoặc <em>Bỏ phân bổ — vào Pool</em>), ghi chú nếu cần → <span class="hd-nut">Phân bổ N Lead</span>. Trưởng phòng chỉ chọn được sale trong nhóm mình.</li>
+    <li><strong>Đổi sale cho một lead</strong>: trên trang chi tiết bấm <span class="hd-nut">Đổi sale</span>, chọn người nhận và <strong>bắt buộc chọn lý do</strong> (sale nghỉ việc, ôm data không chăm sóc, tái phân bổ theo chỉ thị…). Mọi lần đổi đều lưu lại người chuyển, người nhận và lý do.</li>
+  </ul>
+  <div class="hd-meo"><b>Ai được phân bổ?</b> Quyền phân bổ lead và đổi sale do quản trị viên bật trong <a href="#phan-quyen">Phân quyền</a> (nhóm <em>G3 — Phân bổ Lead</em>). Nếu bấm nút mà hệ thống báo thiếu quyền, hãy nhờ quản trị viên bật cho vai trò của bạn.</div>
+
+  <h3>Khách hàng tiềm năng</h3>
+  <p>Tab <strong>Khách hàng tiềm năng</strong> có thêm bộ lọc nhóm khách (VIP, Đầu tư, Thân thiết, Mới) và phương thức tạo (tạo trực tiếp hay từ lead chuyển đổi). Danh sách cho biết mỗi khách đang có bao nhiêu cơ hội và tổng giá trị đã chốt. Có thể thêm khách trực tiếp bằng <span class="hd-nut">Thêm KH</span>, nhập từ Excel giống lead, hoặc tick nhiều khách rồi <span class="hd-nut">Đổi sale</span>.</p>
+  <figure><img src="assets/huong-dan/kh-tiem-nang.webp?v=20261112a" alt="Danh sách khách hàng tiềm năng" width="1440" height="900" loading="lazy"><figcaption>Tab Khách hàng tiềm năng.</figcaption></figure>
+  <p>Trang chi tiết khách hàng gom mọi thứ về một người: trao đổi (gồm cả lịch sử từ thời còn là lead), cơ hội, việc cần làm, chat nội bộ, lịch sử đổi sale. Các nút trên cùng:</p>
+  <ul>
+    <li><span class="hd-nut">AI gợi ý</span> — liệt kê sản phẩm đang bán phù hợp với nhu cầu của khách theo loại BĐS, tầm giá, diện tích và khu vực, kèm điểm phù hợp.</li>
+    <li><span class="hd-nut">Tạo cơ hội</span> — mở form cơ hội đã điền sẵn khách hàng này (xem <a href="#co-hoi">mục 7</a>).</li>
+    <li><span class="hd-nut">Đổi sale</span>, <span class="hd-nut">Sửa</span>.</li>
+  </ul>
+  <figure><img src="assets/huong-dan/kh-chi-tiet.webp?v=20261112a" alt="Chi tiết khách hàng" width="1440" height="900" loading="lazy"><figcaption>Chi tiết khách hàng tiềm năng.</figcaption></figure>
+</section>
+
+<!-- 5 ─────────────────────────────── -->
+<section id="san-pham">
+  <h2>Sản phẩm BĐS</h2>
+  <p>Menu <strong>Sản phẩm BĐS</strong> có hai mục: <strong>Sản phẩm bán mới</strong> (hàng chủ đầu tư, phân phối) và <strong>Sản phẩm chuyển nhượng</strong> (hàng thứ cấp, có thông tin chủ nhà). Hai danh sách dùng chung cách thao tác.</p>
+  <figure><img src="assets/huong-dan/san-pham.webp?v=20261112a" alt="Danh sách sản phẩm" width="1440" height="900" loading="lazy"><figcaption>Giỏ hàng: thẻ đếm theo trạng thái, nút thao tác, bộ lọc và bảng sản phẩm.</figcaption></figure>
+
+  <h3>Trạng thái sản phẩm</h3>
+  <div class="hd-bang"><table>
+    <thead><tr><th>Trạng thái</th><th>Ý nghĩa</th></tr></thead>
+    <tbody>
+      <tr><td><span class="hd-tt tt-cho">Chờ</span></td><td>Telesale vừa đưa lên, chờ QL Sản phẩm duyệt. Chỉ QL Sản phẩm, quản trị và người tạo nhìn thấy.</td></tr>
+      <tr><td><span class="hd-tt tt-ban">Đang bán</span></td><td>Đang mở bán, sale tư vấn và gắn vào cơ hội được.</td></tr>
+      <tr><td><span class="hd-tt tt-dung">Dừng bán</span></td><td>Tạm ngừng chào bán.</td></tr>
+      <tr><td><span class="hd-tt tt-chot">Sales đã chốt</span></td><td>Một sale đã chốt sản phẩm này cho khách — căn bị khoá, sale khác không chốt trùng được.</td></tr>
+      <tr><td><span class="hd-tt tt-xong">Đã bán</span></td><td>Giao dịch hoàn tất, có ghi người bán.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Tìm và lọc</h3>
+  <ul>
+    <li>Tìm theo <strong>mã, tiêu đề</strong>; người có quyền xem thông tin chủ nhà tìm được cả theo <strong>SĐT chủ nhà</strong>.</li>
+    <li>Lọc theo dự án, loại BĐS, trạng thái, loại hình, mức độ sản phẩm, phân khu, tòa, nguồn hàng, hướng ban công, khoảng giá (tỷ).</li>
+    <li>Sắp xếp theo giá, giá/m², diện tích hoặc ngày cập nhật. <span class="hd-nut">Reset lọc</span> để về mặc định, <span class="hd-nut">Ẩn lọc</span> để gọn màn hình.</li>
+    <li>Menu <span class="hd-nut">⋯</span> trên mỗi dòng: <em>Copy thông tin nhanh</em> (dán thẳng vào tin nhắn gửi khách), <em>Ghi nhận trao đổi</em>, <em>Đổi trạng thái</em>, <em>Cập nhật giá</em>, <em>Sửa</em>, <em>Xóa</em>.</li>
+    <li>Tick nhiều dòng để chuyển hàng loạt sang <em>Đang bán</em> / <em>Dừng bán</em>, gán QL sản phẩm, gán người gửi, hoặc xóa.</li>
+  </ul>
+
+  <h3>Thêm sản phẩm</h3>
+  <ol>
+    <li>Bấm <span class="hd-nut">Thêm Sản phẩm</span>, chọn loại: căn hộ chung cư, đất nền, biệt thự, liền kề, shophouse. Form tự đổi theo loại.</li>
+    <li><strong>Định danh &amp; Dự án</strong>: chọn dự án thì tỉnh, quận, địa chỉ và URL bản đồ tự lấy theo dự án. Căn hộ chọn thêm phân khu, tòa, tầng, số căn. Chọn <em>Phân loại</em>: Bán mới hoặc Chuyển nhượng.</li>
+    <li><strong>Thông tin khác</strong>: diện tích, pháp lý, nội thất, loại hình, hướng cửa, hướng ban công…</li>
+    <li><strong>Giá &amp; Thương mại</strong>: gõ giá niêm yết, hệ thống tự thêm dấu chấm và hiện "≈ x tỷ", tự tính đơn giá/m² và giá sàn. Tick các khoản đã gồm trong giá (phí trước bạ, thuế TNCN, phí môi giới…).</li>
+    <li><strong>Trạng thái &amp; Phân công</strong>: người quản lý sản phẩm, nguồn hàng, ngày ra hàng, người gửi, mức độ sản phẩm.</li>
+    <li><strong>Mô tả</strong>: <em>Mô tả công khai</em> khách xem được qua link chia sẻ; <em>Ghi chú nội bộ</em> chỉ người trong công ty thấy.</li>
+    <li>Hàng chuyển nhượng điền thêm khung <strong>Chủ nhà / Người bán</strong> bên phải: tên, SĐT, ghi chú thương lượng giá.</li>
+    <li>Bấm <span class="hd-nut">Lưu Sản phẩm</span>. Ảnh và video tải lên sau khi đã lưu.</li>
+  </ol>
+  <figure><img src="assets/huong-dan/sp-them.webp?v=20261112a" alt="Form thêm sản phẩm" width="1440" height="900" loading="lazy"><figcaption>Form thêm sản phẩm chuyển nhượng.</figcaption></figure>
+  <div class="hd-meo canh"><b>Hàng chuyển nhượng phải đủ thông tin mới lên kệ.</b> Sản phẩm chuyển nhượng ở trạng thái Đang bán hoặc Chờ cần đủ: dự án, mã SP, phân khu, tòa, diện tích, pháp lý, nội thất, loại hình, giá niêm yết, nguồn hàng, ngày ra hàng, người gửi — và khi Đang bán thì thêm hướng cửa, hướng ban công, view. Thiếu ô nào, hệ thống báo và đưa con trỏ tới đúng ô đó.</div>
+
+  <h3>Trang chi tiết sản phẩm</h3>
+  <ul>
+    <li><strong>Vòng đời sản phẩm</strong>: thanh bước Chờ → Đang bán → Sales đã chốt → Đã bán, kèm nút <span class="hd-nut">Duyệt → Đang bán</span>, <span class="hd-nut">Cập nhật sang Dừng bán</span>, <span class="hd-nut">Mở bán lại</span>. Nhãn <em>Đến hạn cập nhật</em> nhắc khi sản phẩm đã lâu chưa được rà lại giá và tình trạng.</li>
+    <li><strong>Thông tin nhanh</strong> có nút <span class="hd-nut">Copy</span> để dán vào tin nhắn.</li>
+    <li>Các tab: <em>Thông tin chi tiết</em>, <em>Trao đổi</em>, <em>Hình ảnh &amp; Tài liệu</em> (ảnh tối đa 10 MB, tự nén; video tối đa 100 MB; kéo thả để sắp thứ tự), <em>Cơ hội liên quan</em>, <em>Lịch sử cập nhật</em> (ai sửa gì, giá trị trước và sau).</li>
+    <li><span class="hd-nut">Sao chép</span> — tạo nhanh một sản phẩm giống hệt rồi sửa phần khác biệt, tiện khi nhập nhiều căn cùng dự án.</li>
+  </ul>
+  <figure><img src="assets/huong-dan/sp-chi-tiet.webp?v=20261112a" alt="Chi tiết sản phẩm" width="1440" height="900" loading="lazy"><figcaption>Chi tiết sản phẩm: ảnh, thông tin nhanh, vòng đời và các tab.</figcaption></figure>
+
+  <h3>Gửi sản phẩm cho khách bằng link chia sẻ</h3>
+  <ol>
+    <li>Trên trang chi tiết sản phẩm, bấm <span class="hd-nut">Chia sẻ</span>.</li>
+    <li>Link được tạo và <strong>tự sao chép</strong>. Bấm <span class="hd-nut">Mở xem trước</span> để xem đúng những gì khách sẽ thấy.</li>
+    <li>Dán link vào Zalo, tin nhắn hoặc email gửi khách. Khách mở được ngay, không cần tài khoản.</li>
+  </ol>
+  <div class="hd-bang"><table>
+    <thead><tr><th>Khách xem được</th><th>Khách không xem được</th></tr></thead>
+    <tbody><tr>
+      <td>Ảnh và video, loại BĐS, dự án và chủ đầu tư, quận/tỉnh, giá niêm yết và đơn giá/m², diện tích, phòng ngủ, hướng, pháp lý, mô tả công khai, ưu đãi</td>
+      <td>Địa chỉ chi tiết, tòa/tầng/số căn, bản đồ, giá sàn, chiết khấu và các khoản phí, thông tin chủ nhà, ghi chú nội bộ</td>
+    </tr></tbody>
+  </table></div>
+  <p>Mỗi sản phẩm có một link cố định — gửi lại cho khách khác vẫn là link đó. Link dùng được cho tới khi sản phẩm bị xóa khỏi hệ thống.</p>
+
+  <h3>Cập nhật giá</h3>
+  <ul>
+    <li><strong>Một sản phẩm</strong>: menu <span class="hd-nut">⋯</span> → <em>Cập nhật giá</em>. Sửa giá niêm yết, chiết khấu tối đa, các khoản phí và chính sách khuyến mại; giá sàn và giá đã gồm phí tự tính lại.</li>
+    <li><strong>Hàng loạt</strong>: nút <span class="hd-nut">Cập nhật giá</span> trên danh sách.
+      <ol>
+        <li>Chọn phạm vi: dự án, tòa/block, loại BĐS.</li>
+        <li>Chọn tăng hay giảm, theo % hay số tiền cố định, nhập mức.</li>
+        <li>Bấm <span class="hd-nut">Preview</span> để xem tổng giá cũ, tổng giá mới, chênh lệch và chi tiết từng căn.</li>
+        <li>Chọn lý do điều chỉnh (đợt mở bán mới, điều chỉnh thị trường, CĐT đổi chính sách, khuyến mại…) rồi <span class="hd-nut">Áp dụng</span>.</li>
+      </ol>
+    </li>
+  </ul>
+  <figure><img src="assets/huong-dan/sp-cap-nhat-gia.webp?v=20261112a" alt="Cập nhật giá hàng loạt" width="1440" height="900" loading="lazy"><figcaption>Cập nhật giá hàng loạt, có bước xem trước.</figcaption></figure>
+
+  <h3>Nhập và xuất Excel</h3>
+  <ol>
+    <li>Mở đúng danh sách (Bán mới hoặc Chuyển nhượng) — sản phẩm nhập vào sẽ thuộc phân loại đó.</li>
+    <li><span class="hd-nut">Import Excel</span> → chọn loại BĐS → <span class="hd-nut">Tải template mẫu</span>. Hướng cửa ghi bằng mã (B, N, Đ, T, ĐB, TB, ĐN, TN); nhiều hướng ban công nối bằng dấu <code>-</code>; ngày theo dạng <code>YYYY-MM-DD</code>; cột "Giá gồm…" đánh <code>x</code> nếu giá đã gồm khoản đó.</li>
+    <li><span class="hd-nut">Kiểm tra dữ liệu</span> — hệ thống báo lỗi từng dòng (thiếu mã SP, không tìm thấy dự án, mã SP đang bán đã tồn tại…) mà <strong>chưa tạo sản phẩm nào</strong>.</li>
+    <li><span class="hd-nut">Xác nhận Import</span>. Sản phẩm mới có trạng thái <em>Đang bán</em>.</li>
+  </ol>
+  <figure><img src="assets/huong-dan/sp-import.webp?v=20261112a" alt="Nhập sản phẩm từ Excel" width="1440" height="900" loading="lazy"><figcaption>Nhập sản phẩm từ Excel theo file mẫu.</figcaption></figure>
+  <p><span class="hd-nut">Export Excel</span> xuất đúng danh sách đang lọc trên màn hình.</p>
+
+  <h3 id="telesale">Dành cho Telesale: đưa sản phẩm lên chờ duyệt</h3>
+  <ol>
+    <li>Thêm sản phẩm như hướng dẫn ở trên. Sản phẩm của Telesale luôn được tạo ở trạng thái <span class="hd-tt tt-cho">Chờ</span>, người gửi là chính bạn.</li>
+    <li>Khi còn ở trạng thái Chờ, bạn sửa hoặc xóa được sản phẩm của mình.</li>
+    <li>QL Sản phẩm mở sản phẩm, kiểm tra rồi bấm <span class="hd-nut">Duyệt → Đang bán</span>. Từ lúc đó sản phẩm vào giỏ hàng chung cho sale tư vấn.</li>
+  </ol>
+  <div class="hd-meo"><b>Không xóa được sản phẩm đã chốt hoặc đã bán</b> — để giữ lịch sử giao dịch. Sản phẩm không còn bán thì chuyển sang <em>Dừng bán</em>.</div>
+</section>
+
+<!-- 6 ─────────────────────────────── -->
+<section id="du-an">
+  <h2>Dự án</h2>
+  <p>Menu <strong>Dự án</strong> liệt kê các dự án cùng số sản phẩm theo từng trạng thái — bấm vào con số để mở ngay danh sách sản phẩm tương ứng. Tìm theo tên, mã, chủ đầu tư hoặc vị trí.</p>
+  <ol>
+    <li><span class="hd-nut">Thêm dự án</span>: tên dự án (bắt buộc), mã dự án (để trống thì hệ thống tự đánh số), chủ đầu tư (gõ để chọn từ tên đã nhập trước đó), loại BĐS (chọn nhiều), tỉnh/quận, vị trí, URL bản đồ.</li>
+    <li>Sau khi lưu, mở <span class="hd-nut">Sửa</span> để khai báo <strong>Phân khu &amp; Toà</strong>. Danh mục này dùng làm lựa chọn khi thêm sản phẩm và làm bộ lọc trên giỏ hàng, nên tên phân khu, tòa luôn thống nhất.</li>
+  </ol>
+  <figure><img src="assets/huong-dan/du-an-sua.webp?v=20261112a" alt="Sửa dự án" width="1440" height="900" loading="lazy"><figcaption>Sửa dự án, khai báo phân khu và tòa.</figcaption></figure>
+  <p>Dự án còn sản phẩm thì không xóa được — chuyển hoặc gỡ sản phẩm trước.</p>
+</section>
+
+<!-- 7 ─────────────────────────────── -->
+<section id="co-hoi">
+  <h2>Cơ hội và pipeline</h2>
+  <p>Một <strong>cơ hội</strong> là một lần một khách hàng cân nhắc mua — thường gắn với một sản phẩm cụ thể. Menu <strong>Cơ hội &amp; Pipeline</strong> cho xem dạng <span class="hd-nut">Kanban</span> (kéo thả giữa các cột giai đoạn) hoặc <span class="hd-nut">List</span>.</p>
+  <figure><img src="assets/huong-dan/co-hoi-kanban.webp?v=20261112a" alt="Pipeline dạng Kanban" width="1440" height="900" loading="lazy"><figcaption>Pipeline dạng Kanban.</figcaption></figure>
+  <div class="hd-meo"><b>Mặc định bạn thấy cơ hội của chính mình</b> — bộ lọc Sale đã chọn sẵn tên bạn. Người được cấp phạm vi <em>Nhóm</em> hoặc <em>Toàn bộ</em> cho quyền xem cơ hội có thể đổi bộ lọc Sale, Nhóm bán hàng, Dự án hoặc Khách hàng để xem pipeline rộng hơn. Muốn trưởng phòng xem cả pipeline của nhóm, quản trị viên chỉnh phạm vi này trong <a href="#phan-quyen">Phân quyền</a>.</div>
+
+  <h3>Các giai đoạn</h3>
+  <div class="hd-bang"><table>
+    <thead><tr><th>Giai đoạn</th><th>Khả năng chốt</th><th>Khi nào</th></tr></thead>
+    <tbody>
+      <tr><td>Mới</td><td>10%</td><td>Vừa ghi nhận nhu cầu</td></tr>
+      <tr><td>Đã liên hệ</td><td>20%</td><td>Đã nói chuyện với khách</td></tr>
+      <tr><td>Tư vấn</td><td>35%</td><td>Đang gửi sản phẩm, dẫn xem</td></tr>
+      <tr><td>Đàm phán</td><td>60%</td><td>Bàn giá, chính sách</td></tr>
+      <tr><td><strong>Chốt</strong></td><td>85%</td><td>Khách đồng ý — sản phẩm bị khoá cho sale này</td></tr>
+      <tr><td>Không thành công</td><td>0%</td><td>Khách không mua — bắt buộc ghi lý do</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Tạo cơ hội</h3>
+  <ol>
+    <li>Bấm <span class="hd-nut">Tạo Cơ hội</span> (hoặc từ trang chi tiết khách hàng).</li>
+    <li>Điền tiêu đề, chọn <strong>khách hàng</strong> (không đổi được sau khi tạo), sản phẩm nếu đã có, mục đích, ngân sách dự kiến, ngày đóng dự kiến, nhu cầu (loại BĐS, layout, dự án, phân khu, diện tích, khu vực).</li>
+    <li>Bấm <span class="hd-nut">Lưu cơ hội</span>. Sản phẩm đã có sale khác chốt hoặc đã bán thì không chọn được.</li>
+  </ol>
+
+  <h3>Chuyển giai đoạn và chốt</h3>
+  <ol>
+    <li>Mở chi tiết cơ hội. Thanh <strong>Tiến trình Pipeline</strong> hiện các giai đoạn — bấm vào giai đoạn muốn chuyển tới.</li>
+    <li>Khi bấm <strong>Chốt</strong>: chọn <em>Sản phẩm khách hàng chốt</em> (chỉ tìm thấy sản phẩm đang bán), thêm ghi chú và file đính kèm nếu có, bấm <span class="hd-nut">Xác nhận Chốt</span>.</li>
+    <li>Sản phẩm lập tức chuyển sang <span class="hd-tt tt-chot">Sales đã chốt</span> — sale khác không chốt trùng căn này được. Hồ sơ lead của khách cũng tự chuyển sang <em>Tiềm năng</em>.</li>
+    <li>Khi giao dịch hoàn tất, QL Sản phẩm chuyển sản phẩm sang <span class="hd-tt tt-xong">Đã bán</span> trên màn Sản phẩm; hệ thống gợi ý sẵn người bán là sale đang chốt căn đó.</li>
+  </ol>
+  <figure><img src="assets/huong-dan/co-hoi-chi-tiet.webp?v=20261112a" alt="Chi tiết cơ hội" width="1440" height="900" loading="lazy"><figcaption>Chi tiết cơ hội với thanh tiến trình pipeline.</figcaption></figure>
+  <ul>
+    <li><strong>Không thành công</strong>: bấm <span class="hd-nut">Đánh dấu Không thành công</span> (hoặc kéo thẻ sang cột đó trên Kanban) và chọn lý do — khách đổi ý, vấn đề tài chính, tìm sản phẩm khác, giá cao… Nếu sản phẩm đang bị khoá cho cơ hội này, sản phẩm tự trở về <em>Đang bán</em>.</li>
+    <li>Trên trang chi tiết còn có <em>Trao đổi &amp; Hoạt động</em>, <em>Chat nội bộ</em>, <em>Việc cần làm</em>, <em>Thông tin chốt</em> và nút <span class="hd-nut">AI gợi ý</span> sản phẩm phù hợp với nhu cầu của cơ hội.</li>
+  </ul>
+</section>
+
+<!-- 8 ─────────────────────────────── -->
+<section id="cong-viec">
+  <h2>Lịch và công việc</h2>
+  <p>Menu <strong>Lịch &amp; Công việc</strong> là danh sách task, có thẻ đếm tổng, đang xử lý, hoàn thành và quá hạn. Lọc theo trạng thái, mức ưu tiên, nhóm, người làm.</p>
+  <ol>
+    <li>Bấm <span class="hd-nut">Tạo Task</span>: tiêu đề, mô tả, ngày bắt đầu, hạn, mức ưu tiên (Khẩn cấp, Cao, Bình thường, Thấp), người thực hiện. Có thể gắn với một khách hàng và một cơ hội của khách đó.</li>
+    <li>Trên danh sách: <span class="hd-nut">Bắt đầu</span> → <span class="hd-nut">Hoàn thành</span>. Hủy task thì phải ghi lý do.</li>
+    <li>Task quá hạn hiện chữ đỏ <em>(Quá hạn)</em>; người thực hiện nhận thông báo khi task sắp tới hạn và khi đã quá hạn.</li>
+  </ol>
+  <figure><img src="assets/huong-dan/cong-viec.webp?v=20261112a" alt="Danh sách công việc" width="1440" height="900" loading="lazy"><figcaption>Danh sách công việc.</figcaption></figure>
+</section>
+
+<!-- 9 ─────────────────────────────── -->
+<section id="bao-cao">
+  <h2>Báo cáo</h2>
+  <ul>
+    <li><strong>Báo cáo theo Nguồn Hàng</strong>: số sản phẩm theo từng nguồn hàng và trạng thái; số sản phẩm ra hàng theo tuần, tháng, năm (tính theo ngày ra hàng).</li>
+    <li><strong>Báo cáo theo Trạng Thái</strong>: với hàng chuyển nhượng, số sản phẩm được cập nhật sang từng trạng thái theo tuần, tháng, năm. Bấm vào một con số để mở danh sách sản phẩm đứng sau con số đó.</li>
+  </ul>
+  <figure><img src="assets/huong-dan/bao-cao.webp?v=20261112a" alt="Báo cáo theo nguồn hàng" width="1440" height="900" loading="lazy"><figcaption>Báo cáo theo nguồn hàng.</figcaption></figure>
+  <p>Số liệu kinh doanh — pipeline, giá trị chốt, xếp hạng nhóm và sale — nằm trên <a href="#dashboard">Dashboard</a>.</p>
+</section>
+
+<!-- 10 ─────────────────────────────── -->
+<section id="thong-bao">
+  <h2>Thông báo</h2>
+  <p>Thông báo hiện ở chuông trên thanh tiêu đề và ở trang <strong>Thông báo</strong> (lọc <em>Tất cả</em> / <em>Chưa đọc</em>, <span class="hd-nut">Đánh dấu đã đọc</span>).</p>
+  <div class="hd-bang"><table>
+    <thead><tr><th>Thông báo</th><th>Khi nào</th><th>Ai nhận</th></tr></thead>
+    <tbody>
+      <tr><td>Lead ngủ</td><td>Lead ở trạng thái <em>Mới</em> quá số ngày cấu hình (mặc định 3) không được tương tác</td><td>Sale phụ trách</td></tr>
+      <tr><td>Lead nguy hiểm</td><td>Lead <em>Đang tư vấn</em> quá số ngày cấu hình (mặc định 7) không được tương tác</td><td>Sale phụ trách</td></tr>
+      <tr><td>Task sắp đến hạn</td><td>Hạn trong 24 giờ tới</td><td>Người thực hiện</td></tr>
+      <tr><td>Task quá hạn</td><td>Đã qua hạn mà chưa xong</td><td>Người thực hiện</td></tr>
+      <tr><td>Cơ hội đến hạn</td><td>Ngày đóng dự kiến là hôm nay hoặc ngày mai</td><td>Sale phụ trách</td></tr>
+      <tr><td>Được nhắc tên</td><td>Ai đó gõ <code>@tên bạn</code> trong chat nội bộ của lead, khách hàng hoặc cơ hội</td><td>Người được nhắc — gửi ngay</td></tr>
+    </tbody>
+  </table></div>
+  <p>Các nhắc nhở theo lịch được gửi mỗi sáng lúc 8 giờ, mỗi đối tượng tối đa một lần một ngày, để danh sách thông báo không bị dội.</p>
+  <figure><img src="assets/huong-dan/thong-bao.webp?v=20261112a" alt="Trang thông báo" width="1440" height="900" loading="lazy"><figcaption>Trang thông báo.</figcaption></figure>
+</section>
+
+<!-- 11 ─────────────────────────────── -->
+<section id="ai">
+  <h2>Trợ lý AI và Sales Coach</h2>
+  <h3>Trợ lý AI tra cứu tài liệu</h3>
+  <ol>
+    <li>Bấm nút tròn màu tím ở góc dưới phải, trên bất kỳ màn hình nào.</li>
+    <li>Gõ câu hỏi về sản phẩm, chính sách bán hàng hoặc quy trình của công ty.</li>
+    <li>Trợ lý trả lời <strong>dựa trên tài liệu công ty đã tải lên</strong>, ghi nguồn trích dẫn [1], [2] và mức độ tin cậy. Nếu tài liệu không có thông tin, trợ lý nói rõ là không tìm thấy — không tự bịa câu trả lời.</li>
+  </ol>
+  <figure><img src="assets/huong-dan/ai-tro-ly.webp?v=20261112a" alt="Trợ lý AI" width="1440" height="900" loading="lazy"><figcaption>Khung Trợ lý AI mở từ nút tròn góc dưới phải.</figcaption></figure>
+
+  <h3>Sales Coach AI — luyện bán hàng</h3>
+  <ol>
+    <li>Mở menu <strong>Sales Coach AI</strong>, chọn chế độ:
+      <ul>
+        <li><strong>Bạn đóng SALES</strong> — AI đóng vai khách khó tính, bạn luyện xử lý từ chối.</li>
+        <li><strong>Bạn đóng KHÁCH</strong> — AI đóng vai sales chuẩn, trả lời theo tài liệu và kịch bản huấn luyện của công ty; bạn học cách người giỏi trả lời.</li>
+      </ul>
+    </li>
+    <li>Chọn một tình huống (mỗi thẻ ghi độ khó và kỹ năng luyện), bấm <span class="hd-nut">Bắt đầu</span> và hội thoại như với khách thật.</li>
+    <li>Sau ít nhất 4 lượt, bấm <span class="hd-nut">Kết thúc &amp; Chấm điểm</span>. Bạn nhận điểm trên thang 10, điểm mạnh, điểm cần cải thiện và gợi ý cụ thể.</li>
+    <li>Tab <em>Lịch sử của tôi</em> xem lại các phiên; tab <em>Bảng xếp hạng</em> so điểm trung bình trong đội.</li>
+  </ol>
+  <figure><img src="assets/huong-dan/coach-chon.webp?v=20261112a" alt="Sales Coach AI" width="1440" height="900" loading="lazy"><figcaption>Chọn chế độ và tình huống luyện tập.</figcaption></figure>
+</section>
+
+<!-- 12 ─────────────────────────────── -->
+<section id="quan-tri">
+  <h2>Quản trị hệ thống</h2>
+  <p>Menu <strong>Cấu hình</strong> hiện các mục theo quyền của bạn.</p>
+  <figure><img src="assets/huong-dan/cau-hinh.webp?v=20261112a" alt="Trang cấu hình" width="1440" height="900" loading="lazy"><figcaption>Các mục cấu hình.</figcaption></figure>
+
+  <h3>Người dùng</h3>
+  <ul>
+    <li><span class="hd-nut">Thêm người dùng</span>: họ tên, tên đăng nhập, email, SĐT, mật khẩu (ít nhất 8 ký tự, có chữ hoa, số và ký tự đặc biệt), vai trò (chọn nhiều), nhóm.</li>
+    <li>Trên mỗi dòng: <em>Sửa</em>, <em>Đổi mật khẩu</em>, <em>Vô hiệu</em> — người đã vô hiệu không đăng nhập được nhưng dữ liệu họ tạo vẫn giữ nguyên.</li>
+  </ul>
+  <figure><img src="assets/huong-dan/nguoi-dung.webp?v=20261112a" alt="Quản lý người dùng" width="1440" height="900" loading="lazy"><figcaption>Quản lý người dùng.</figcaption></figure>
+
+  <h3>Nhóm bán hàng</h3>
+  <p>Tạo nhóm, thêm thành viên, đặt trưởng nhóm. Nhóm quyết định phạm vi "theo nhóm" của trưởng phòng và danh sách sale được chọn khi phân bổ lead.</p>
+
+  <h3 id="phan-quyen">Phân quyền</h3>
+  <ol>
+    <li>Mở <strong>Phân quyền</strong>: ma trận vai trò × quyền, chia theo nhóm chức năng (Platform, Sản phẩm BĐS, Khách hàng &amp; Lead, Phân bổ Lead, Cơ hội &amp; Pipeline, Hoạt động &amp; Công việc).</li>
+    <li>Tick để bật quyền, chọn phạm vi <em>Toàn bộ</em>, <em>Nhóm</em> hoặc <em>Của mình</em>.</li>
+    <li>Bấm <span class="hd-nut">Lưu</span>. Thay đổi có hiệu lực trong vài phút, không cần người dùng đăng nhập lại. <span class="hd-nut">Reset mặc định</span> đưa toàn bộ ma trận về cấu hình gốc.</li>
+  </ol>
+  <figure><img src="assets/huong-dan/phan-quyen.webp?v=20261112a" alt="Ma trận phân quyền" width="1440" height="900" loading="lazy"><figcaption>Ma trận phân quyền.</figcaption></figure>
+  <div class="hd-meo"><b>Gợi ý khi bắt đầu:</b> bật quyền <em>Phân bổ Lead</em> và <em>Đổi sale khách hàng</em> (nhóm G3) cho Trưởng phòng KD với phạm vi Nhóm, để trưởng phòng tự chia lead cho đội mà không phải nhờ quản trị viên.</div>
+
+  <h3>Danh mục và quy tắc nghiệp vụ</h3>
+  <ul>
+    <li><strong>Danh mục</strong>: nguồn lead, nhóm khách hàng, layout căn hộ, nguồn hàng, pháp lý, mức độ sản phẩm, nội thất… Thêm mục mới, sắp xếp lên/xuống, tắt mục không dùng nữa.</li>
+    <li><strong>Quy tắc nghiệp vụ</strong>: số ngày nhắc cập nhật sản phẩm theo từng mức độ, số ngày cảnh báo lead ngủ, và các ngưỡng khác.</li>
+    <li><strong>Thông tin công ty</strong>: pháp nhân, mã số thuế, địa chỉ, pháp nhân mặc định.</li>
+  </ul>
+
+  <h3>Nhật ký thao tác</h3>
+  <p>Mọi thao tác quan trọng — tạo, sửa, xóa, đăng nhập, đăng nhập thất bại — được ghi lại và <strong>không xóa được</strong>. Lọc theo người, chức năng, loại thao tác, khoảng ngày; mở từng dòng để xem dữ liệu trước và sau khi sửa, địa chỉ IP và thiết bị.</p>
+
+  <h3>Bảo mật đăng nhập <span style="font-size:14px;color:var(--ink-3);font-weight:500">— Super Admin</span></h3>
+  <ul>
+    <li><span class="hd-nut">Setup TOTP</span> / <span class="hd-nut">Đổi TOTP</span> và 10 mã dự phòng — xem <a href="#cai-otp">Bước 1 ở mục 1</a>.</li>
+    <li>Dòng <em>Backup codes: x/y còn dùng</em> cho biết còn bao nhiêu mã dự phòng. Dùng một mã dự phòng để khôi phục thì OTP bị đặt lại và <strong>thiết bị của mọi nhân viên đều bị thu hồi</strong> — cả công ty phải nhập OTP lại ở lần đăng nhập sau. Cài lại OTP ngay và báo trước cho mọi người.</li>
+    <li>Bảng <strong>Thiết bị đã đăng ký</strong> liệt kê mọi trình duyệt đã xác thực: người dùng, thiết bị, IP, lần dùng gần nhất. Thu hồi khi nhân viên mất máy hoặc nghỉ việc.</li>
+  </ul>
+
+  <h3>Tài liệu AI và kịch bản huấn luyện <span style="font-size:14px;color:var(--ink-3);font-weight:500">— Super Admin</span></h3>
+  <ul>
+    <li><strong>Tài liệu AI</strong>: tải lên PDF, Word, Excel, .txt hoặc .md kèm tiêu đề, danh mục, thẻ. Khi trạng thái là <em>Sẵn sàng</em>, Trợ lý AI và Sales Coach dùng được tài liệu đó.</li>
+    <li><strong>Kịch bản huấn luyện</strong>: thêm tay câu hỏi của khách cùng cách trả lời chuẩn, cách trả lời sai và ghi chú; hoặc chọn một tài liệu và bấm <span class="hd-nut">Sinh kịch bản</span> để AI soạn nháp. Kịch bản phải được <em>Duyệt</em> mới dùng trong Sales Coach.</li>
+  </ul>
+</section>
+
+<!-- 13 ─────────────────────────────── -->
+<section id="hoi-dap">
+  <h2>Câu hỏi thường gặp</h2>
+  <h3>Tôi quên mật khẩu thì sao?</h3>
+  <p>Liên hệ quản trị viên. Quản trị viên mở <em>Cấu hình → Người dùng</em>, chọn <em>Đổi mật khẩu</em> trên dòng của bạn và gửi mật khẩu mới.</p>
+  <h3>Đổi máy tính, điện thoại hoặc trình duyệt, sao lại phải nhập OTP?</h3>
+  <p>Hệ thống ghi nhớ từng trình duyệt đã xác thực. Máy mới, trình duyệt khác, tab ẩn danh hoặc vừa xoá dữ liệu duyệt web đều được coi là thiết bị mới — gọi Super Admin xin mã OTP một lần. Xem <a href="#bat-dau">Khi nào phải nhập OTP lại</a>.</p>
+  <h3>Sao tôi không thấy menu Khách hàng / Báo cáo / Cấu hình?</h3>
+  <p>Menu chỉ hiện theo quyền của vai trò bạn. Nếu công việc cần, nhờ quản trị viên bật quyền trong <a href="#phan-quyen">Phân quyền</a>.</p>
+  <h3>Sao không xóa được sản phẩm?</h3>
+  <p>Sản phẩm <em>Sales đã chốt</em> hoặc <em>Đã bán</em> không xóa được, để giữ lịch sử giao dịch. Chuyển sản phẩm sang <em>Dừng bán</em> nếu không còn chào bán. Telesale chỉ xóa được sản phẩm của mình khi còn ở trạng thái Chờ.</p>
+  <h3>Hai sale có chốt trùng một căn được không?</h3>
+  <p>Không. Khi một cơ hội chuyển sang <em>Chốt</em>, sản phẩm bị khoá ở trạng thái <em>Sales đã chốt</em>; cơ hội khác không chọn được sản phẩm đó nữa. Nếu giao dịch đổ, đánh dấu cơ hội <em>Không thành công</em> — sản phẩm tự mở bán lại.</p>
+  <h3>Link chia sẻ sản phẩm có lộ giá sàn hay thông tin chủ nhà không?</h3>
+  <p>Không. Khách chỉ xem được thông tin công khai — xem bảng <a href="#san-pham">ở mục Sản phẩm</a>.</p>
+  <h3>Có cần cài ứng dụng trên điện thoại không?</h3>
+  <p>Không. Mở VinaLand bằng trình duyệt trên điện thoại là dùng được đầy đủ.</p>
+
+  <div class="hd-cuoi" style="margin-top:34px">
+    <div><h3>Cần hướng dẫn trực tiếp cho đội của bạn?</h3><p>Đội VinaLand hỗ trợ cài đặt, nhập dữ liệu ban đầu và đào tạo theo từng vai trò.</p></div>
+    <a class="btn btn-solid" href="index.html#demo" style="background:#fff;color:var(--brand);border-color:#fff">Đặt lịch demo</a>
+  </div>
+</section>
+
+  </article>
+</div>
+
+<footer class="ft">
+  <div class="frame">
+    <div class="ft-grid">
+      <div>
+        <a class="brand" href="index.html" style="margin-bottom:12px"><img src="assets/vinaland.png" alt="VinaLand"></a>
+        <p style="margin:10px 0 0">Phần mềm quản lý sàn bất động sản</p>
+        <p style="margin:16px 0 0;font-size:13px"><b>Đơn vị cung cấp:</b> VinaLand<br><b>Văn phòng Hà Nội:</b> 539 Vũ Tông Phan, Khương Đình, Thanh Xuân, Hà Nội<br><b>Văn phòng TP. HCM:</b> 47 Hồ Bá Kiện, Phường 15, Quận 10, TP. Hồ Chí Minh<br><b>Hotline:</b> 024 6685 8488</p>
+      </div>
+      <div><h4>Hướng dẫn</h4><a href="#bat-dau">Đăng nhập</a><a href="#khach-hang">Lead &amp; khách hàng</a><a href="#san-pham">Sản phẩm BĐS</a><a href="#co-hoi">Cơ hội &amp; pipeline</a></div>
+      <div><h4>Nền tảng</h4><a href="index.html#trien-khai">Triển khai &amp; chuyển dữ liệu</a><a href="index.html#bao-mat">Quản trị &amp; bảo mật</a><a href="index.html#gia">Gói dịch vụ</a><a href="index.html#ai">Trợ lý AI</a></div>
+      <div><h4>Liên hệ</h4><a href="index.html#demo">Đặt lịch demo</a><a href="index.html#hoi-dap">Hỏi đáp</a><a href="tel:02466858488">024 6685 8488</a></div>
+    </div>
+    <p class="legal">© 2026 VinaLand — phần mềm quản lý sàn bất động sản.</p>
+  </div>
+</footer>
+
+<div class="hd-phong" id="hd-phong" role="dialog" aria-label="Ảnh phóng to"><img alt=""></div>
+
+<script>
+/* Mục lục: tô mục đang đọc */
+(function(){
+  var links = document.querySelectorAll(".hd-ml a");
+  var map = {};
+  links.forEach(function(a){ map[a.getAttribute("href").slice(1)] = a; });
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if (e.isIntersecting && map[e.target.id]) {
+        links.forEach(function(a){ a.classList.remove("on"); });
+        map[e.target.id].classList.add("on");
+      }
+    });
+  }, { rootMargin: "-30% 0px -60% 0px" });
+  document.querySelectorAll(".hd-bai section[id]").forEach(function(s){ io.observe(s); });
+  /* Điện thoại: mục lục thu gọn sẵn, bấm mục thì gập lại */
+  var ml = document.querySelector(".hd-ml");
+  if (window.matchMedia("(max-width:960px)").matches) ml.removeAttribute("open");
+  links.forEach(function(a){ a.addEventListener("click", function(){ if (window.matchMedia("(max-width:960px)").matches) ml.removeAttribute("open"); }); });
+})();
+/* Bấm ảnh để phóng to */
+(function(){
+  var box = document.getElementById("hd-phong"), img = box.querySelector("img");
+  document.querySelectorAll(".hd-bai figure img").forEach(function(i){
+    i.addEventListener("click", function(){ img.src = i.currentSrc || i.src; img.alt = i.alt; box.classList.add("mo"); });
+  });
+  box.addEventListener("click", function(){ box.classList.remove("mo"); });
+  document.addEventListener("keydown", function(e){ if (e.key === "Escape") box.classList.remove("mo"); });
+})();
+</script>
+</body>
+</html>
